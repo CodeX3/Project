@@ -12,6 +12,7 @@
 <!-- partial:index.partial.html -->
 <!-- multistep form -->
 <form id="msform" method="POST">
+    {% csrf_token %}
   <!-- progressbar -->
   <ul id="progressbar">
     <li class="active">Account Setup</li>
@@ -23,19 +24,25 @@
   <fieldset>
     <h2 class="fs-title">Create your account</h2>
     <h3 class="fs-subtitle">Login Credential</h3>
-    <input type="text" name="email" placeholder="Email" />
-    <input type="password" name="password" placeholder="Password" />
-    <input type="password" name="cpass" placeholder="Confirm Password" />
-    <input type="button" name="previous" class="previous action-button" value="Previous" />
+      <span id="sp1" style="color: red;font-size: 15px;"></span>
+    <input type="email" id="email" name="email" onkeypress="clearspan('sp1')" placeholder="Email" />
+    <span id="sp2" style="color: red;font-size: 15px;"></span>
+    <input type="password" id="fpass" name="password" onkeypress="clearspan('sp2')" placeholder="Password" />
+     <span id="sp3" style="color: red;font-size: 15px;"></span>
+    <input type="password" id="cpass" onkeypress="clearspan('sp3')" placeholder="Confirm Password" />
     <input type="button" name="next" class="next action-button" value="Next" />
   </fieldset>
   <fieldset>
     <h2 class="fs-title">Personal Details</h2>
     <h3 class="fs-subtitle">Enter as per College records</h3>
-    <input type="text" name="fname" placeholder="First Name" />
-    <input type="text" name="lname" placeholder="Last Name" />
-    <input type="text" name="phone" placeholder="Phone" />
-    <textarea name="address" placeholder="Address"></textarea>
+      <span id="sp4" style="color: red;font-size: 15px;"></span>
+    <input type="text" id="fname" name="fname" onkeypress="clearspan('sp4')"  placeholder="First Name" />
+      <span id="sp5" style="color: red;font-size: 15px;"></span>
+    <input type="text" id="lname" name="lname" onkeypress="clearspan('sp5')"  placeholder="Last Name" />
+      <span id="sp6" style="color: red;font-size: 15px;"></span>
+    <input type="text" id="phone" name="phone" onkeypress="clearspan('sp6')"  placeholder="Phone" />
+      <span id="sp7" style="color: red;font-size: 15px;"></span>
+    <textarea name="address" id="address" onkeypress="clearspan('sp7')" placeholder="Address"></textarea>
     <input type="button" name="previous" class="previous action-button" value="Previous" />
     <input type="button" name="next" class="next action-button" value="Next" />
 
@@ -43,9 +50,12 @@
   <fieldset>
     <h2 class="fs-title">Course Details</h2>
     <h3 class="fs-subtitle">Enter as per College records</h3>
-    <input type="text" name="course" placeholder="Course" />
-    <input type="text" name="year" placeholder="Year" />
-    <input type="text" name="admno" placeholder="Admission Number" />
+      <span id="sp8" style="color: red;font-size: 15px;"></span>
+    <input type="text" id="course" name="course" onkeypress="clearspan('sp8')" placeholder="Course" />
+      <span id="sp9" style="color: red;font-size: 15px;"></span>
+    <input type="text" id="year" name="year" onkeypress="clearspan('sp9')" placeholder="Year" />
+      <span id="sp10" style="color: red;font-size: 15px;"></span>
+    <input type="text" id="admno" name="admno" onkeypress="clearspan('sp8')" placeholder="Admission Number" />
     <input type="button" name="previous" class="previous action-button" value="Previous" />
     <input type="submit" name="submit" class="submit action-button" value="Submit" />
   </fieldset>

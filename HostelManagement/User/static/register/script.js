@@ -77,5 +77,92 @@ $(".previous").click(function(){
 });
 
 $(".submit").click(function(){
-	return true;
+	email =document.getElementById('email').value.trim();
+	pass1 =document.getElementById('fpass').value.trim();
+	cpass=document.getElementById('cpass').value.trim();
+	fname=document.getElementById('fname').value.trim();
+	lname=document.getElementById('lname').value.trim();
+	mobile=document.getElementById('phone').value.trim();
+	address=document.getElementById('address').value.trim();
+	course=document.getElementById('course').value.trim();
+	year=document.getElementById('year').value.trim();
+	admno=document.getElementById('admno').value.trim();
+	var flag =true;
+	if (email==""){
+		alert("you are missed to  enter email");
+		document.getElementById('sp1').innerHTML="email required";
+		flag =false;
+	}else {
+		const re =/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		if(re.test(String(email).toLowerCase())){
+			//do nothing
+		}else {
+			alert("enter a valid email");
+			document.getElementById('sp1').innerHTML="enter valid email";
+			flag =false;
+		}
+	}
+	if(pass1==""){
+		alert("you are missed to  enter password");
+		document.getElementById('sp2').innerHTML="password required";
+		flag =false;
+	}
+	if(cpass==""){
+		alert("you are missed to  enter confirm password ");
+		document.getElementById('sp3').innerHTML="re-enter password";
+		flag =false;
+	}
+	if(pass1!=cpass){
+		alert("passwords are not matched..");
+		document.getElementById('sp2').innerHTML="enter the password again";
+		document.getElementById('fpass').value="";
+		document.getElementById('cpass').value="";
+		flag =false;
+	}
+	if(fname==""){
+		alert("you are missed to enter first name");
+		document.getElementById('sp4').innerHTML="enter first name";
+		flag =false;
+	}
+	if(lname==""){
+		alert("you are missed to enter last name");
+		document.getElementById('sp5').innerHTML="enter last name";
+		flag =false;
+	}
+	if(mobile==""){
+		alert("you are missed to enter phone number");
+		document.getElementById('sp6').innerHTML="enter phone number";
+		flag =false;
+	}
+	if (address==""){
+		alert("you are missed to enter address");
+		document.getElementById('sp7').innerHTML="enter address";
+		flag =false;
+	}
+	if(course==""){
+		alert("you are missed to enter course");
+		document.getElementById('sp8').innerHTML="enter course";
+		flag =false;
+	}
+	if(year==""){
+		alert("you are missed to enter year");
+		document.getElementById('sp9').innerHTML="enter year";
+		flag =false;
+	}
+	if (admno==""){
+		alert("you are misssed to enter admission number");
+		document.getElementById('sp10').innerHTML="enter admission no.";
+		flag =false;
+	}
+	if(!flag){
+		return false;
+	}else {
+		return true;
+	}
+
 })
+
+function clearspan(sp){
+	document.getElementById(sp).innerHTML="";
+
+}

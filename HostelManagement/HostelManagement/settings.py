@@ -23,9 +23,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '95h471-wz1#ljc1-48b41yix%7c28i9f05)b^s54juwlgu#@6b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False # changed for 404
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = [] #commented
+
+if DEBUG is False:
+    ALLOWED_HOSTS=['127.0.0.1:8000','*']
+if DEBUG is True:
+    ALLOWED_HOSTS=[]
 
 # Application definition
 
@@ -118,3 +123,6 @@ STATIC_URL = '/static/'
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIR=[STATIC_DIR]
+
+#csrf tocken error
+CSRF_COOKIE_SECURE = True
