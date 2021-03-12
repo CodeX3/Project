@@ -11,3 +11,10 @@ class register_new_user(models.Model):
     course=models.CharField(max_length=50)
     year=models.CharField(max_length=4)
     admno=models.CharField(max_length=10)
+
+class contact_us(models.Model):
+    uname=models.CharField(max_length=20)
+    uemail=models.CharField(max_length=50)
+    uphone=models.CharField(max_length=10)
+    umsg=models.CharField(max_length=250)
+
