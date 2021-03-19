@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
 
-
+#------------------------------USER ---------------------------------#
 # 404 handler
 def handler404(request, exception):
     return render(request, '404.html', locals())
@@ -36,3 +36,8 @@ def do_register(request):
             obj = {'status': False}
             return render(request, 'register_verification.html', obj)
     return render(request, 'register.html')
+
+#---------------------------Admin-------------------------------#
+
+def load_admin_index(request):
+    return render(request,'admin_templates/index.html')
