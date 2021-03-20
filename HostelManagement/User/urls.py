@@ -7,7 +7,7 @@ urlpatterns = [
     path('register',views.do_register),
     # path('',views.load_index),
     path('test',views.test),
-    path('', ) ,#index
+    #
     path('login',views.do_login),
     path('dashboard',views.load_admin_index),
 ]
