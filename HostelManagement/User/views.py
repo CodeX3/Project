@@ -3,6 +3,20 @@ from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
 
+#---------------------------Login--------------------------------#
+def do_login(request):
+    if request.method=="GET":
+        return render(request,'login.html')
+    if request.method=="POST":
+        print("post request recieved")
+        response=redirect('/test')
+        return response
+
+
+
+
+
+
 #------------------------------USER ---------------------------------#
 # 404 handler
 def handler404(request, exception):
@@ -23,6 +37,8 @@ def do_register(request):
         form = contact_us(request.POST)
         if form.is_valid():
             form.save()
+            response =redirect('')
+            return response
         else:
             form = contact_us()
     if request.method == "POST" and 'submit' in request.POST:
