@@ -72,8 +72,9 @@ def load_admin_index(request):
     return render(request,'admin_templates/index.html')
 
 def verify_students(request):
-
-    return render(request,'admin_templates/student_reg_verify.html')
+    obj=register_new_user.objects.all()
+    context={'obj':obj}
+    return render(request,'admin_templates/student_reg_verify.html',context)
 
 def table(request):
     return  render(request,'admin_templates/table.html')

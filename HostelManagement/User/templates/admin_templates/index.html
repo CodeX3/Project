@@ -42,7 +42,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="" class="site_title"><i class="fa fa-paw"></i> <span>Welcome Admin!!</span></a>
+              <a href="{% url 'dashboard' %}" class="site_title"><i class="fa fa-paw"></i> <span>Welcome Admin!!</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -73,7 +73,7 @@
                       <li><a href="index3.html">Dashboard3</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-home"></i> Students <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-group"></i> Students <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{% url 'verify_students' %}">Student Registrations</a></li>
                       <li><a href="index2.html">Dashboard2</a></li>
