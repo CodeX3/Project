@@ -10,4 +10,7 @@ urlpatterns = [
     #
     path('login',views.do_login),
     path('dashboard',views.load_admin_index),
+    path('dashboard/verification',views.verify_students,name='verify_students'),
+    path('table',views.table),
+    # path('contact',views.load_contact),
 ]

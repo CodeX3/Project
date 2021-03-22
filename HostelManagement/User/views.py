@@ -37,8 +37,7 @@ def do_register(request):
         form = contact_us(request.POST)
         if form.is_valid():
             form.save()
-            response =redirect('')
-            return response
+            return redirect('/')
         else:
             form = contact_us()
     if request.method == "POST" and 'submit' in request.POST:
@@ -53,7 +52,28 @@ def do_register(request):
             return render(request, 'register_verification.html', obj)
     return render(request, 'register.html')
 
+
+# def load_contact(request):
+#     if request.method =="POST" and 'contact' in request.POST:
+#         print(request.body)
+#         form =contact_us(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('/')
+#         else:
+#             form=contact_us()
+#     obj = {'status': False}
+#     return render(request,'register_verification.html',obj)
+
+
 #---------------------------Admin-------------------------------#
 
 def load_admin_index(request):
     return render(request,'admin_templates/index.html')
+
+def verify_students(request):
+
+    return render(request,'admin_templates/student_reg_verify.html')
+
+def table(request):
+    return  render(request,'admin_templates/table.html')
