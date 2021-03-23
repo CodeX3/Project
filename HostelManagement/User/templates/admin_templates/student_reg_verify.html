@@ -45,7 +45,7 @@
                                     <td>{{i.phone}}</td>
                                     <td>{{i.year}}</td>
                                     <td>{{i.admno}}</td>
-                                    <td>approve || deny buttons</td>
+                                    <td> <a class="btn-link" href="{% url 'confirm_student'  i.id  %}">Approve/Deny</a> </td>
                                 </tr>
                                 {% endfor %}
                             </tbody>

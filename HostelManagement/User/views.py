@@ -76,5 +76,10 @@ def verify_students(request):
     context={'obj':obj}
     return render(request,'admin_templates/student_reg_verify.html',context)
 
+def verify_students_confirm(request,pk):
+    obj = register_new_user.objects.get(id=pk)
+    print(obj)
+    return render(request,'admin_templates/validate_student.html')
+
 def table(request):
     return  render(request,'admin_templates/table.html')

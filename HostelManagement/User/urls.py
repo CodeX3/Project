@@ -13,4 +13,5 @@ urlpatterns = [
     path('dashboard/verification',views.verify_students,name='verify_students'),
     path('table',views.table),
     # path('contact',views.load_contact),
+    path('dashboard/verification/<int:pk>',views.verify_students_confirm,name='confirm_student'),
 ]
