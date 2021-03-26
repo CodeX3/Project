@@ -199,6 +199,7 @@
                 return true;
             },
 
+
             // Date is validated in European format (day,month,year)
             date : function( field, data ){
                 var day, A = data.value.split(/[-./]/g), i;
