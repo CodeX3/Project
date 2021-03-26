@@ -42,15 +42,15 @@
                                         class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
                                     <input class="form-control" data-validate-length-range="6" data-validate-words="2"
-                                        name="name" value="{{obj.fname}} {{obj.lname}}" required="required" />
+                                        name="sd_name" value="{{obj.fname}} {{obj.lname}}" required="required" />
                                 </div>
                             </div>
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Course<span
                                         class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" class='optional' name="course" value="{{ obj.course }}"
-                                        data-validate-length-range="5,15" type="text" />
+                                    <input class="form-control" class='optional' name="sd_course"
+                                        value="{{ obj.course }}" data-validate-length-range="5,15" type="text" />
                                 </div>
                             </div>
 
@@ -58,11 +58,19 @@
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Admission Number <span
                                         class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" type="number" class='number' name="admission_number"
-                                    data-validate-length-range="0,8" required='required'>
+                                    <input class="form-control" type="number" class='number' name="sd_admno"
+                                        data-validate-length-range="0,8" value="{{ obj.admno }}" required='required'>
                                 </div>
                             </div>
 
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3  label-align">Year<span
+                                        class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input class="form-control" data-validate-length-range="4" name="sd_year"
+                                        value="{{ obj.year}}" required="required" />
+                                </div>
+                            </div>
 
 
 
@@ -70,7 +78,7 @@
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">email<span
                                         class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" name="email" class='email' required="required"
+                                    <input class="form-control" name="sd_email" class='email' required="required"
                                         value="{{ obj.email }}" type="email" />
                                 </div>
                             </div>
@@ -79,8 +87,8 @@
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Student Phone Number<span
                                         class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" type="tel" class='tel' name="phone" required='required'
-                                        data-validate-length-range="8,20" />
+                                    <input class="form-control" type="tel" value="{{obj.phone}}" class='tel'
+                                        name="sd_phone" required='required' data-validate-length-range="8,20" />
                                 </div>
                             </div>
 
@@ -89,7 +97,7 @@
                                         class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
                                     <input class="form-control" data-validate-length-range="6" data-validate-words="2"
-                                        id="parent_name" name="parent_name" required="required" />
+                                        id="parent_name" name="sd_parent" required="required" />
                                 </div>
                             </div>
 
@@ -98,7 +106,7 @@
                                         class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
                                     <input class="form-control" id="parent_phone" type="tel" class='tel'
-                                        name="parent_phone" required='required' data-validate-length-range="8,20" />
+                                        name="sd_parent_phone" required='required' data-validate-length-range="8,20" />
                                 </div>
                             </div>
 
@@ -121,7 +129,7 @@
                                         class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
                                     <input class="form-control" id="guardian_name" data-validate-length-range="6"
-                                        data-validate-words="2" name="guardian_name" required="required" />
+                                        data-validate-words="2" name="sd_guardian" required="required" />
                                 </div>
                             </div>
 
@@ -130,7 +138,8 @@
                                         class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
                                     <input class="form-control" id="guardian_phone" type="tel" class='tel'
-                                        name="guardian_phone" required='required' data-validate-length-range="8,20" />
+                                        name="sd_guardian_phone" required='required'
+                                        data-validate-length-range="8,20" />
                                 </div>
                             </div>
 
@@ -141,7 +150,7 @@
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Room Number <span
                                         class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" type="number" class='number' name="number"
+                                    <input class="form-control" type="number" class='number' name="sd_room_no"
                                         data-validate-minmax="10,500" required='required'>
                                 </div>
                             </div>
@@ -152,7 +161,7 @@
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Date of Birth<span
                                         class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" class='date' type="date" name="date"
+                                    <input class="form-control" class='date' type="date" name="sd_dob"
                                         required='required'>
                                 </div>
                             </div>
@@ -162,10 +171,7 @@
                                         class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
                                     <input class="form-control" type="password" value="{{ obj.password }}"
-                                        id="password1" name="password"
-                                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}"
-                                        title="Minimum 8 Characters Including An Upper And Lower Case Letter, A Number And A Unique Character"
-                                        required />
+                                        id="password1" name="sd_password" required />
 
                                     <span style="position: absolute;right:15px;top:7px;" onclick="hideshow()">
                                         <i id="slash" class="fa fa-eye-slash"></i>
@@ -179,7 +185,8 @@
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Address<span
                                         class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <textarea style="width: 500px; height: 89px;"  required="required" name='address'></textarea>
+                                    <textarea style="width: 500px; height: 89px;" required="required"
+                                        name='sd_address'>{{obj.address}}</textarea>
                                 </div>
                             </div>
                             <div class="ln_solid">
@@ -196,6 +203,9 @@
             </div>
         </div>
     </div>
+
+    {{ form.error }}
+    {{ form.non_field_errors }}
 </div>
 
 

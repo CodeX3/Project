@@ -2,6 +2,15 @@
 
 {% block content %}
 
+    <script>
+    $(function (){
+        {% if alert %}
+            alert("Student Approved..")
+        {% else %}
+            alert("Student Approval is Failed..")
+        {% endif %}
+    })
+    </script>
 
 
 
