@@ -39,3 +39,7 @@ class student(models.Model):
     sd_parent_phone=models.CharField(max_length=20)
     sd_password=models.CharField(max_length=250)
 
+class visitor(models.Model):
+    visitor_name=models.CharField(max_length=100)
+    visitor_contact=models.CharField(max_length=100)
+    visitor_student_id=models.CharField(max_length=1000)
