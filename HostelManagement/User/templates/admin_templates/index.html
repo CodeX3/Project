@@ -51,7 +51,7 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src="../../static/admin_static/index/images/img.jpg" alt="..." class="img-circle profile_img">
+                            <img src=" {% static 'admin_static/index/images/img.jpg' %} " alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
@@ -87,7 +87,7 @@
                                     <ul class="nav child_menu">
                                         <li><a href="{% url 'verify_students' %}">Student Registrations</a></li>
                                         <li>
-                                            <a href="#">Student</a>
+                                            <a href="{% url 'view_student_all' %}">Student</a>
                                         </li>
                                         <li>
                                             <a href="index3.html">Visitors</a>
@@ -146,7 +146,7 @@
                                         </li>
                                     </ul>
                                 </li>
-
+                            </ul>
 
                         </div>
 
@@ -312,4 +312,4 @@
 
 </body>
 
-</html </html </html </html </html </html </html </html
+</html>

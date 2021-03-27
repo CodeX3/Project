@@ -95,3 +95,22 @@ def verify_students_confirm(request,pk):
 
 def table(request):
     return  render(request,'admin_templates/table.html')
+
+
+def view_students(request):
+    obj= student.objects.all()
+    context ={'obj':obj}
+    return render(request,'admin_templates/student_view.html',context)
+
+def edit_student(request,pk):
+    obj=student.objects.get(sd_id=pk)
+    context={'obj':obj}
+
+    if request.method=="POST":
+        form=Student_edit(request.POST,instance=obj)
+        if form.is_valid():
+            form.save()
+            return  redirect('/dashboard/students')
+        else:
+            print("not valid")
+    return render(request,'admin_templates/edit_student.html',context)
