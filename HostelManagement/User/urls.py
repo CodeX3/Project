@@ -5,7 +5,7 @@ from  django.conf.urls import (handler404)
 handler404='User.views.handler404'
 urlpatterns = [
     path('register',views.do_register),
-    # path('',views.load_index),
+    path('',views.load_index),
     path('test',views.test),
     #
     path('login',views.do_login),
