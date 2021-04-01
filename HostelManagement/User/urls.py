@@ -15,5 +15,11 @@ urlpatterns = [
     # path('contact',views.load_contact),
     path('dashboard/verification/<int:pk>',views.verify_students_confirm,name='confirm_student'),
     path('dashboard/students',views.view_students,name='view_student_all'),
-    path('dashboard/students/edit/<int:pk>',views.edit_student,name='edit_student_details')
+    path('dashboard/students/edit/<int:pk>',views.edit_student,name='edit_student_details'),
+    path('dashboard/visitors',views.view_visitors,name='view_visitors'),
+    path('dashboard/complaints',views.view_complaints,name='admin_complaints'),
+    path('admin/review_complain',views.review_complaint),
+    path('complaints',views.reg_complaint),
+
+
 ]

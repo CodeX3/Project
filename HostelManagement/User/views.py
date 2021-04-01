@@ -1,4 +1,6 @@
 import json
+
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
@@ -114,3 +116,28 @@ def edit_student(request,pk):
         else:
             print("not valid")
     return render(request,'admin_templates/edit_student.html',context)
+
+def view_visitors(request):
+    obj=visitor.objects.all()
+
+    return  render(request,'admin_templates/visitor.html',{'obj':obj})
+def view_complaints(request):
+    obj=complaint.objects.all()
+
+
+    return render(request,'admin_templates/complaint.html',{'obj':obj})
+
+def review_complaint(request):
+   obj=complaint.objects.get(id=request.GET['id'])
+   obj.status="closed"
+   obj.save()
+   return HttpResponse(status=200)
+
+def reg_complaint(request):
+    if request.method=="POST":
+        form =complaints(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            form=complaints()
+    return render(request,'complaint_insert.html')

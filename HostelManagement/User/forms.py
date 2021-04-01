@@ -20,3 +20,8 @@ class Student_edit(forms.ModelForm):
     class Meta:
         model =student
         fields =['sd_name','sd_admno','sd_course','sd_year','sd_email','sd_guardian','sd_address','sd_room_no','sd_phone','sd_guardian_phone','sd_parent','sd_parent_phone','sd_password']
+
+class complaints(forms.ModelForm):
+    class Meta:
+        model=complaint
+        fields=['auther','auther_phone','auther_ID','subject','status','date','body']
