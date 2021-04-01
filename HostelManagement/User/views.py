@@ -31,7 +31,7 @@ def test(request):
     return render(request, 'test.html', context)
 
 def load_index(request):
-    render(request, 'index.html')
+   return  render(request, 'index.html')
 
 
 def do_register(request):
