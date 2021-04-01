@@ -43,3 +43,15 @@ class visitor(models.Model):
     visitor_name=models.CharField(max_length=100)
     visitor_contact=models.CharField(max_length=100)
     visitor_student_id=models.CharField(max_length=1000)
+    visitor_student_name=models.CharField(max_length=50)
+    visitor_date=models.DateField(null=True)
+
+class complaint(models.Model):
+    auther=models.CharField(max_length=50)
+    auther_phone=models.CharField(max_length=20)
+    auther_ID=models.CharField(max_length=1000)
+    subject=models.CharField(max_length=50)
+    status=models.CharField(max_length=20)
+    date=models.DateField()
+    body=models.CharField(max_length=500)
+

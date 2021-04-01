@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>test insert</title>
+    </head>
+    <body>
+        
+        <form action="" method="POST">
+            {% csrf_token %}
+            <label>author</label>
+            <input type="text" name="auther">
+            <br><br>
+            <label>author_phone</label>
+            <input type="text" name="auther_phone">
+            <br><br>
+            <label>author_ID</label>
+            <input type="text" name="auther_ID">
+            <br><br>
+            <label >subject</label>
+            <input type="text" name="subject">
+            <br><br>
+            <label >status</label>
+            <input type="text" name="status">
+            <br><br>
+            <label >date</label>
+            <input type="date" name="date">
+            <br><br>
+            <label>body</label>
+            <input type="text" name="body" >
+            <br><br>
+            <input type="submit">
+        </form>
+    </body>
+</html>

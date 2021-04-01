@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Table</title>
+    <title>Admin Dashboard</title>
 
     <!-- Bootstrap -->
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -29,6 +29,8 @@
 
     <!-- Custom Theme Style -->
     <link href="{% static 'admin_static//build/css/custom.min.css' %}" rel="stylesheet">
+      <!-- Ajax library -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
 
   <body class="nav-md">
@@ -84,7 +86,7 @@
                                   <a href="{% url 'view_student_all' %}">Student</a>
                               </li>
                               <li>
-                                  <a href="index3.html">Visitors</a>
+                                  <a href={% url 'view_visitors' %}>Visitors</a>
                               </li>
                               <li>
                                   <a href="index.html">Fees</a>
@@ -136,7 +138,7 @@
                       <li><a><i class="fa fa-edit"></i>Complaints<span class="fa fa-chevron-down "></span></a>
                           <ul class="nav child_menu ">
                               <li>
-                                  <a href="tables.html ">Feedback</a>
+                                  <a href="{% url 'admin_complaints' %} ">Feedback</a>
                               </li>
                           </ul>
                       </li>
@@ -314,6 +316,9 @@
 
     <!-- Custom Theme Scripts -->
     <script src="{%static 'admin_static/build/js/custom.min.js'%}"></script>
-
+    <!-- Ajax Script  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
   </body>
 </html>
