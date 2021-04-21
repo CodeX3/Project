@@ -2,12 +2,12 @@
 
 {% block content %}
 
-    <div class="col-md-12 col-sm-12 ">
+<div class="col-md-12 col-sm-12 ">
     <div class="x_panel">
         <div class="x_title">
             <h2>Today Attendace</h2>
             <ul class="nav navbar-right panel_toolbox">
-                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
             </ul>
             <div class="clearfix"></div>
         </div>
@@ -44,10 +44,10 @@
                                     {% if i.sd_id in attendace_obj %}
                                     <td id={{ i.sd_id }}>Present</td>
                                     {% else %}
-                                     <td id={{ i.sd_id }}>Absent</td>
+                                    <td id={{ i.sd_id }}>Absent</td>
                                     {% endif %}
 
-                                    <td> <button style="background-color: #008CBA;" class="btn btn-success" onclick="alert('Are you sure to mark as present'); update({{ i.sd_id }})"  >Mark</button> </td>
+                                    <td> Finalized </td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -59,23 +59,4 @@
     </div>
 </div>
 
-    <script>
-    function update(id){
-        $.ajax({
-            url:'/admin/mark_attendance',
-            type:'get',
-            data :{
-                'id':id
-            },
-            success : (response)=>{
-                alert("Marked")
-                document.getElementById(id).innerText="Present";
-            },
-            error :(responce)=>{
-                alert("something wrong happened");
-            }
-
-        })
-    }
-    </script>
-{%  endblock %}
+{% endblock %}
