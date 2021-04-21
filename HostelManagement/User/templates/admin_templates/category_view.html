@@ -18,7 +18,7 @@
                         <p class="text-muted font-13 m-b-30">
                             <b>Select the date:</b>
                             <input type="date" id="date">
-                            <button style="background-color: #008CBA;color: black;" class="btn btn-success" onclick="redirect_page_date();" >Fetch</button>
+                            <button style="background-color: #008CBA;color: black;" class="btn btn-success" onclick="return redirect_page_date();" >Fetch</button>
                         </p>
                     </div>
                 </div>
@@ -32,9 +32,11 @@
     function redirect_page_date(){
         console.log("ethi")
         var current =document.getElementById('date').value;
+        if(current==""){
+            return false;
+        }
         var url = "{% url 'attendance_date' '2021-04-21' %}";
         location.href=url.replace('2021-04-21',current);
-        return false;
     }
 
     </script>
