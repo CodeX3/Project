@@ -36,7 +36,7 @@ urlpatterns = [
     path('dashboard/today',views.today_attendance,name="today_attendance"),
     path('admin/mark_attendance',views.mark_attendance),
     path('dashboard/view/',views.general_attendance,name="common_attendance"),
-    path('dashboard/view/<yyyy:date>/',views.date_attendance,name="attendance_date"),
+    path('dashboard/view/<yyyy:date>',views.date_attendance,name="attendance_date"),
 
 
 ]
