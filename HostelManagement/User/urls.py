@@ -20,6 +20,7 @@ urlpatterns = [
     path('dashboard/complaints',views.view_complaints,name='admin_complaints'),
     path('admin/review_complain',views.review_complaint),
     path('complaints',views.reg_complaint),
-
+    path('dashboard/today',views.today_attendance,name="today_attendance"),
+    path('admin/mark_attendance',views.mark_attendance),
 
 ]

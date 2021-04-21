@@ -1,9 +1,12 @@
+import datetime
 import json
+from datetime import date
 
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
+from django.core.exceptions import *
 
 #---------------------------Login--------------------------------#
 def do_login(request):
@@ -141,3 +144,24 @@ def reg_complaint(request):
         else:
             form=complaints()
     return render(request,'complaint_insert.html')
+
+def today_attendance(request):
+    today=date.today()
+    obj =attendance.objects.filter(date=today).values("sd_id")
+    res = [sub['sd_id'] for sub in obj]
+    st_obj=student.objects.all()
+    return  render(request,'admin_templates/today_attendance.html',{'obj':st_obj,'today':today,'attendace_obj':res})
+def mark_attendance(request):
+    try:
+        obj=attendance.objects.get(sd_id=request.GET['id'])
+    except ObjectDoesNotExist:
+        print(date.today().strftime("%Y-%m-%d"))
+        obj=attendance()
+        student_data=student.objects.get(sd_id=request.GET['id'])
+        obj.status=1
+        obj.sd_id=request.GET['id']
+        obj.date=date.today().strftime("%Y-%m-%d")
+        obj.stduent_info=student_data
+        obj.sd_name=student_data.sd_name
+        obj.save()
+    return HttpResponse(status=200)
