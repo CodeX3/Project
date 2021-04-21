@@ -22,7 +22,8 @@
     <link href="{% static 'admin_static/vendors/iCheck/skins/flat/green.css'%}" rel="stylesheet">
 
     <!-- bootstrap-progressbar -->
-    <link href="{% static 'admin_static/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css'%}" rel="stylesheet">
+    <link href="{% static 'admin_static/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css'%}"
+        rel="stylesheet">
     <!-- JQVMap -->
     <link href="{% static 'admin_static/vendors/jqvmap/dist/jqvmap.min.css'%}" rel="stylesheet" />
     <!-- bootstrap-daterangepicker -->
@@ -34,7 +35,9 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
 
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js">
+    </script>
 </head>
 
 <body class="nav-md">
@@ -43,7 +46,8 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="{% url 'dashboard' %}" class="site_title"><i class="fa fa-paw"></i> <span>Welcome Admin!!</span></a>
+                        <a href="{% url 'dashboard' %}" class="site_title"><i class="fa fa-paw"></i> <span>Welcome
+                                Admin!!</span></a>
                     </div>
 
                     <div class="clearfix"></div>
@@ -51,7 +55,8 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src=" {% static 'admin_static/index/images/img.jpg' %} " alt="..." class="img-circle profile_img">
+                            <img src=" {% static 'admin_static/index/images/img.jpg' %} " alt="..."
+                                class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
@@ -97,13 +102,14 @@
                                         </li>
                                     </ul>
                                 </li>
-                                  <li><a><i class="fa fa-check-circle-o "></i> Attendance <span class="fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-check-circle-o "></i> Attendance <span
+                                            class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li>
                                             <a href={% url 'today_attendance' %}>Today</a>
                                         </li>
                                         <li>
-                                            <a href="form_advanced.html">View all</a>
+                                            <a href={% url 'common_attendance' %}>View all</a>
                                         </li>
                                         <li>
                                             <a href="form_validation.html">Report</a>
@@ -123,7 +129,8 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-suitcase "></i> Guest<span class="fa fa-chevron-down "></span></a>
+                                <li><a><i class="fa fa-suitcase "></i> Guest<span
+                                            class="fa fa-chevron-down "></span></a>
                                     <ul class="nav child_menu ">
                                         <li>
                                             <a href="tables.html ">Registration</a>
@@ -137,8 +144,9 @@
                                     <ul class="nav child_menu ">
                                         <li>
                                             <a href="chartjs.html ">Gallery</a>
+                                        </li>
                                     </ul>
-                                    </li>
+                                </li>
                                 <li><a><i class="fa fa-edit"></i>Complaints<span class="fa fa-chevron-down "></span></a>
                                     <ul class="nav child_menu ">
                                         <li>
@@ -181,72 +189,89 @@
                     <nav class="nav navbar-nav ">
                         <ul class=" navbar-right ">
                             <li class="nav-item dropdown open " style="padding-left: 15px; ">
-                                <a href="javascript:; " class="user-profile dropdown-toggle " aria-haspopup="true " id="navbarDropdown " data-toggle="dropdown " aria-expanded="false ">
+                                <a href="javascript:; " class="user-profile dropdown-toggle " aria-haspopup="true "
+                                    id="navbarDropdown " data-toggle="dropdown " aria-expanded="false ">
                                     <img src="../../static/admin_static/index/images/img.jpg " alt=" ">John Doe
                                 </a>
-                                <div class="dropdown-menu dropdown-usermenu pull-right " aria-labelledby="navbarDropdown ">
+                                <div class="dropdown-menu dropdown-usermenu pull-right "
+                                    aria-labelledby="navbarDropdown ">
                                     <a class="dropdown-item " href="javascript:; "> Profile</a>
                                     <a class="dropdown-item " href="javascript:; ">
                                         <span class="badge bg-red pull-right ">50%</span>
                                         <span>Settings</span>
                                     </a>
                                     <a class="dropdown-item " href="javascript:; ">Help</a>
-                                    <a class="dropdown-item " href="login.html "><i class="fa fa-sign-out pull-right "></i> Log Out</a>
+                                    <a class="dropdown-item " href="login.html "><i
+                                            class="fa fa-sign-out pull-right "></i> Log Out</a>
                                 </div>
                             </li>
 
                             <li role="presentation " class="nav-item dropdown open ">
-                                <a href="javascript:; " class="dropdown-toggle info-number " id="navbarDropdown1 " data-toggle="dropdown " aria-expanded="false ">
+                                <a href="javascript:; " class="dropdown-toggle info-number " id="navbarDropdown1 "
+                                    data-toggle="dropdown " aria-expanded="false ">
                                     <i class="fa fa-envelope-o "></i>
                                     <span class="badge bg-green ">6</span>
                                 </a>
-                                <ul class="dropdown-menu list-unstyled msg_list " role="menu " aria-labelledby="navbarDropdown1 ">
+                                <ul class="dropdown-menu list-unstyled msg_list " role="menu "
+                                    aria-labelledby="navbarDropdown1 ">
                                     <li class="nav-item ">
                                         <a class="dropdown-item ">
-                                            <span class="image "><img src="../../static/admin_static/index/images/img.jpg " alt="Profile Image " /></span>
+                                            <span class="image "><img
+                                                    src="../../static/admin_static/index/images/img.jpg "
+                                                    alt="Profile Image " /></span>
                                             <span>
-                          <span>John Smith</span>
-                                            <span class="time ">3 mins ago</span>
+                                                <span>John Smith</span>
+                                                <span class="time ">3 mins ago</span>
                                             </span>
                                             <span class="message ">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
+                                                Film festivals used to be do-or-die moments for movie makers. They were
+                                                where...
+                                            </span>
                                         </a>
                                     </li>
                                     <li class="nav-item ">
                                         <a class="dropdown-item ">
-                                            <span class="image "><img src="../../static/admin_static/index/images/img.jpg " alt="Profile Image " /></span>
+                                            <span class="image "><img
+                                                    src="../../static/admin_static/index/images/img.jpg "
+                                                    alt="Profile Image " /></span>
                                             <span>
-                          <span>John Smith</span>
-                                            <span class="time ">3 mins ago</span>
+                                                <span>John Smith</span>
+                                                <span class="time ">3 mins ago</span>
                                             </span>
                                             <span class="message ">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
+                                                Film festivals used to be do-or-die moments for movie makers. They were
+                                                where...
+                                            </span>
                                         </a>
                                     </li>
                                     <li class="nav-item ">
                                         <a class="dropdown-item ">
-                                            <span class="image "><img src="../../static/admin_static/index/images/img.jpg " alt="Profile Image " /></span>
+                                            <span class="image "><img
+                                                    src="../../static/admin_static/index/images/img.jpg "
+                                                    alt="Profile Image " /></span>
                                             <span>
-                          <span>John Smith</span>
-                                            <span class="time ">3 mins ago</span>
+                                                <span>John Smith</span>
+                                                <span class="time ">3 mins ago</span>
                                             </span>
                                             <span class="message ">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
+                                                Film festivals used to be do-or-die moments for movie makers. They were
+                                                where...
+                                            </span>
                                         </a>
                                     </li>
                                     <li class="nav-item ">
                                         <a class="dropdown-item ">
-                                            <span class="image "><img src="../../static/admin_static/index/images/img.jpg " alt="Profile Image " /></span>
+                                            <span class="image "><img
+                                                    src="../../static/admin_static/index/images/img.jpg "
+                                                    alt="Profile Image " /></span>
                                             <span>
-                          <span>John Smith</span>
-                                            <span class="time ">3 mins ago</span>
+                                                <span>John Smith</span>
+                                                <span class="time ">3 mins ago</span>
                                             </span>
                                             <span class="message ">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
+                                                Film festivals used to be do-or-die moments for movie makers. They were
+                                                where...
+                                            </span>
                                         </a>
                                     </li>
                                     <li class="nav-item ">

@@ -164,4 +164,21 @@ def mark_attendance(request):
         obj.stduent_info=student_data
         obj.sd_name=student_data.sd_name
         obj.save()
+
     return HttpResponse(status=200)
+
+def general_attendance(request):
+    return render(request,'admin_templates/category_view.html')
+
+def date_attendance(request,date=None):
+    if date is None:
+        today=date.today().strftime("%Y-%m-%d")
+        obj = attendance.objects.filter(date=today).values("sd_id")
+        res = [sub['sd_id'] for sub in obj]
+        st_obj = student.objects.all()
+        return render(request, 'admin_templates/all_attendance',{'obj': st_obj, 'today': today, 'attendace_obj': res})
+    else:
+        obj = attendance.objects.filter(date=date).values("sd_id")
+        res = [sub['sd_id'] for sub in obj]
+        st_obj = student.objects.all()
+        return render(request, 'admin_templates/all_attendance.html',{'obj': st_obj, 'today': date, 'attendace_obj': res})

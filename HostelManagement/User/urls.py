@@ -1,6 +1,19 @@
-from django.urls import path
+from datetime import datetime
+from django.urls import path, register_converter
 from .import views
 from  django.conf.urls import (handler404)
+
+class DateConverter:
+    regex = '\d{4}-\d{2}-\d{2}'
+
+    def to_python(self, value):
+        return datetime.strptime(value, '%Y-%m-%d')
+
+    def to_url(self, value):
+        return value
+
+register_converter(DateConverter, 'yyyy')
+
 
 handler404='User.views.handler404'
 urlpatterns = [
@@ -22,5 +35,8 @@ urlpatterns = [
     path('complaints',views.reg_complaint),
     path('dashboard/today',views.today_attendance,name="today_attendance"),
     path('admin/mark_attendance',views.mark_attendance),
+    path('dashboard/view/',views.general_attendance,name="common_attendance"),
+    path('dashboard/view/<yyyy:date>/',views.date_attendance,name="attendance_date"),
+
 
 ]
