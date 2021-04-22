@@ -1,3 +1,5 @@
+import datetime
+
 import cv2
 import numpy as np
 import face_recognition
@@ -24,6 +26,27 @@ def findEncodings(images):
     return encodeList
 encodeListKnownFaces =findEncodings(images)
 print("Successfull encoding")
+
+def MarkAttendance(name):
+    today = datetime.date.today().strftime("%Y-%m-%d")
+    if os.path.isfile(f'record/{today}.csv'):
+        print("record already created")
+    else :
+        f=open(f'record/{today}.csv','x')
+        f.writelines('Name,Date,Time')
+        f.close()
+        print("record created")
+    with open(f'record/{today}.csv','r+') as f:
+        myDataList = f.readlines()
+        nameList=[]
+        for line in myDataList:
+            entry =line.split(',')
+            nameList.append(entry[0])
+        if name not in nameList:
+            now = datetime.datetime.now()
+            today = datetime.date.today().strftime("%Y-%m-%d")
+            dtString =now.strftime("%H:%M:%S")
+            f.writelines(f'\n{name},{today},{dtString}')
 
 # camera
 cap = cv2.VideoCapture(0)
@@ -53,5 +76,7 @@ while True:
             cv2.rectangle(img,(int(x1),int(y1)),(int(x2),int(y2)),(0,0,0),2)
             # cv2.rectangle(img, (x1, y1-100), (x2, y2), (0, 255, 0), cv2.FILLED)
             cv2.putText(img,name,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
+            MarkAttendance(name)
+
     cv2.imshow('Webcam',img)
     cv2.waitKey(1)
