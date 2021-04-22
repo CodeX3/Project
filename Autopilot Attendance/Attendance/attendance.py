@@ -1,4 +1,6 @@
 import datetime
+import sqlite3
+from sqlite3 import Error
 
 import cv2
 import numpy as np
@@ -31,6 +33,7 @@ def MarkAttendance(name):
     today = datetime.date.today().strftime("%Y-%m-%d")
     if os.path.isfile(f'record/{today}.csv'):
         print("record already created")
+
     else :
         f=open(f'record/{today}.csv','x')
         f.writelines('Name,Date,Time')
@@ -47,7 +50,30 @@ def MarkAttendance(name):
             today = datetime.date.today().strftime("%Y-%m-%d")
             dtString =now.strftime("%H:%M:%S")
             f.writelines(f'\n{name},{today},{dtString}')
-
+    try:
+        # print(name)
+        db_path = '../../HostelManagement/db.sqlite3'
+        connection = sqlite3.connect(db_path)
+        cursor = connection.cursor()
+        cursor.execute(f"select sd_id from User_student Where sd_name='{name}'  ")
+        result = cursor.fetchone()
+        cursor.execute(f"select * from User_attendance Where sd_name='{name}'  AND  date=CURRENT_DATE ")
+        at = cursor.fetchone()
+        student_id = result[0]
+        print(student_id)
+        if at is None:
+            cursor.execute(
+                f"insert into User_attendance('sd_id','date','status','sd_name','stduent_info_id') values({student_id},CURRENT_DATE ,1,'{name}',{student_id}) ")
+            connection.commit()
+            print("value inserted")
+        else:
+            print("already value exists!!")
+        cursor.close()
+        connection.close()
+        # print(result)
+        # print(at)
+    except Error as e:
+        print(e)
 # camera
 cap = cv2.VideoCapture(0)
 
@@ -67,7 +93,7 @@ while True:
 
         # find the name
         if matches[matchIndex]:
-            name =classNames[matchIndex].upper()
+            name =classNames[matchIndex]
             print(name)
             y1,x2,y2,x1 = faceloc
             # print(y1, x2, y2, x1)
