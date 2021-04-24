@@ -39,4 +39,5 @@ urlpatterns = [
     path('dashboard/view/<yyyy:date>',views.date_attendance,name="attendance_date"),
 
 
+
 ]
