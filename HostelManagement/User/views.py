@@ -9,6 +9,7 @@ from .forms import *
 from django.core.exceptions import *
 
 
+
 # ---------------------------Login--------------------------------#
 def do_login(request):
     if request.method == "GET":
@@ -195,3 +196,4 @@ def date_attendance(request, date=None):
         st_obj = student.objects.all()
         return render(request, 'admin_templates/all_attendance.html',
                       {'obj': st_obj, 'today': date, 'attendace_obj': res})
+
