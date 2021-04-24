@@ -195,3 +195,16 @@ def date_attendance(request, date=None):
         st_obj = student.objects.all()
         return render(request, 'admin_templates/all_attendance.html',
                       {'obj': st_obj, 'today': date, 'attendace_obj': res})
+
+def fees(request):
+
+    return render(request,'admin_templates/fees.html')
+
+
+def all_fees(request):
+
+    return render(request,'admin_templates/all_fees.html')
+
+def pending_fee(request):
+
+    return render(request,'admin_templates/pending_fee.html')

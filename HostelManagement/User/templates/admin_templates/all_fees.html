@@ -1,13 +1,12 @@
 {% extends 'admin_templates/table.html' %}
 
-{% load static %}
-
 {% block content %}
+
 
 <div class="col-md-12 col-sm-12 ">
     <div class="x_panel">
         <div class="x_title">
-            <h2>All Students List</h2>
+            <h2>All Fees List</h2>
             <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
             </ul>
@@ -24,15 +23,16 @@
 
                             <thead>
                                 <tr>
-                                    <th>No</th>
+                                    <th>MM/YYYY</th>
                                     <th>Name</th>
-                                    <th>ID</th>
-                                    <th>Course</th>
-                                    <th>Email</th>
-                                    <th>phone</th>
-                                    <th>Year</th>
-                                    <th>Admission num</th>
-
+                                    <th>Phone</th>
+                                    <th>Mess</th>
+                                    <th>Fine</th>
+                                    <th>Acco.</th>
+                                    <th>CmnExp</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th>Paid By</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -55,6 +55,5 @@
         </div>
     </div>
 </div>
-
 
 {% endblock %}

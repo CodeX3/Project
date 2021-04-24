@@ -1,0 +1,175 @@
+{% extends 'admin_templates/index.html' %}
+
+{% block content %}
+
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Add Fees Section</h3>
+            </div>
+
+            <div class="title_right">
+                <div class="col-md-5 col-sm-5   form-group row pull-right top_search">
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12  ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Add Fees Individual</h2>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+                        <form class="form-horizontal form-label-left">
+
+                            <div class="form-group row">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-3">Student ID</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control">
+                                        <span class="input-group-btn">
+                                            <button type="button" onclick="redirect_to_all()"
+                                                class="btn btn-primary">Find</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-3">Mess Fee</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input type="text" id=1 class="form-control" placeholder="0">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-3">Fine</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input type="text" id=2 class="form-control" placeholder="0">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-3">Accommodation</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input type="text" id=3 class="form-control" placeholder="0">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-3">Common Expenses</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input type="text" id=4 class="form-control" placeholder="0">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-3">Total</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <input type="text" id="sum" class="form-control">
+                                        <span class="input-group-btn">
+                                            <button type="button" onclick="Sum()" class="btn btn-primary">Calc</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="ln_solid"></div>
+
+                            <div class="form-group row">
+                                <div class="col-md-9 offset-md-3">
+                                    <button type="submit" class="btn btn-primary">Cancel</button>
+                                    <button type="submit" class="btn btn-success" value="individual">Submit</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-6 col-sm-12  ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Add Fees By Attendance</h2>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+                        <form class="form-horizontal form-label-left">
+
+                            <div class="form-group row">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-3">Mess Fee/Day</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input type="text" id=1 class="form-control" placeholder="0">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-3">Accommodation</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input type="text" id=3 class="form-control" placeholder="0">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-3">Common Expenses</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input type="text" id=4 class="form-control" placeholder="0">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-3">Total</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <input type="text" id="sum" class="form-control">
+                                        <span class="input-group-btn">
+                                            <button type="button" onclick="Sum()" class="btn btn-primary">Calc</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="ln_solid"></div>
+
+                            <div class="form-group row">
+                                <div class="col-md-9 offset-md-3">
+                                    <button type="submit" class="btn btn-primary">Cancel</button>
+                                    <button type="submit" class="btn btn-success" value="all">Submit</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script>
+    function redirect_to_all() {
+        location.href = "{% url 'view_student_all' %}"
+    }
+    function Sum() {
+        var sum = 0;
+        for (var i = 1; i < 5; i++) {
+            sum += Number(document.getElementById(i).value);
+        }
+        document.getElementById("sum").value = sum;
+    }
+
+</script>
+{% endblock %}

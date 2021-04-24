@@ -35,8 +35,7 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
 
-    <script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js">
     </script>
 </head>
 
@@ -88,7 +87,8 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-graduation-cap"></i> Students <span class="fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-graduation-cap"></i> Students <span
+                                            class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="{% url 'verify_students' %}">Student Registrations</a></li>
                                         <li>
@@ -97,8 +97,15 @@
                                         <li>
                                             <a href="{% url 'view_visitors' %}">Visitors</a>
                                         </li>
-                                        <li>
-                                            <a href="index.html">Fees</a>
+                                        <li><a>Fees<span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li class="sub_menu"><a href="{% url 'add_fees' %}">Add Fees</a>
+                                                </li>
+                                                <li><a href="{% url 'all_fees_list' %}">All Details</a>
+                                                </li>
+                                                <li><a href="{% url 'fee_pending' %}">Pending</a>
+                                                </li>
+                                            </ul>
                                         </li>
                                     </ul>
                                 </li>
@@ -140,7 +147,8 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a><i class=" fa fa-camera-retro "></i>Photo Gallery<span class="fa fa-chevron-down "></span></a>
+                                <li><a><i class=" fa fa-camera-retro "></i>Photo Gallery<span
+                                            class="fa fa-chevron-down "></span></a>
                                     <ul class="nav child_menu ">
                                         <li>
                                             <a href="chartjs.html ">Gallery</a>
