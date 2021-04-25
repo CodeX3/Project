@@ -171,6 +171,8 @@ def mark_attendance(request):
         obj.sd_id = request.GET['id']
         obj.date = date.today().strftime("%Y-%m-%d")
         obj.stduent_info = student_data
+        obj.month =int(date.today().strftime("%m"))
+        obj.year=int(date.today().strftime("%Y"))
         obj.sd_name = student_data.sd_name
         obj.save()
 
@@ -209,9 +211,8 @@ def add_fees(request):
         common=request.POST['common']
         total=request.POST['total']
         form =add_fee_ind(request.POST)
-        print(form.errors)
+        # print(form.errors)
         if form.is_valid():
-            print("form is valid")
             obj= fees()
             obj.sd_id = sd_id
             obj.status = status
@@ -226,11 +227,39 @@ def add_fees(request):
             obj.common = common
             obj.total = total
             obj.save()
-            print("saved")
+            # print("saved")
             return redirect('all_fees_list')
         else:
             form =add_fee_ind()
+    if request.method=="POST" and 'all' in request.POST:
+        all_student =student.objects.all()
+        month = int(date.today().strftime("%m"))
+        year = int(date.today().strftime("%Y"))
 
+        for i in all_student:
+            present =attendance.objects.filter(sd_id=i.sd_id,month=month,year=year).count()
+            mess_fee =int(request.POST['mess_fee'])
+            mess_fee =mess_fee * present
+            # print(i.sd_id,present,":",mess_fee)
+            accommodation = request.POST['accommodation']
+            common = request.POST['common']
+            total = int(request.POST['total'])
+            total =total+mess_fee
+            # print(total)
+            obj = fees()
+            obj.sd_id = i.sd_id
+            obj.status = 0
+            obj.month = month
+            obj.year = year
+            obj.created_date = date.today().strftime("%Y-%m-%d")
+            obj.student_info = i
+            obj.student_info_id = i.sd_id
+            obj.mess_fee = mess_fee
+            obj.accommodation = accommodation
+            obj.common = common
+            obj.total = total
+            obj.save()
+        return redirect('all_fees_list')
 
     return render(request,'admin_templates/fees.html')
 

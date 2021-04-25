@@ -61,9 +61,11 @@ def MarkAttendance(name):
         at = cursor.fetchone()
         student_id = result[0]
         print(student_id)
+        month = int(datetime.date.today().strftime("%m"))
+        year = int(datetime.date.today().strftime("%Y"))
         if at is None:
             cursor.execute(
-                f"insert into User_attendance('sd_id','date','status','sd_name','stduent_info_id') values({student_id},CURRENT_DATE ,1,'{name}',{student_id}) ")
+                f"insert into User_attendance('sd_id','date','status','sd_name','stduent_info_id','month','year') values({student_id},CURRENT_DATE ,1,'{name}',{student_id},{month},{year}) ")
             connection.commit()
             print("value inserted")
         else:
