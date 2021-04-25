@@ -25,3 +25,8 @@ class complaints(forms.ModelForm):
     class Meta:
         model=complaint
         fields=['auther','auther_phone','auther_ID','subject','status','date','body']
+
+class add_fee_ind(forms.ModelForm):
+    class Meta:
+        model = fees
+        fields=['sd_id','mess_fee','fine','accommodation','common','total']

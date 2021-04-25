@@ -1,13 +1,11 @@
 import datetime
 import json
 from datetime import date
-
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
 from django.core.exceptions import *
-
 
 
 # ---------------------------Login--------------------------------#
@@ -197,3 +195,50 @@ def date_attendance(request, date=None):
         return render(request, 'admin_templates/all_attendance.html',
                       {'obj': st_obj, 'today': date, 'attendace_obj': res})
 
+def add_fees(request):
+    if request.method=="POST" and 'individual' in request.POST:
+        month =date.today().strftime("%m")
+        year =date.today().strftime("%Y")
+        created_date = date.today().strftime("%Y-%m-%d")
+        sd_id =request.POST['sd_id']
+        status =0
+        student_info=student.objects.get(sd_id=sd_id)
+        mess_fee=request.POST['mess_fee']
+        fine=request.POST['fine']
+        accommodation=request.POST['accommodation']
+        common=request.POST['common']
+        total=request.POST['total']
+        form =add_fee_ind(request.POST)
+        print(form.errors)
+        if form.is_valid():
+            print("form is valid")
+            obj= fees()
+            obj.sd_id = sd_id
+            obj.status = status
+            obj.month = month
+            obj.year = year
+            obj.created_date = created_date
+            obj.student_info = student_info
+            obj.student_info_id = sd_id
+            obj.mess_fee = mess_fee
+            obj.fine = fine
+            obj.accommodation = accommodation
+            obj.common = common
+            obj.total = total
+            obj.save()
+            print("saved")
+            return redirect('all_fees_list')
+        else:
+            form =add_fee_ind()
+
+
+    return render(request,'admin_templates/fees.html')
+
+
+def all_fees(request):
+    obj =fees.objects.all()
+    return render(request,'admin_templates/all_fees.html',{'obj':obj})
+
+def pending_fee(request):
+    obj=fees.objects.filter(status=0).all()
+    return render(request,'admin_templates/pending_fee.html',{'obj':obj})

@@ -62,4 +62,19 @@ class attendance(models.Model):
     sd_name=models.CharField(max_length=50)
     stduent_info=models.ForeignKey(student,on_delete=models.CASCADE,null=True)
 
+class fees(models.Model):
+    sd_id=models.IntegerField()
+    created_date=models.DateField()
+    status=models.BooleanField(default=False)
+    month=models.IntegerField()
+    year =models.IntegerField()
+    paid_by=models.CharField(max_length=50,null=True)
+    transaction=models.CharField(max_length=100,null=True)
+    mess_fee=models.IntegerField(null=True)
+    fine=models.IntegerField(null=True)
+    accommodation=models.IntegerField(null=True)
+    common=models.IntegerField(null=True)
+    total=models.IntegerField()
+    student_info =models.ForeignKey(student,on_delete=models.CASCADE,null=True)
+
 

@@ -37,6 +37,10 @@ urlpatterns = [
     path('admin/mark_attendance',views.mark_attendance),
     path('dashboard/view/',views.general_attendance,name="common_attendance"),
     path('dashboard/view/<yyyy:date>',views.date_attendance,name="attendance_date"),
+    path('dashboard/fees',views.add_fees,name="add_fees"),
+    path('dashboard/all_fees',views.all_fees,name="all_fees_list"),
+    path('dashboard/pending_fee',views.pending_fee,name="fee_pending")
+
 
 
 
