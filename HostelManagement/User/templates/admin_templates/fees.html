@@ -100,33 +100,33 @@
                     </div>
                     <div class="x_content">
                         <br />
-                        <form class="form-horizontal form-label-left">
-
+                        <form class="form-horizontal form-label-left" method="post">
+                            {% csrf_token %}
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-3">Mess Fee/Day</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input type="text" id=1 class="form-control" placeholder="0">
+                                    <input type="text" name="mess_fee" id=10 class="form-control" value="0" placeholder="0">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-3">Accommodation</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input type="text" id=3 class="form-control" placeholder="0">
+                                    <input type="text" id=11 name="accommodation" class="form-control" value="0"  placeholder="0">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-3">Common Expenses</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input type="text" id=4 class="form-control" placeholder="0">
+                                    <input type="text" id=12 name="common" class="form-control" value="0" placeholder="0">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-3">Total</label>
                                 <div class="col-sm-9">
                                     <div class="input-group">
-                                        <input type="text" id="sum" class="form-control">
+                                        <input type="text" name="total" id="sum_g" class="form-control">
                                         <span class="input-group-btn">
-                                            <button type="button" onclick="Sum()" class="btn btn-primary">Calc</button>
+                                            <button type="button" onclick="Sum_g()" class="btn btn-primary">Calc</button>
                                         </span>
                                     </div>
                                 </div>
@@ -138,7 +138,7 @@
                             <div class="form-group row">
                                 <div class="col-md-9 offset-md-3">
                                     <button type="submit" class="btn btn-primary">Cancel</button>
-                                    <button type="submit" class="btn btn-success" value="all">Submit</button>
+                                    <button type="submit" class="btn btn-success"  name="all" value="all">Submit</button>
                                 </div>
                             </div>
 
@@ -168,6 +168,15 @@
         }
         document.getElementById("sum").value = sum;
     }
+    function Sum_g() {
+        var sum = 0;
+        for (var i = 11; i < 13; i++) {
+            sum += Number(document.getElementById(i).value);
+        }
+
+        document.getElementById("sum_g").value = sum;
+    }
+
 
 </script>
 {% endblock %}

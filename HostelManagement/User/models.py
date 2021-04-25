@@ -58,6 +58,8 @@ class complaint(models.Model):
 class attendance(models.Model):
     sd_id=models.IntegerField()
     date=models.DateField(null=True)
+    month =models.CharField(max_length=31)
+    year =models.CharField(max_length=5000)
     status=models.BooleanField(default=False)
     sd_name=models.CharField(max_length=50)
     stduent_info=models.ForeignKey(student,on_delete=models.CASCADE,null=True)
