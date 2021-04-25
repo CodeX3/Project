@@ -38,14 +38,26 @@
                             <tbody>
                                 {% for i in obj %}
                                 <tr>
-                                    <td>{{ forloop.counter }}</td>
-                                    <td><a class="btn-link" href="{% url 'edit_student_details' i.sd_id %}">{{i.sd_name}}</a></td>
-                                    <td>{{ i.sd_id }}</td>
-                                    <td>{{i.sd_course}}</td>
-                                    <td>{{i.sd_email}}</td>
-                                    <td>{{i.sd_phone}}</td>
-                                    <td>{{i.sd_year}}</td>
-                                    <td>{{i.sd_admno}}</td>
+                                    <td>{{ i.month }}/{{ i.year }}</td>
+                                    <td><a class="btn-link" href="{% url 'edit_student_details' i.sd_id %}">{{i.student_info.sd_name}}</a></td>
+                                    <td>{{ i.student_info.sd_phone }}</td>
+                                    <td>{{i.mess_fee}}</td>
+                                    <td>{{i.fine}}</td>
+                                    <td>{{i.accommodation}}</td>
+                                    <td>{{i.common}}</td>
+                                    <td>{{i.total}}</td>
+                                    {% if  i.status %}
+                                    <td>Paid</td>
+                                    {% else %}
+                                    <td>Pending</td>
+                                    {% endif %}
+
+                                    {% if i.status %}
+                                        <td>{{ i.paid_by }}</td>
+                                    {% else %}
+                                        <td>Waiting</td>
+                                    {% endif %}
+                                </tr>
                                 {% endfor %}
                             </tbody>
                         </table>

@@ -27,13 +27,13 @@
                     </div>
                     <div class="x_content">
                         <br />
-                        <form class="form-horizontal form-label-left">
-
+                        <form class="form-horizontal form-label-left" method="post">
+                             {% csrf_token %}
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-3">Student ID</label>
                                 <div class="col-sm-9">
                                     <div class="input-group">
-                                        <input type="text" class="form-control">
+                                        <input type="text" name="sd_id" class="form-control">
                                         <span class="input-group-btn">
                                             <button type="button" onclick="redirect_to_all()"
                                                 class="btn btn-primary">Find</button>
@@ -44,46 +44,44 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-3">Mess Fee</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input type="text" id=1 class="form-control" placeholder="0">
+                                    <input type="text" name="mess_fee" id=1 class="form-control" value="0">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-3">Fine</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input type="text" id=2 class="form-control" placeholder="0">
+                                    <input type="text" name="fine" id=2 class="form-control" value="0">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-3">Accommodation</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input type="text" id=3 class="form-control" placeholder="0">
+                                    <input type="text" id=3 name="accommodation" class="form-control" value="0">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-3">Common Expenses</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input type="text" id=4 class="form-control" placeholder="0">
+                                    <input type="text" id=4 name="common" class="form-control" value="0">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-3">Total</label>
                                 <div class="col-sm-9">
                                     <div class="input-group">
-                                        <input type="text" id="sum" class="form-control">
+                                        <input type="text" id="sum" name="total" class="form-control">
                                         <span class="input-group-btn">
                                             <button type="button" onclick="Sum()" class="btn btn-primary">Calc</button>
                                         </span>
                                     </div>
                                 </div>
                             </div>
-
-
                             <div class="ln_solid"></div>
 
                             <div class="form-group row">
                                 <div class="col-md-9 offset-md-3">
                                     <button type="submit" class="btn btn-primary">Cancel</button>
-                                    <button type="submit" class="btn btn-success" value="individual">Submit</button>
+                                    <button type="submit" class="btn btn-success" value="individual" name="individual">Submit</button>
                                 </div>
                             </div>
 
