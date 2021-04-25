@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'User',
+    'image',
 
 ]
 
@@ -128,3 +129,7 @@ STATICFILES_DIR = [STATIC_DIR]
 # csrf tocken error
 CSRF_COOKIE_SECURE = True
 
+#gallery
+
+MEDIA_URL="/media/"
+MEDIA_ROOT=os.path.join(BASE_DIR,"media/")
