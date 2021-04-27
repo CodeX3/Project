@@ -6,7 +6,6 @@
   <title>Register your account here..</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 <link rel="stylesheet" href="{%  static 'register/style.css' %}">
-
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -14,12 +13,12 @@
 <form id="msform" method="POST">
     {% csrf_token %}
   <!-- progressbar -->
-  <ul id="progressbar">
-    <li class="active">Account Setup</li>
-    <li>Personal Details</li>
-    <li>Course Details</li>
-    
-  </ul>
+{#  <ul id="progressbar">#}
+{#    <li class="active">Account Setup</li>#}
+{#    <li>Personal Details</li>#}
+{#    <li>Course Details</li>#}
+{#    #}
+{#  </ul>#}
   <!-- fieldsets -->
   <fieldset>
     <h2 class="fs-title">Login</h2>

@@ -17,7 +17,7 @@ register_converter(DateConverter, 'yyyy')
 
 handler404='User.views.handler404'
 urlpatterns = [
-    path('register',views.do_register),
+    path('register',views.do_register,name='register'),
     path('',views.load_index),
     path('test',views.test),
     #
@@ -39,7 +39,9 @@ urlpatterns = [
     path('dashboard/view/<yyyy:date>',views.date_attendance,name="attendance_date"),
     path('dashboard/fees',views.add_fees,name="add_fees"),
     path('dashboard/all_fees',views.all_fees,name="all_fees_list"),
-    path('dashboard/pending_fee',views.pending_fee,name="fee_pending")
+    path('dashboard/pending_fee',views.pending_fee,name="fee_pending"),
+    path('dashboard/service',views.service_list,name="service"),
+
 
 
 

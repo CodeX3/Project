@@ -1,0 +1,95 @@
+{% extends 'admin_templates/table.html' %}
+
+{% block content %}
+<div class="col-md-12 col-sm-12 ">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Service Open</h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card-box table-responsive">
+{#                        <p class="text-muted font-13 m-b-30">#}
+{#                            Student list requested to join to the hostel#}
+{#                        </p>#}
+                        <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Student</th>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>Discription</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in obj %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td><a class="btn-link" href="{% url 'edit_student_details' i.sd_id %}">{{i.visitor_name}}</a></td>
+                                    <td>{{i.visitor_date}}</td>
+                                    <td>{{i.visitor_student_name}}</td>
+                                    <td>{{i.visitor_student_id}}</td>
+                                {% endfor %}
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12 col-sm-12 ">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Service Closed</h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card-box table-responsive">
+{#                        <p class="text-muted font-13 m-b-30">#}
+{#                            Student list requested to join to the hostel#}
+{#                        </p>#}
+                        <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Student</th>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>Discription</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in obj %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td><a class="btn-link" href="{% url 'edit_student_details' i.sd_id %}">{{i.visitor_name}}</a></td>
+                                    <td>{{i.visitor_date}}</td>
+                                    <td>{{i.visitor_student_name}}</td>
+                                    <td>{{i.visitor_student_id}}</td>
+                                {% endfor %}
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
