@@ -10,7 +10,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{% static 'homescreen/assets/img/favicon.png' %}" rel="icon" >
+{#  <link href="{% static 'homescreen/assets/img/favicon.png' %}" rel="icon" >#}
   <link href="{% static 'homescreen/assets/img/apple-touch-icon.png'%}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -71,7 +71,7 @@
             </ul>
           </li>
           <li><a href="#contact">Contact Us</a></li>
-          <li class="active"><a  href="#contact">Login/Register</a></li>
+          <li class="active"><a  href="{% url 'register' %}">Login/Register</a></li>
 
         </ul>
       </nav><!-- .nav-menu -->

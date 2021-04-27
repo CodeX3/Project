@@ -1,6 +1,8 @@
 import datetime
 import json
 from datetime import date
+
+from django.contrib.auth import authenticate
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import *
@@ -13,8 +15,14 @@ def do_login(request):
     if request.method == "GET":
         return render(request, 'login.html')
     if request.method == "POST":
-        print("post request recieved")
-        response = redirect('/test')
+        email =request.POST['email']
+        password=request.POST['password']
+        user = authenticate(request,username=email,password=password)
+        if user is None:
+            print("empty")
+            response =redirect('/login')
+        else :
+            response = redirect('/test')
         return response
 
 
@@ -271,3 +279,7 @@ def all_fees(request):
 def pending_fee(request):
     obj=fees.objects.filter(status=0).all()
     return render(request,'admin_templates/pending_fee.html',{'obj':obj})
+
+def service_list(request):
+
+    return render(request,'admin_templates/service.html')
