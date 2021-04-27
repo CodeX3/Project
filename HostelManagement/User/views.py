@@ -12,20 +12,20 @@ from django.core.exceptions import *
 
 # ---------------------------Login--------------------------------#
 def do_login(request):
+    value = request.session.get('userid')
+    if value is not None:
+        return  redirect('student_home')
     if request.method == "GET":
         return render(request, 'login.html')
     if request.method == "POST":
         email =request.POST['email']
         password=request.POST['password']
-        user = authenticate(request,username=email,password=password)
-        if user is None:
-            print("empty")
-            response =redirect('/login')
-        else :
-            response = redirect('/test')
-        return response
-
-
+        try:
+            obj = student.objects.get(sd_email=email,sd_password=password)
+        except ObjectDoesNotExist:
+            return  render(request,'login.html',{'err':True})
+        request.session['userid']=obj.sd_id
+        return redirect('student_home')
 # ------------------------------USER ---------------------------------#
 # 404 handler
 def handler404(request, exception):

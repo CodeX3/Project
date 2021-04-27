@@ -8,6 +8,9 @@
 <link rel="stylesheet" href="{%  static 'register/style.css' %}">
 </head>
 <body>
+{% if err %}
+<script>alert('login failed!!');</script>
+{% endif %}
 <!-- partial:index.partial.html -->
 <!-- multistep form -->
 <form id="msform" method="POST">

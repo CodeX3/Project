@@ -22,7 +22,8 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     path('admin_templates/', admin.site.urls),
     path('',include('User.urls')),
-    path('image/',include('image.urls'))
+    path('image/',include('image.urls')),
+    path('homepage/',include('Student.urls')),
 ]
 
 if settings.DEBUG:
