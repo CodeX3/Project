@@ -79,4 +79,13 @@ class fees(models.Model):
     total=models.IntegerField()
     student_info =models.ForeignKey(student,on_delete=models.CASCADE,null=True)
 
-
+class warden(models.Model):
+    name = models.CharField(max_length=50)
+    is_main =models.BooleanField(default=False)
+    address = models.CharField(max_length=100)
+    phone = models.CharField(max_length=15)
+    status = models.BooleanField(default=True)
+    is_normal=models.BooleanField(default=True)
+    incharge= models.CharField(max_length=50)
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=50)
