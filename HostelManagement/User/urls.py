@@ -41,6 +41,9 @@ urlpatterns = [
     path('dashboard/all_fees',views.all_fees,name="all_fees_list"),
     path('dashboard/pending_fee',views.pending_fee,name="fee_pending"),
     path('dashboard/service',views.service_list,name="service"),
+    path('dashboard/warden',views.show_warden,name='warden'),
+    path('admin',views.admin_login,name='admin_login'),
+    path('logout',views.admin_logout,name='logout_admin'),
 
 
 

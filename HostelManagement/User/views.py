@@ -26,6 +26,27 @@ def do_login(request):
             return  render(request,'login.html',{'err':True})
         request.session['userid']=obj.sd_id
         return redirect('student_home')
+
+def admin_login(request):
+    value =request.session.get('admin')
+    if value is not None:
+        return  redirect('dashboard')
+    if request.method == "GET":
+        return render(request, 'admin_login.html')
+    if request.method == "POST":
+        email =request.POST['email']
+        password=request.POST['password']
+        print(email,password)
+        try:
+            obj = warden.objects.get(email=email,password=password)
+        except ObjectDoesNotExist:
+            return  render(request,'admin_login.html',{'err':True})
+        request.session['admin']=obj.id
+        return redirect('dashboard')
+def admin_logout(request):
+    request.session.flush()
+    return redirect('admin_login')
+
 # ------------------------------USER ---------------------------------#
 # 404 handler
 def handler404(request, exception):
@@ -79,16 +100,27 @@ def do_register(request):
 # ---------------------------Admin-------------------------------#
 
 def load_admin_index(request):
+
+    value = request.session.get('admin')
+    if value is None:
+        return redirect('admin_login')
+
     return render(request, 'admin_templates/index.html')
 
 
 def verify_students(request):
+    value = request.session.get('admin')
+    if value is None:
+        return redirect('admin_login')
     obj = register_new_user.objects.all()
     context = {'obj': obj}
     return render(request, 'admin_templates/student_reg_verify.html', context)
 
 
 def verify_students_confirm(request, pk):
+    value = request.session.get('admin')
+    if value is None:
+        return redirect('admin_login')
     obj = register_new_user.objects.get(id=pk)
     context = {'obj': obj}
 
@@ -106,16 +138,25 @@ def verify_students_confirm(request, pk):
 
 
 def table(request):
+    value = request.session.get('admin')
+    if value is None:
+        return redirect('admin_login')
     return render(request, 'admin_templates/table.html')
 
 
 def view_students(request):
+    value = request.session.get('admin')
+    if value is None:
+        return redirect('admin_login')
     obj = student.objects.all()
     context = {'obj': obj}
     return render(request, 'admin_templates/student_view.html', context)
 
 
 def edit_student(request, pk):
+    value = request.session.get('admin')
+    if value is None:
+        return redirect('admin_login')
     obj = student.objects.get(sd_id=pk)
     context = {'obj': obj}
 
@@ -130,18 +171,27 @@ def edit_student(request, pk):
 
 
 def view_visitors(request):
+    value = request.session.get('admin')
+    if value is None:
+        return redirect('admin_login')
     obj = visitor.objects.all()
 
     return render(request, 'admin_templates/visitor.html', {'obj': obj})
 
 
 def view_complaints(request):
+    value = request.session.get('admin')
+    if value is None:
+        return redirect('admin_login')
     obj = complaint.objects.all()
 
     return render(request, 'admin_templates/complaint.html', {'obj': obj})
 
 
 def review_complaint(request):
+    value = request.session.get('admin')
+    if value is None:
+        return redirect('admin_login')
     obj = complaint.objects.get(id=request.GET['id'])
     obj.status = "closed"
     obj.save()
@@ -149,6 +199,9 @@ def review_complaint(request):
 
 
 def reg_complaint(request):
+    value = request.session.get('admin')
+    if value is None:
+        return redirect('admin_login')
     if request.method == "POST":
         form = complaints(request.POST)
         if form.is_valid():
@@ -159,6 +212,9 @@ def reg_complaint(request):
 
 
 def today_attendance(request):
+    value = request.session.get('admin')
+    if value is None:
+        return redirect('admin_login')
     today = date.today()
     obj = attendance.objects.filter(date=today).values("sd_id")
     res = [sub['sd_id'] for sub in obj]
@@ -168,6 +224,9 @@ def today_attendance(request):
 
 
 def mark_attendance(request):
+    value = request.session.get('admin')
+    if value is None:
+        return redirect('admin_login')
     try:
         today = date.today().strftime("%Y-%m-%d")
         obj = attendance.objects.get(sd_id=request.GET['id'], date=today)
@@ -188,10 +247,16 @@ def mark_attendance(request):
 
 
 def general_attendance(request):
+    value = request.session.get('admin')
+    if value is None:
+        return redirect('admin_login')
     return render(request, 'admin_templates/category_view.html')
 
 
 def date_attendance(request, date=None):
+    value = request.session.get('admin')
+    if value is None:
+        return redirect('admin_login')
     if date is None:
         today = date.today().strftime("%Y-%m-%d")
         obj = attendance.objects.filter(date=today).values("sd_id")
@@ -206,6 +271,9 @@ def date_attendance(request, date=None):
                       {'obj': st_obj, 'today': date, 'attendace_obj': res})
 
 def add_fees(request):
+    value = request.session.get('admin')
+    if value is None:
+        return redirect('admin_login')
     if request.method=="POST" and 'individual' in request.POST:
         month =date.today().strftime("%m")
         year =date.today().strftime("%Y")
@@ -273,13 +341,32 @@ def add_fees(request):
 
 
 def all_fees(request):
+    value = request.session.get('admin')
+    if value is None:
+        return redirect('admin_login')
     obj =fees.objects.all()
     return render(request,'admin_templates/all_fees.html',{'obj':obj})
 
 def pending_fee(request):
+    value = request.session.get('admin')
+    if value is None:
+        return redirect('admin_login')
     obj=fees.objects.filter(status=0).all()
     return render(request,'admin_templates/pending_fee.html',{'obj':obj})
 
 def service_list(request):
+    value = request.session.get('admin')
+    if value is None:
+        return redirect('admin_login')
 
     return render(request,'admin_templates/service.html')
+
+def show_warden(request):
+    value = request.session.get('admin')
+    if value is None:
+        return redirect('admin_login')
+    admin_id = request.session.get('admin')
+    obj = warden.objects.all()
+    check_super_admin=warden.objects.get(id=admin_id)
+    check_super_admin=check_super_admin.is_main
+    return render(request,'admin_templates/warden.html',{'obj':obj,'edit':check_super_admin})
