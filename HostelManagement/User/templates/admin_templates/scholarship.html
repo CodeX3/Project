@@ -1,0 +1,122 @@
+{% extends 'admin_templates/index.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="right_col" role="main">
+    {% if err %}
+    <script>alert("admission number not found");</script>
+    {% endif %}
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Student marks</h3>
+            </div>
+
+            <!-- <div class="title_right">
+                            <div class="col-md-5 col-sm-5 form-group pull-right top_search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search for...">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button">Go!</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div> -->
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Student validation by College records</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <form class="" action="" method="post" novalidate>
+                            {% csrf_token %}
+                            <span class="section">Personal Info</span>
+
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3  label-align">Admission Number <span
+                                        class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input class="form-control" type="number" class='number' name="sd_admno"
+                                           data-validate-length-range="0,8" value="{{ obj.sd_admno }}" required='required'>
+                                </div>
+                            </div>
+
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3  label-align">Odd sem mark<span
+                                        class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input class="form-control" type="text" value="{{obj.mark1}}" class='number'
+                                           name="mark1" id="mark1" value="0" onchange="sum_()"   required='required' />
+                                </div>
+                            </div>
+
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3  label-align">Even sem mark<span
+                                        class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input class="form-control" type="text" value="{{obj.mark2}}" class='number'
+                                           name="mark2" id="mark2" value="0" onchange="sum_()"  required='required' />
+                                </div>
+                            </div>
+
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3  label-align">total<span
+                                        class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input class="form-control" type="number"  class='form-control'
+                                           name="total" id="total"  required='required' readonly/>
+                                </div>
+                            </div>
+
+                            <div class="ln_solid">
+                                <div class="form-group">
+                                    <div class="col-md-6 offset-md-3">
+                                        <button type='submit' class="btn btn-primary">Submit</button>
+                                        <button type='reset' class="btn btn-success">Reset</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{ form.error }}
+    {{ form.non_field_errors }}
+</div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="{% static 'admin_static/vendors/validator/multifield.js' %}"></script>
+<script src="{%  static 'admin_static/vendors/validator/validator.js'%}"></script>
+
+<!-- Javascript functions	-->
+
+
+
+
+<script>
+    function sum_(){
+        var total=0;
+        total=Number(document.getElementById('mark1').value)+Number(document.getElementById('mark2').value);
+        document.getElementById('total').value=total
+        console.log(total)
+        return true;
+    }
+
+
+</script>
+
+{% endblock %}

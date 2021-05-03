@@ -389,3 +389,32 @@ def show_warden(request):
             print(e)
             return render(request, 'admin_templates/warden.html',{'obj': all_warden, 'edit': check_super_admin, 'reg': False})
     return render(request,'admin_templates/warden.html',{'obj':all_warden,'edit':check_super_admin,'reg':True})
+
+
+
+def scholarship(request):
+
+    if request.method=='POST':
+        print(request.POST)
+        num=request.POST['sd_admno']
+        try:
+            st =student.objects.get(sd_admno=num)
+
+        except ObjectDoesNotExist:
+            return render(request,'admin_templates/scholarship.html',{'err':True})
+        obj =marks()
+        obj.sd_id=int(st.sd_id)
+        obj.sd_name=st.sd_name
+        obj.sd_admno=st.sd_admno
+        obj.mark1 = int(request.POST['mark1'])
+        obj.mark2 =int(request.POST['mark2'])
+        obj.total =int(request.POST['total'])
+        obj.save()
+        print("saved")
+    return render(request,'admin_templates/scholarship.html')
+
+def scholarshipview(request):
+    selected=marks.objects.order_by('-total')
+    selected=marks.objects.first()
+    print(selected)
+    return render(request,'admin_templates/scholarshipview.html',{'obj':selected})
