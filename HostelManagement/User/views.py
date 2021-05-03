@@ -366,7 +366,26 @@ def show_warden(request):
     if value is None:
         return redirect('admin_login')
     admin_id = request.session.get('admin')
-    obj = warden.objects.all()
+    all_warden = warden.objects.all()
     check_super_admin=warden.objects.get(id=admin_id)
     check_super_admin=check_super_admin.is_main
-    return render(request,'admin_templates/warden.html',{'obj':obj,'edit':check_super_admin})
+    if request.method=="POST":
+        try:
+            obj = warden()
+            obj.name = request.POST['name']
+            obj.address = request.POST['address']
+            obj.password = request.POST['password']
+            obj.email = request.POST['email']
+            obj.incharge = request.POST['incharge']
+            obj.phone = request.POST['phone']
+            print(request.POST)
+            if 'status' in request.POST:
+                obj.status = True
+            else:
+                obj.status = False
+            obj.save()
+            return render(request, 'admin_templates/warden.html', {'obj': all_warden, 'edit': check_super_admin,'reg':True})
+        except Exception as e:
+            print(e)
+            return render(request, 'admin_templates/warden.html',{'obj': all_warden, 'edit': check_super_admin, 'reg': False})
+    return render(request,'admin_templates/warden.html',{'obj':all_warden,'edit':check_super_admin,'reg':True})
