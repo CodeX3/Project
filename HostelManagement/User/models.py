@@ -89,3 +89,12 @@ class warden(models.Model):
     incharge= models.CharField(max_length=50)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=50)
+
+
+class marks(models.Model):
+    sd_id=models.IntegerField()
+    sd_name=models.CharField(max_length=50)
+    sd_admno=models.CharField(max_length=10)
+    mark1=models.IntegerField(default=0)
+    mark2=models.IntegerField(default=0)
+    total=models.IntegerField()
