@@ -3,50 +3,58 @@ from django.conf import settings
 from django.core.exceptions import *
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+
 from .forms import *
-
-
+# live camera
+from django.views.decorators import gzip
+from django.http import StreamingHttpResponse
+import cv2
+import threading
+cam = None
 # ---------------------------Login--------------------------------#
 def do_login(request):
     value = request.session.get('userid')
     if value is not None:
-        return  redirect('student_home')
+        return redirect('student_home')
     if request.method == "GET":
         return render(request, 'login.html')
     if request.method == "POST":
-        email =request.POST['email']
-        password=request.POST['password']
+        email = request.POST['email']
+        password = request.POST['password']
         try:
-            obj = student.objects.get(sd_email=email,sd_password=password)
+            obj = student.objects.get(sd_email=email, sd_password=password)
         except ObjectDoesNotExist:
-            return  render(request,'login.html',{'err':True})
-        request.session['userid']=obj.sd_id
+            return render(request, 'login.html', {'err': True})
+        request.session['userid'] = obj.sd_id
         return redirect('student_home')
 
+
 def admin_login(request):
-    value =request.session.get('admin')
+    value = request.session.get('admin')
     if value is not None:
-        return  redirect('dashboard')
+        return redirect('dashboard')
     if request.method == "GET":
         return render(request, 'admin_login.html')
     if request.method == "POST":
-        email =request.POST['email']
-        password=request.POST['password']
-        print(email,password)
+        email = request.POST['email']
+        password = request.POST['password']
+        print(email, password)
         try:
-            obj = warden.objects.get(email=email,password=password)
+            obj = warden.objects.get(email=email, password=password)
         except ObjectDoesNotExist:
-            return  render(request,'admin_login.html',{'err':True})
+            return render(request, 'admin_login.html', {'err': True})
         if obj.status:
             request.session['admin'] = obj.id
             return redirect('dashboard')
         else:
 
-            return  render(request,'admin_login.html',{'active':True})
+            return render(request, 'admin_login.html', {'active': True})
+
 
 def admin_logout(request):
     request.session.flush()
     return redirect('admin_login')
+
 
 # ------------------------------USER ---------------------------------#
 # 404 handler
@@ -101,12 +109,15 @@ def do_register(request):
 # ---------------------------Admin-------------------------------#
 
 def load_admin_index(request):
-
+    try:
+        VideoCamera.__del__(cam)
+    except Exception as e:
+        print(e)
     value = request.session.get('admin')
     if value is None:
         return redirect('admin_login')
-    user=warden.objects.get(id=value)
-    return render(request, 'admin_templates/index.html',{'user':user})
+    user = warden.objects.get(id=value)
+    return render(request, 'admin_templates/index.html', {'user': user})
 
 
 def verify_students(request):
@@ -115,7 +126,7 @@ def verify_students(request):
         return redirect('admin_login')
     user = warden.objects.get(id=value)
     obj = register_new_user.objects.all()
-    context = {'obj': obj,'user':user}
+    context = {'obj': obj, 'user': user}
     return render(request, 'admin_templates/student_reg_verify.html', context)
 
 
@@ -125,7 +136,7 @@ def verify_students_confirm(request, pk):
         return redirect('admin_login')
     user = warden.objects.get(id=value)
     obj = register_new_user.objects.get(id=pk)
-    context = {'obj': obj,'user':user}
+    context = {'obj': obj, 'user': user}
 
     if request.method == "POST":
         form = Student_add(request.POST)
@@ -145,7 +156,7 @@ def table(request):
     if value is None:
         return redirect('admin_login')
     user = warden.objects.get(id=value)
-    return render(request, 'admin_templates/table.html',{'user':user})
+    return render(request, 'admin_templates/table.html', {'user': user})
 
 
 def view_students(request):
@@ -154,7 +165,7 @@ def view_students(request):
         return redirect('admin_login')
     user = warden.objects.get(id=value)
     obj = student.objects.all()
-    context = {'obj': obj,'user':user}
+    context = {'obj': obj, 'user': user}
     return render(request, 'admin_templates/student_view.html', context)
 
 
@@ -164,7 +175,7 @@ def edit_student(request, pk):
         return redirect('admin_login')
     user = warden.objects.get(id=value)
     obj = student.objects.get(sd_id=pk)
-    context = {'obj': obj,'user':user}
+    context = {'obj': obj, 'user': user}
 
     if request.method == "POST":
         form = Student_edit(request.POST, instance=obj)
@@ -183,7 +194,7 @@ def view_visitors(request):
     user = warden.objects.get(id=value)
     obj = visitor.objects.all()
 
-    return render(request, 'admin_templates/visitor.html', {'obj': obj,'user':user})
+    return render(request, 'admin_templates/visitor.html', {'obj': obj, 'user': user})
 
 
 def view_complaints(request):
@@ -193,7 +204,7 @@ def view_complaints(request):
     user = warden.objects.get(id=value)
     obj = complaint.objects.all()
 
-    return render(request, 'admin_templates/complaint.html', {'obj': obj,'user':user})
+    return render(request, 'admin_templates/complaint.html', {'obj': obj, 'user': user})
 
 
 def review_complaint(request):
@@ -217,7 +228,7 @@ def reg_complaint(request):
             form.save()
         else:
             form = complaints()
-    return render(request, 'complaint_insert.html',{'user':user})
+    return render(request, 'complaint_insert.html', {'user': user})
 
 
 def today_attendance(request):
@@ -229,7 +240,8 @@ def today_attendance(request):
     obj = attendance.objects.filter(date=today).values("sd_id")
     res = [sub['sd_id'] for sub in obj]
     st_obj = student.objects.all()
-    return render(request, 'admin_templates/today_attendance.html',{'obj': st_obj, 'today': today, 'attendace_obj': res,'user':user})
+    return render(request, 'admin_templates/today_attendance.html',
+                  {'obj': st_obj, 'today': today, 'attendace_obj': res, 'user': user})
 
 
 def mark_attendance(request):
@@ -247,8 +259,8 @@ def mark_attendance(request):
         obj.sd_id = request.GET['id']
         obj.date = date.today().strftime("%Y-%m-%d")
         obj.stduent_info = student_data
-        obj.month =int(date.today().strftime("%m"))
-        obj.year=int(date.today().strftime("%Y"))
+        obj.month = int(date.today().strftime("%m"))
+        obj.year = int(date.today().strftime("%Y"))
         obj.sd_name = student_data.sd_name
         obj.save()
 
@@ -260,7 +272,7 @@ def general_attendance(request):
     if value is None:
         return redirect('admin_login')
     user = warden.objects.get(id=value)
-    return render(request, 'admin_templates/category_view.html',{'user':user})
+    return render(request, 'admin_templates/category_view.html', {'user': user})
 
 
 def date_attendance(request, date=None):
@@ -273,34 +285,37 @@ def date_attendance(request, date=None):
         obj = attendance.objects.filter(date=today).values("sd_id")
         res = [sub['sd_id'] for sub in obj]
         st_obj = student.objects.all()
-        return render(request, 'admin_templates/all_attendance', {'obj': st_obj, 'today': today, 'attendace_obj': res,'user':user})
+        return render(request, 'admin_templates/all_attendance',
+                      {'obj': st_obj, 'today': today, 'attendace_obj': res, 'user': user})
     else:
         obj = attendance.objects.filter(date=date).values("sd_id")
         res = [sub['sd_id'] for sub in obj]
         st_obj = student.objects.all()
-        return render(request, 'admin_templates/all_attendance.html',{'obj': st_obj, 'today': date, 'attendace_obj': res,'user':user})
+        return render(request, 'admin_templates/all_attendance.html',
+                      {'obj': st_obj, 'today': date, 'attendace_obj': res, 'user': user})
+
 
 def add_fees(request):
     value = request.session.get('admin')
     if value is None:
         return redirect('admin_login')
     user = warden.objects.get(id=value)
-    if request.method=="POST" and 'individual' in request.POST:
-        month =date.today().strftime("%m")
-        year =date.today().strftime("%Y")
+    if request.method == "POST" and 'individual' in request.POST:
+        month = date.today().strftime("%m")
+        year = date.today().strftime("%Y")
         created_date = date.today().strftime("%Y-%m-%d")
-        sd_id =request.POST['sd_id']
-        status =0
-        student_info=student.objects.get(sd_id=sd_id)
-        mess_fee=request.POST['mess_fee']
-        fine=request.POST['fine']
-        accommodation=request.POST['accommodation']
-        common=request.POST['common']
-        total=request.POST['total']
-        form =add_fee_ind(request.POST)
+        sd_id = request.POST['sd_id']
+        status = 0
+        student_info = student.objects.get(sd_id=sd_id)
+        mess_fee = request.POST['mess_fee']
+        fine = request.POST['fine']
+        accommodation = request.POST['accommodation']
+        common = request.POST['common']
+        total = request.POST['total']
+        form = add_fee_ind(request.POST)
         # print(form.errors)
         if form.is_valid():
-            obj= fees()
+            obj = fees()
             obj.sd_id = sd_id
             obj.status = status
             obj.month = month
@@ -317,21 +332,21 @@ def add_fees(request):
             # print("saved")
             return redirect('all_fees_list')
         else:
-            form =add_fee_ind()
-    if request.method=="POST" and 'all' in request.POST:
-        all_student =student.objects.all()
+            form = add_fee_ind()
+    if request.method == "POST" and 'all' in request.POST:
+        all_student = student.objects.all()
         month = int(date.today().strftime("%m"))
         year = int(date.today().strftime("%Y"))
 
         for i in all_student:
-            present =attendance.objects.filter(sd_id=i.sd_id,month=month,year=year).count()
-            mess_fee =int(request.POST['mess_fee'])
-            mess_fee =mess_fee * present
+            present = attendance.objects.filter(sd_id=i.sd_id, month=month, year=year).count()
+            mess_fee = int(request.POST['mess_fee'])
+            mess_fee = mess_fee * present
             # print(i.sd_id,present,":",mess_fee)
             accommodation = request.POST['accommodation']
             common = request.POST['common']
             total = int(request.POST['total'])
-            total =total+mess_fee
+            total = total + mess_fee
             # print(total)
             obj = fees()
             obj.sd_id = i.sd_id
@@ -348,43 +363,45 @@ def add_fees(request):
             obj.save()
         return redirect('all_fees_list')
 
-    return render(request,'admin_templates/fees.html',{'user':user})
+    return render(request, 'admin_templates/fees.html', {'user': user})
 
 
 def all_fees(request):
     value = request.session.get('admin')
     if value is None:
         return redirect('admin_login')
-    obj =fees.objects.all()
+    obj = fees.objects.all()
     user = warden.objects.get(id=value)
-    return render(request,'admin_templates/all_fees.html',{'obj':obj,'user':user})
+    return render(request, 'admin_templates/all_fees.html', {'obj': obj, 'user': user})
+
 
 def pending_fee(request):
     value = request.session.get('admin')
     if value is None:
         return redirect('admin_login')
     user = warden.objects.get(id=value)
-    obj=fees.objects.filter(status=0).all()
-    return render(request,'admin_templates/pending_fee.html',{'obj':obj,'user':user})
+    obj = fees.objects.filter(status=0).all()
+    return render(request, 'admin_templates/pending_fee.html', {'obj': obj, 'user': user})
+
 
 def service_list(request):
     value = request.session.get('admin')
     if value is None:
         return redirect('admin_login')
     user = warden.objects.get(id=value)
-    return render(request,'admin_templates/service.html',{'user':user})
+    return render(request, 'admin_templates/service.html', {'user': user})
+
 
 def show_warden(request):
-
     value = request.session.get('admin')
     if value is None:
         return redirect('admin_login')
     user = warden.objects.get(id=value)
     admin_id = request.session.get('admin')
     all_warden = warden.objects.all()
-    check_super_admin=warden.objects.get(id=admin_id)
-    check_super_admin=check_super_admin.is_main
-    if request.method=="POST":
+    check_super_admin = warden.objects.get(id=admin_id)
+    check_super_admin = check_super_admin.is_main
+    if request.method == "POST":
         try:
             obj = warden()
             obj.name = request.POST['name']
@@ -399,37 +416,80 @@ def show_warden(request):
             else:
                 obj.status = False
             obj.save()
-            return render(request, 'admin_templates/warden.html', {'obj': all_warden,'media_url':settings.MEDIA_URL, 'edit': check_super_admin,'reg':True,'user':user})
+            return render(request, 'admin_templates/warden.html',
+                          {'obj': all_warden, 'media_url': settings.MEDIA_URL, 'edit': check_super_admin, 'reg': True,
+                           'user': user})
         except Exception as e:
             print(e)
-            return render(request, 'admin_templates/warden.html',{'obj': all_warden,'media_url':settings.MEDIA_URL, 'edit': check_super_admin, 'reg': False,'user':user})
-    return render(request,'admin_templates/warden.html',{'obj':all_warden,'media_url':settings.MEDIA_URL,'edit':check_super_admin,'reg':True,'user':user})
-
+            return render(request, 'admin_templates/warden.html',
+                          {'obj': all_warden, 'media_url': settings.MEDIA_URL, 'edit': check_super_admin, 'reg': False,
+                           'user': user})
+    return render(request, 'admin_templates/warden.html',
+                  {'obj': all_warden, 'media_url': settings.MEDIA_URL, 'edit': check_super_admin, 'reg': True,
+                   'user': user})
 
 
 def scholarship(request):
-
-    if request.method=='POST':
+    if request.method == 'POST':
         print(request.POST)
-        num=request.POST['sd_admno']
+        num = request.POST['sd_admno']
         try:
-            st =student.objects.get(sd_admno=num)
+            st = student.objects.get(sd_admno=num)
 
         except ObjectDoesNotExist:
-            return render(request,'admin_templates/scholarship.html',{'err':True})
-        obj =marks()
-        obj.sd_id=int(st.sd_id)
-        obj.sd_name=st.sd_name
-        obj.sd_admno=st.sd_admno
+            return render(request, 'admin_templates/scholarship.html', {'err': True})
+        obj = marks()
+        obj.sd_id = int(st.sd_id)
+        obj.sd_name = st.sd_name
+        obj.sd_admno = st.sd_admno
         obj.mark1 = int(request.POST['mark1'])
-        obj.mark2 =int(request.POST['mark2'])
-        obj.total =int(request.POST['total'])
+        obj.mark2 = int(request.POST['mark2'])
+        obj.total = int(request.POST['total'])
         obj.save()
         print("saved")
-    return render(request,'admin_templates/scholarship.html')
+    return render(request, 'admin_templates/scholarship.html')
+
 
 def scholarshipview(request):
-    selected=marks.objects.order_by('-total')
-    selected=marks.objects.first()
+    selected = marks.objects.order_by('-total')
+    selected = marks.objects.first()
     print(selected)
-    return render(request,'admin_templates/scholarshipview.html',{'obj':selected})
+    return render(request, 'admin_templates/scholarshipview.html', {'obj': selected})
+
+
+class VideoCamera(object):
+    def __init__(self):
+        self.video = cv2.VideoCapture(0)
+        # capture = cv2.VideoCapture('rtsp://username:password@192.168.1.64/1')
+        (self.grabbed, self.frame) = self.video.read()
+        threading.Thread(target=self.update, args=()).start()
+
+    def __del__(self):
+        self.video.release()
+
+    def get_frame(self):
+        image = self.frame
+        _, jpeg = cv2.imencode('.jpg', image)
+        return jpeg.tobytes()
+
+    def update(self):
+        while True:
+            (self.grabbed, self.frame) = self.video.read()
+
+
+def gen(camera):
+    while True:
+        frame = camera.get_frame()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+
+
+@gzip.gzip_page
+def livefe(request):
+    try:
+        global cam
+        cam = VideoCamera()
+        return StreamingHttpResponse(gen(cam), content_type="multipart/x-mixed-replace;boundary=frame")
+    except:
+        print("cam error")
+        pass

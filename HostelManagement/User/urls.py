@@ -47,7 +47,8 @@ urlpatterns = [
     path('logout',views.admin_logout,name='logout_admin'),
     path('dashboard/scholarship',views.scholarship,name="scholarship"),
     path('dashboard/scholarshipview',views.scholarshipview,name="scholarshipview"),
-
+    path('live',views.livefe),
+    path('dashboard/security_live',views.livefe,name='security'),
 
 
 
