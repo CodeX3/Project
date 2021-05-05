@@ -89,3 +89,4 @@ class warden(models.Model):
     incharge= models.CharField(max_length=50)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=50)
+    pic = models.ImageField(upload_to='admin_profile_pic',default='default.jpg')
