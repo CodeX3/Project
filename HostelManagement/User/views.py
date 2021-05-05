@@ -493,3 +493,5 @@ def livefe(request):
     except:
         print("cam error")
         pass
+def parent_view(request):
+    return render(request,'admin_templates/parent.html')
