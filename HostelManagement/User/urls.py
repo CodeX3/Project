@@ -45,6 +45,8 @@ urlpatterns = [
     path('dashboard/warden',views.show_warden,name='warden'),
     path('admin',views.admin_login,name='admin_login'),
     path('logout',views.admin_logout,name='logout_admin'),
+    path('dashboard/scholarship',views.scholarship,name="scholarship"),
+    path('dashboard/scholarshipview',views.scholarshipview,name="scholarshipview"),
 
 
 
