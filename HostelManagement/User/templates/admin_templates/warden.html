@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-    <link href="{% static 'admin_static//vendors/switchery/dist/switchery.min.css' %}" rel="stylesheet">
+    <link href="{% static 'admin_static/vendors/switchery/dist/switchery.min.css' %}" rel="stylesheet">
     <script src="{% static 'admin_static/vendors/switchery/dist/switchery.min.js' %}"></script>
 {#<script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js" integrity="sha512-lC8vSUSlXWqh7A/F+EUS3l77bdlj+rGMN4NB5XFAHnTR3jQtg4ibZccWpuSSIdPoPUlUxtnGktLyrWcDhG8RvA==" crossorigin="anonymous"></script>#}
 <div class="right_col" role="main">
@@ -67,11 +67,10 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               </div>
             </div>
-
           </div>
         </div>
-
       </div>
+
 
       <div class="title_right">
         <div class="col-md-5 col-sm-5  form-group pull-right top_search">
@@ -129,17 +128,22 @@
                   </ul>
                 </div>
                 <div class="right col-md-5 col-sm-5 text-center">
-                  <img src="{% static 'admin_static/index/images/img.jpg' %}" alt="" class="img-circle img-fluid">
+                  <img src="{{ media_url }}{{ i.pic }}" alt="" class="img-circle img-fluid">
                 </div>
               </div>
               <div class=" profile-bottom text-center">
-                {% if edit %}
+
                 <div class=" col-sm-6 emphasis">
+                {% if edit %}
                   <button type="button" class="btn btn-success btn-sm" {% if i.is_main %} disabled {% endif %}>
                     <i class="fa fa-user">Deactivate User</i>
                   </button>
                   <button type="button" class="btn btn-danger btn-sm" {% if i.is_main %} disabled {% endif %}>
                     <i class="fa fa-user"> </i> Delete User
+                  </button>
+                    {% else %}
+                  <button type="button" style="width: 100px;" class="btn btn-success btn-sm" data-toggle="modal" data-target="#profile" >
+                    <i class="fa fa-user">Profile</i>
                   </button>
                   {% endif %}
                 </div>
