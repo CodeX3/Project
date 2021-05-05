@@ -1,14 +1,9 @@
-import datetime
-import json
 from datetime import date
-
 from django.conf import settings
-from django.contrib.auth import authenticate
+from django.core.exceptions import *
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .models import *
 from .forms import *
-from django.core.exceptions import *
 
 
 # ---------------------------Login--------------------------------#
