@@ -26,12 +26,10 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Name</th>
-                                    <th>ID</th>
-                                    <th>Course</th>
-                                    <th>Email</th>
-                                    <th>phone</th>
-                                    <th>Year</th>
-                                    <th>Admission num</th>
+                                    <th>Parent</th>
+                                    <th>P.Phone</th>
+                                    <th>Guardian</th>
+                                    <th>G.Phone</th>
 
                                 </tr>
                             </thead>
@@ -40,12 +38,10 @@
                                 <tr>
                                     <td>{{ forloop.counter }}</td>
                                     <td><a class="btn-link" href="{% url 'edit_student_details' i.sd_id %}">{{i.sd_name}}</a></td>
-                                    <td>{{ i.sd_id }}</td>
-                                    <td>{{i.sd_course}}</td>
-                                    <td>{{i.sd_email}}</td>
-                                    <td>{{i.sd_phone}}</td>
-                                    <td>{{i.sd_year}}</td>
-                                    <td>{{i.sd_admno}}</td>
+                                    <td>{{ i.sd_parent }}</td>
+                                    <td>{{i.sd_parent_phone}}</td>
+                                    <td>{{i.sd_guardian}}</td>
+                                    <td>{{i.sd_guardian_phone}}</td>
                                 {% endfor %}
                             </tbody>
                         </table>

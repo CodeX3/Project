@@ -494,4 +494,9 @@ def livefe(request):
         print("cam error")
         pass
 def parent_view(request):
-    return render(request,'admin_templates/parent.html')
+    value = request.session.get('admin')
+    if value is None:
+        return redirect('admin_login')
+    user = warden.objects.get(id=value)
+    parent = student.objects.all()
+    return render(request,'admin_templates/parent.html',{'user':user,'obj':parent})

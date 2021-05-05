@@ -49,7 +49,8 @@ urlpatterns = [
     path('scholarshipview',views.scholarshipview,name="scholarshipview"),
     path('live',views.livefe),
     path('security_live',views.livefe,name='security'),
-    # path('/')
+    path('parent',views.parent_view,name='parent'),
+
 
 
 
