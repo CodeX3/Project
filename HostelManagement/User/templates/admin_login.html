@@ -24,6 +24,12 @@
   </head>
 
   <body class="login">
+  {% if err %}
+      <script>alert("Make sure your email and password are correct.Try again");</script>
+  {% endif %}
+  {% if active %}
+      <script>alert("Account is deactivated by Admin..Contact Admin to reactivate..")</script>
+  {% endif %}
     <div>
       <a class="hiddenanchor" id="signup"></a>
       <a class="hiddenanchor" id="signin"></a>

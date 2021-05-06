@@ -18,13 +18,19 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from User import views
+
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path('admin_templates/', admin.site.urls),
-    path('',include('User.urls')),
+    path('dashboard/',include('User.urls')),
     path('image/',include('image.urls')),
     path('homepage/',include('Student.urls')),
     path('guest/',include('guest.urls')),
+    path('',views.load_index),
+    path('login', views.do_login, name='login'),
+    path('register', views.do_register, name='register'),
+    path('admin',views.admin_login,name='admin_login'),
 ]
 
 if settings.DEBUG:
