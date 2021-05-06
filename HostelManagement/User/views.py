@@ -507,7 +507,23 @@ def parent_view(request):
 def admin_profile(request):
     value = request.session.get('admin')
     user = warden.objects.get(id=value)
-    return render(request,'admin_templates/profile.html',{'user':user,'media_url': settings.MEDIA_URL,})
+    if request.method=="POST":
+        print(request.POST)
+        print(request.FILES)
+        try:
+            user.name = request.POST['name']
+            user.address = request.POST['address']
+            user.email = request.POST['email']
+            user.phone = request.POST['phone']
+            user.incharge = request.POST['incharge']
+            user.password = request.POST['password']
+            if len(request.FILES) !=0:
+                user.pic = request.FILES['pic']
+            user.save()
+            return render(request, 'admin_templates/profile.html', {'user': user, 'media_url': settings.MEDIA_URL,'success':True})
+        except Exception as e:
+            return render(request, 'admin_templates/profile.html', {'user': user, 'media_url': settings.MEDIA_URL,'err':True })
+    return render(request,'admin_templates/profile.html',{'user':user,'media_url': settings.MEDIA_URL})
 
 @adminonly
 def show_profile(request,pk):
