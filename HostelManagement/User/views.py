@@ -535,4 +535,23 @@ def show_profile(request,pk):
         obj =warden.objects.get(id=pk)
     except ObjectDoesNotExist:
         return redirect('warden')
+    if request.method=="POST":
+        try:
+            obj.name = request.POST['name']
+            obj.address = request.POST['address']
+            obj.email = request.POST['email']
+            obj.phone = request.POST['phone']
+            obj.incharge = request.POST['incharge']
+            obj.password = request.POST['password']
+            if len(request.FILES) !=0:
+                obj.pic = request.FILES['pic']
+            if 'status' in request.POST:
+                obj.status = True
+            else:
+                obj.status = False
+            print(obj)
+            obj.save()
+            return render(request, 'admin_templates/show_profile.html', {'user': user, 'media_url': settings.MEDIA_URL,'success':True,'obj':obj})
+        except Exception as e:
+            return render(request, 'admin_templates/show_profile.html', {'user': user, 'media_url': settings.MEDIA_URL,'err':True,'obj':obj })
     return render(request,'admin_templates/show_profile.html',{'user':user,'media_url': settings.MEDIA_URL,'obj':obj})
