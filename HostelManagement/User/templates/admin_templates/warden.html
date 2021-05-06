@@ -119,7 +119,7 @@
                 </h4>
 
                 <div class="left col-md-7 col-sm-7">
-                  <h2>{{ i.name }}</h2>
+                  <h2><a href="{% url 'show_profile' i.id %}"> {{ i.name }}</a></h2>
                   <p><strong>Incharge: </strong>{{ i.incharge }}</p>
                   <ul class="list-unstyled">
                     <li><i class="fa fa-building"></i> Address: {{ i.address }}</li>
