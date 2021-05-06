@@ -428,7 +428,7 @@ def show_warden(request):
                   {'obj': all_warden, 'media_url': settings.MEDIA_URL, 'edit': check_super_admin, 'reg': True,
                    'user': user})
 
-
+@adminonly
 def scholarship(request):
     if request.method == 'POST':
         print(request.POST)
@@ -449,7 +449,7 @@ def scholarship(request):
         print("saved")
     return render(request, 'admin_templates/scholarship.html')
 
-
+@adminonly
 def scholarshipview(request):
     selected = marks.objects.order_by('-total')
     selected = marks.objects.first()
