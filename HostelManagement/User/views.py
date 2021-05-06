@@ -502,3 +502,21 @@ def parent_view(request):
     user = warden.objects.get(id=value)
     parent = student.objects.all()
     return render(request,'admin_templates/parent.html',{'user':user,'obj':parent})
+
+@adminonly
+def admin_profile(request):
+    value = request.session.get('admin')
+    user = warden.objects.get(id=value)
+    return render(request,'admin_templates/profile.html',{'user':user,'media_url': settings.MEDIA_URL,})
+
+@adminonly
+def show_profile(request,pk):
+    value = request.session.get('admin')
+    if pk ==value:
+        return redirect('admin_profile')
+    user = warden.objects.get(id=value)
+    try:
+        obj =warden.objects.get(id=pk)
+    except ObjectDoesNotExist:
+        return redirect('warden')
+    return render(request,'admin_templates/show_profile.html',{'user':user,'media_url': settings.MEDIA_URL,'obj':obj})

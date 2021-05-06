@@ -1,34 +1,37 @@
 <html>
-    <head>
-        <title>blank</title>
-    </head>
-    <body>
-      {%  for x in all_details %}
-         email: {{x.email}}
-                    <br>
 
-         password: {{x.password}}
-                    <br>
+<head>
+    <title>blank</title>
+</head>
 
-         first name: {{x.fname}}
-                    <br>
+<body>
+    {% for x in all_details %}
+    email: {{x.email}}
+    <br>
 
-         last name: {{x.lname}}
-                    <br>
+    password: {{x.password}}
+    <br>
 
-         phone :{{x.phone}}
-                    <br>
+    first name: {{x.fname}}
+    <br>
 
-         address :{{x.address}}
-                    <br>
+    last name: {{x.lname}}
+    <br>
 
-         course :{{x.course}}
-          <br>
-          year :{{x.year}}
-          <br>
-          admno :{{x.admno}}
-          <br>
+    phone :{{x.phone}}
+    <br>
+
+    address :{{x.address}}
+    <br>
+
+    course :{{x.course}}
+    <br>
+    year :{{x.year}}
+    <br>
+    admno :{{x.admno}}
+    <br>
 
     {% endfor %}
-    </body>
+</body>
+
 </html>

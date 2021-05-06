@@ -22,8 +22,7 @@
     <link href="{% static 'admin_static/vendors/iCheck/skins/flat/green.css'%}" rel="stylesheet">
 
     <!-- bootstrap-progressbar -->
-    <link href="{% static 'admin_static/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css'%}"
-        rel="stylesheet">
+    <link href="{% static 'admin_static/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css'%}" rel="stylesheet">
     <!-- JQVMap -->
     <link href="{% static 'admin_static/vendors/jqvmap/dist/jqvmap.min.css'%}" rel="stylesheet" />
     <!-- bootstrap-daterangepicker -->
@@ -53,8 +52,7 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src=" {% static 'admin_static/index/images/img.jpg' %} " alt="..."
-                                class="img-circle profile_img">
+                            <img src=" {% static 'admin_static/index/images/img.jpg' %} " alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
@@ -69,27 +67,9 @@
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
                             <ul class="nav side-menu">
-                                <li><a><i class="fa fa-home"></i> Hostel <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="index.html">Warden</a></li>
-                                        <li>
-                                            <a href="index2.html">Security</a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'service' %}">Services</a>
-                                        </li>
-                                        <li>
-                                            <a href="index.html">Mess</a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'view_visitors' %}">Visitors</a>
-                                        </li>
-                                    </ul>
-                                </li>
                                 <li><a><i class="fa fa-graduation-cap"></i> Students <span
                                             class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="{% url 'verify_students' %}">Student Registrations</a></li>
                                         <li>
                                             <a href="{% url 'view_student_all' %}">Student</a>
                                         </li>
@@ -98,8 +78,6 @@
                                         </li>
                                         <li><a>Fees<span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu">
-                                                <li class="sub_menu"><a href="{% url 'add_fees' %}">Add Fees</a>
-                                                </li>
                                                 <li><a href="{% url 'all_fees_list' %}">All Details</a>
                                                 </li>
                                                 <li><a href="{% url 'fee_pending' %}">Pending</a>
@@ -117,21 +95,15 @@
                                         <li>
                                             <a href={% url 'common_attendance' %}>View all</a>
                                         </li>
-                                        <li>
-                                            <a href="form_validation.html">Report</a>
-                                        </li>
-                                    </ul>
+					<li>
+					    <a>Leave Form</a>
+                                        </li> 
+				</ul>
                                 </li>
                                 <li><a><i class="fa fa-user "></i> Parent <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li>
                                             <a href="form.html">Parents</a>
-                                        </li>
-                                        <li>
-                                            <a href="form_advanced.html">Messages</a>
-                                        </li>
-                                        <li>
-                                            <a href="form_validation.html">Fees</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -139,10 +111,7 @@
                                             class="fa fa-chevron-down "></span></a>
                                     <ul class="nav child_menu ">
                                         <li>
-                                            <a href="tables.html ">Registration</a>
-                                        </li>
-                                        <li>
-                                            <a href="index.html">Fees</a>
+                                            <a>Guests</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -154,7 +123,14 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-edit"></i>Complaints<span class="fa fa-chevron-down "></span></a>
+                                <li><a><i class="fa fa-search "></i> Request <span class="fa fa-chevron-down "></span></a>
+                                    <ul class="nav child_menu ">
+                                        <li>
+                                            <a> Services </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a><i class=" fa fa-edit "></i>Complaints<span class="fa fa-chevron-down "></span></a>
                                     <ul class="nav child_menu ">
                                         <li>
                                             <a href="{% url 'admin_complaints' %} ">Feedback</a>
@@ -179,7 +155,7 @@
                         <a data-toggle="tooltip " data-placement="top " title="Lock ">
                             <span class="glyphicon glyphicon-eye-close " aria-hidden="true "></span>
                         </a>
-                        <a data-toggle="tooltip " data-placement="top " title="Logout " href="{% url 'logout' %}">
+                        <a data-toggle="tooltip " data-placement="top " title="Logout " href="{% url 'logout' %} ">
                             <span class="glyphicon glyphicon-off " aria-hidden="true "></span>
                         </a>
                     </div>
@@ -196,12 +172,10 @@
                     <nav class="nav navbar-nav ">
                         <ul class=" navbar-right ">
                             <li class="nav-item dropdown open " style="padding-left: 15px; ">
-                                <a href="javascript:; " class="user-profile dropdown-toggle " aria-haspopup="true "
-                                    id="navbarDropdown " data-toggle="dropdown " aria-expanded="false ">
+                                <a href="javascript:; " class="user-profile dropdown-toggle " aria-haspopup="true " id="navbarDropdown " data-toggle="dropdown " aria-expanded="false ">
                                     <img src="../../static/admin_static/index/images/img.jpg " alt=" ">{{ obj.sd_name }}
                                 </a>
-                                <div class="dropdown-menu dropdown-usermenu pull-right "
-                                    aria-labelledby="navbarDropdown ">
+                                <div class="dropdown-menu dropdown-usermenu pull-right " aria-labelledby="navbarDropdown ">
                                     <a class="dropdown-item " href="javascript:; "> Profile</a>
                                     <a class="dropdown-item " href="javascript:; ">
                                         <span class="badge bg-red pull-right ">50%</span>
@@ -214,13 +188,11 @@
                             </li>
 
                             <li role="presentation " class="nav-item dropdown open ">
-                                <a href="javascript:; " class="dropdown-toggle info-number " id="navbarDropdown1 "
-                                    data-toggle="dropdown " aria-expanded="false ">
+                                <a href="javascript:; " class="dropdown-toggle info-number " id="navbarDropdown1 " data-toggle="dropdown " aria-expanded="false ">
                                     <i class="fa fa-envelope-o "></i>
                                     <span class="badge bg-green ">6</span>
                                 </a>
-                                <ul class="dropdown-menu list-unstyled msg_list " role="menu "
-                                    aria-labelledby="navbarDropdown1 ">
+                                <ul class="dropdown-menu list-unstyled msg_list " role="menu " aria-labelledby="navbarDropdown1 ">
                                     <li class="nav-item ">
                                         <a class="dropdown-item ">
                                             <span class="image "><img
@@ -228,7 +200,7 @@
                                                     alt="Profile Image " /></span>
                                             <span>
                                                 <span>John Smith</span>
-                                                <span class="time ">3 mins ago</span>
+                                            <span class="time ">3 mins ago</span>
                                             </span>
                                             <span class="message ">
                                                 Film festivals used to be do-or-die moments for movie makers. They were
@@ -243,7 +215,7 @@
                                                     alt="Profile Image " /></span>
                                             <span>
                                                 <span>John Smith</span>
-                                                <span class="time ">3 mins ago</span>
+                                            <span class="time ">3 mins ago</span>
                                             </span>
                                             <span class="message ">
                                                 Film festivals used to be do-or-die moments for movie makers. They were
@@ -258,7 +230,7 @@
                                                     alt="Profile Image " /></span>
                                             <span>
                                                 <span>John Smith</span>
-                                                <span class="time ">3 mins ago</span>
+                                            <span class="time ">3 mins ago</span>
                                             </span>
                                             <span class="message ">
                                                 Film festivals used to be do-or-die moments for movie makers. They were
@@ -273,7 +245,7 @@
                                                     alt="Profile Image " /></span>
                                             <span>
                                                 <span>John Smith</span>
-                                                <span class="time ">3 mins ago</span>
+                                            <span class="time ">3 mins ago</span>
                                             </span>
                                             <span class="message ">
                                                 Film festivals used to be do-or-die moments for movie makers. They were

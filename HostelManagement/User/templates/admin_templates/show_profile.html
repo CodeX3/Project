@@ -49,20 +49,22 @@
                   <div class="card">
                     <div class="card-body">
                       <div class="d-flex flex-column align-items-center text-center">
-                        <img src="{{media_url}}/{{ user.pic }}" alt="Admin" class="rounded-circle" width="150">
+                        <img src="{{media_url}}/{{ obj.pic }}" alt="Admin" class="rounded-circle" width="150">
                         <div class="mt-3">
                           <h4>
-                            {% if user.is_main %}
+                            {% if obj.is_main %}
                             Main Admin
                             {% else %}
                             Warden
                             {% endif %}
                           </h4>
                           <p class="text-secondary mb-1">
-                            Incharge:{{ user.incharge }}</p>
-                          <p class="text-muted font-size-sm">{{ user.address }}</p>
-
+                            Incharge:{{ obj.incharge }}</p>
+                          <p class="text-muted font-size-sm">{{ obj.address }}</p>
+                          <button class="btn btn-outline-primary">Message</button>
+                          {% if user.is_main %}
                           <button class="btn btn-outline-dark">Edit Profile</button>
+                          {% endif %}
                         </div>
                       </div>
                     </div>
@@ -78,7 +80,7 @@
                           <h6 class="mb-0">Full Name</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          {{ user.name }}
+                          {{ obj.name }}
                         </div>
                       </div>
                       <hr>
@@ -87,7 +89,7 @@
                           <h6 class="mb-0">Email</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          {{ user.email }}
+                          {{ obj.email }}
                         </div>
                       </div>
                       <hr>
@@ -96,7 +98,7 @@
                           <h6 class="mb-0">Phone</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          {{ user.phone }}
+                          {{ obj.phone }}
                         </div>
                       </div>
                       <hr>
@@ -105,7 +107,7 @@
                           <h6 class="mb-0">Incharge</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          {{ user.incharge }}
+                          {{ obj.incharge }}
                         </div>
                       </div>
                       <hr>
@@ -114,7 +116,7 @@
                           <h6 class="mb-0">Address</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          {{ user.address }}
+                          {{ obj.address }}
                         </div>
                       </div>
                       <hr>
@@ -123,7 +125,7 @@
                           <h6 class="mb-0">Account Status</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          {% if user.status %}
+                          {% if obj.status %}
                           Active
                           {% else %}
                           Deactivated

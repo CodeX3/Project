@@ -2,9 +2,12 @@
 {% load static %}
 {% block content %}
 
-    <link href="{% static 'admin_static/vendors/switchery/dist/switchery.min.css' %}" rel="stylesheet">
-    <script src="{% static 'admin_static/vendors/switchery/dist/switchery.min.js' %}"></script>
-{#<script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js" integrity="sha512-lC8vSUSlXWqh7A/F+EUS3l77bdlj+rGMN4NB5XFAHnTR3jQtg4ibZccWpuSSIdPoPUlUxtnGktLyrWcDhG8RvA==" crossorigin="anonymous"></script>#}
+<link href="{% static 'admin_static/vendors/switchery/dist/switchery.min.css' %}" rel="stylesheet">
+<script src="{% static 'admin_static/vendors/switchery/dist/switchery.min.js' %}"></script>
+{#
+<script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"
+  integrity="sha512-lC8vSUSlXWqh7A/F+EUS3l77bdlj+rGMN4NB5XFAHnTR3jQtg4ibZccWpuSSIdPoPUlUxtnGktLyrWcDhG8RvA=="
+  crossorigin="anonymous"></script>#}
 <div class="right_col" role="main">
   <div class="">
     <div class="page-title">
@@ -27,39 +30,46 @@
               </div>
               <div class="modal-body">
                 <form method="POST">
-                    {% csrf_token %}
+                  {% csrf_token %}
                   <div class="field item form-group">
-                      <label class="col-form-label label-align">Name<span class="required">*</span></label>
-                      <input class="form-control" style="margin-left: 20px;" type="text" name="name" required="" data-toggle="tooltip" data-placement="right" title="Enter name">
+                    <label class="col-form-label label-align">Name<span class="required">*</span></label>
+                    <input class="form-control" style="margin-left: 20px;" type="text" name="name" required=""
+                      data-toggle="tooltip" data-placement="right" title="Enter name">
                   </div>
 
                   <div class="field item form-group">
-                      <label class="col-form-label label-align">Address<span class="required">*</span></label>
-                      <input class="form-control" style="margin-left: 8px;" type="text" name="address" required="" data-toggle="tooltip" data-placement="right" title="Enter address">
+                    <label class="col-form-label label-align">Address<span class="required">*</span></label>
+                    <input class="form-control" style="margin-left: 8px;" type="text" name="address" required=""
+                      data-toggle="tooltip" data-placement="right" title="Enter address">
                   </div>
-                    <div class="field item form-group">
-                      <label class="col-form-label label-align">Email<span class="required">*</span></label>
-                      <input class="form-control" style="margin-left: 23px;" type="email" name="email" required="" data-toggle="tooltip" data-placement="right" title="Enter a valid email">
+                  <div class="field item form-group">
+                    <label class="col-form-label label-align">Email<span class="required">*</span></label>
+                    <input class="form-control" style="margin-left: 23px;" type="email" name="email" required=""
+                      data-toggle="tooltip" data-placement="right" title="Enter a valid email">
                   </div>
-                    <div class="field item form-group">
-                      <label class="col-form-label label-align">Phone<span class="required">*</span></label>
-                      <input class="form-control" style="margin-left: 16px;" type="text" name="phone" required="" data-toggle="tooltip" data-placement="right" title="Enter phone number">
+                  <div class="field item form-group">
+                    <label class="col-form-label label-align">Phone<span class="required">*</span></label>
+                    <input class="form-control" style="margin-left: 16px;" type="text" name="phone" required=""
+                      data-toggle="tooltip" data-placement="right" title="Enter phone number">
                   </div>
-                    <div class="field item form-group">
-                      <label class="col-form-label label-align">Incharge<span class="required">*</span></label>
-                      <input class="form-control" style="margin-left: 3px;" type="text" name="incharge" required="" data-toggle="tooltip" data-placement="right" title="Enter department">
+                  <div class="field item form-group">
+                    <label class="col-form-label label-align">Incharge<span class="required">*</span></label>
+                    <input class="form-control" style="margin-left: 3px;" type="text" name="incharge" required=""
+                      data-toggle="tooltip" data-placement="right" title="Enter department">
                   </div>
-                    <div class="field item form-group">
-                      <label class="col-form-label label-align" style="margin-right: 16px">Status<span class="required" >*</span></label>
-                      <input class="form-control js-switch "  type="checkbox" name="status"  >
+                  <div class="field item form-group">
+                    <label class="col-form-label label-align" style="margin-right: 16px">Status<span
+                        class="required">*</span></label>
+                    <input class="form-control js-switch " type="checkbox" name="status">
                   </div>
-                    <div class="field item form-group">
-                      <label class="col-form-label label-align">Password<span class="required">*</span></label>
-                      <input class="form-control"  type="text" name="password" value="warden@hostel" required="" data-toggle="tooltip" data-placement="right" title="Default password: warden@hostel">
+                  <div class="field item form-group">
+                    <label class="col-form-label label-align">Password<span class="required">*</span></label>
+                    <input class="form-control" type="text" name="password" value="warden@hostel" required=""
+                      data-toggle="tooltip" data-placement="right" title="Default password: warden@hostel">
                   </div>
-                    <div class="field item form-group">
-                        <button type="submit" style="margin-left: 138px" class="btn btn-outline-success">Submit</button>
-                        <button type="reset" class="btn btn-outline-danger">Reset</button>
+                  <div class="field item form-group">
+                    <button type="submit" style="margin-left: 138px" class="btn btn-outline-success">Submit</button>
+                    <button type="reset" class="btn btn-outline-danger">Reset</button>
                   </div>
                 </form>
               </div>
@@ -134,15 +144,16 @@
               <div class=" profile-bottom text-center">
 
                 <div class=" col-sm-6 emphasis">
-                {% if edit %}
+                  {% if edit %}
                   <button type="button" class="btn btn-success btn-sm" {% if i.is_main %} disabled {% endif %}>
                     <i class="fa fa-user">Deactivate User</i>
                   </button>
                   <button type="button" class="btn btn-danger btn-sm" {% if i.is_main %} disabled {% endif %}>
                     <i class="fa fa-user"> </i> Delete User
                   </button>
-                    {% else %}
-                  <button type="button" style="width: 100px;" class="btn btn-success btn-sm" data-toggle="modal" data-target="#profile" >
+                  {% else %}
+                  <button type="button" style="width: 100px;" class="btn btn-success btn-sm" data-toggle="modal"
+                    data-target="#profile" onclick="location.href='{% url 'show_profile' i.id %}'">
                     <i class="fa fa-user">Profile</i>
                   </button>
                   {% endif %}
@@ -151,7 +162,7 @@
             </div>
           </div>
           {% endfor %}
-        </script>
+          </script>
         </div>
       </div>
     </div>
