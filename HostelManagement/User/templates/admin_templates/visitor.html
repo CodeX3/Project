@@ -14,9 +14,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card-box table-responsive">
-{#                        <p class="text-muted font-13 m-b-30">#}
-{#                            Student list requested to join to the hostel#}
-{#                        </p>#}
+                        {# <p class="text-muted font-13 m-b-30">#}
+                            {# Student list requested to join to the hostel#}
+                            {# </p>#}
                         <table id="datatable" class="table table-striped table-bordered" style="width:100%">
 
                             <thead>
@@ -32,11 +32,12 @@
                                 {% for i in obj %}
                                 <tr>
                                     <td>{{ forloop.counter }}</td>
-                                    <td><a class="btn-link" href="{% url 'edit_student_details' i.sd_id %}">{{i.visitor_name}}</a></td>
+                                    <td><a class="btn-link"
+                                            href="{% url 'edit_student_details' i.sd_id %}">{{i.visitor_name}}</a></td>
                                     <td>{{i.visitor_date}}</td>
                                     <td>{{i.visitor_student_name}}</td>
                                     <td>{{i.visitor_student_id}}</td>
-                                {% endfor %}
+                                    {% endfor %}
                             </tbody>
                         </table>
                     </div>

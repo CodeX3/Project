@@ -50,8 +50,8 @@ urlpatterns = [
     path('live',views.livefe),
     path('security_live',views.livefe,name='security'),
     path('parent',views.parent_view,name='parent'),
-
-
+    path('profile',views.admin_profile,name='admin_profile'),
+    path('profile/<int:pk>',views.show_profile,name='show_profile'),
 
 
 
