@@ -24,6 +24,7 @@ urlpatterns = [
     path('',include('User.urls')),
     path('image/',include('image.urls')),
     path('homepage/',include('Student.urls')),
+    path('guest/',include('guest.urls')),
 ]
 
 if settings.DEBUG:

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'User',
     'image',
     'Student',
+    'guest',
 
 ]
 
