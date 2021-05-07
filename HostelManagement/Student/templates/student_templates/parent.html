@@ -1,0 +1,215 @@
+{% extends 'student_templates/index.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<link href="{% static 'admin_static/vendors/switchery/dist/switchery.min.css' %}" rel="stylesheet">
+<script src="{% static 'admin_static/vendors/switchery/dist/switchery.min.js' %}"></script>
+
+{% if err %}
+<script>alert("failed to save");</script>
+{% endif %}
+{% if success %}
+<script>alert("successfully updated");</script>
+{% endif %}
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3>Parent Details</h3>
+      </div>
+
+      <div class="title_right">
+        <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+          <div class="input-group">
+            <input type="text" id="search" class="form-control" placeholder="Search for...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" onclick="find(document.getElementById('search').value);"
+                type="button">Go!</button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="profile" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Edit Profile</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+          </div>
+          <div class="modal-body">
+            <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="field item form-group">
+                <label class="col-form-label label-align">Name<span class="required">*</span></label>
+                <input class="form-control" style="margin-left: 20px;" type="text" name="sd_name" required=""
+                  data-toggle="tooltip" data-placement="right" title="Enter name" value="{{ user.sd_name }}">
+              </div>
+              <div class="field item form-group">
+                <label class="col-form-label label-align">Picture<span class="required">*</span></label>
+                <input class="form-control" style="margin-left: 20px;" type="file" name="sd_pic" data-toggle="tooltip"
+                  data-placement="right" title="Please upload square size image">
+              </div>
+              <div class="field item form-group">
+                <label class="col-form-label label-align">Address<span class="required">*</span></label>
+                <input class="form-control" style="margin-left: 8px;" type="text" name="sd_address" required=""
+                  data-toggle="tooltip" data-placement="right" title="Enter address" value="{{ user.sd_address }}">
+              </div>
+              <div class="field item form-group">
+                <label class="col-form-label label-align">Email<span class="required">*</span></label>
+                <input class="form-control" style="margin-left: 23px;" type="email" name="sd_email" required=""
+                  data-toggle="tooltip" data-placement="right" title="Enter a valid email" value="{{ user.sd_email }}">
+              </div>
+              <div class="field item form-group">
+                <label class="col-form-label label-align">Phone<span class="required">*</span></label>
+                <input class="form-control" style="margin-left: 16px;" type="text" name="sd_phone" required=""
+                  data-toggle="tooltip" data-placement="right" title="Enter phone number" value="{{ user.sd_phone }}">
+              </div>
+              <div class="field item form-group">
+                <label class="col-form-label label-align">Uni.No.<span class="required">*</span></label>
+                <input class="form-control" style="margin-left: 11px;" type="text" name="sd_university_register" required=""
+                  data-toggle="tooltip" data-placement="right" title="Enter department" value="{{ user.sd_university_register }}">
+              </div>
+              <div class="field item form-group">
+                <label class="col-form-label label-align">Password<span class="required">*</span></label>
+                <input class="form-control" style="margin-left: -4px;" type="text" name="sd_password" required="" data-toggle="tooltip"
+                  data-placement="right" title="Change password">
+              </div>
+              <div class="field item form-group">
+                <button type="submit" style="margin-left: 138px" class="btn btn-outline-success">Submit</button>
+                <button type="reset" class="btn btn-outline-danger">Reset</button>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12  ">
+      <div class="x_panel">
+        <div class="x_title">
+           <button class="btn btn-outline-primary" > <span class="fa fa-edit"></span>Edit Details</button>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+
+        <div class="container">
+          <div class="main-body">
+
+
+              <div class="col">
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Father Name:</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        value
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Mother Name:</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        value
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">House Name</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        value
+                      </div>
+                    </div>
+                       <hr>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Permenant Address</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        value
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Temporary Address</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        value
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Phone Number #1</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        value
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Phone Number #2</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                          value
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Guardian Name</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                         value
+                      </div>
+                    </div>
+                      <hr>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Guardian Phone</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                         value
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}
