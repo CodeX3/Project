@@ -39,3 +39,17 @@ def student_profile(request):
                           {'user': user, 'media_url': settings.MEDIA_URL, 'err': True})
 
     return render(request,'student_templates/profile.html',{'user':user,'media_url': settings.MEDIA_URL})
+
+@studentonly
+def student_parent_show(request):
+    id = request.session.get('userid')
+    user = student.objects.get(sd_id=id)
+
+    return render(request,'student_templates/parent.html',{'user':user})
+
+@studentonly
+def table(request):
+    id = request.session.get('userid')
+    user = student.objects.get(sd_id=id)
+    return render(request,'student_templates/table.html' ,{'user':user})
+
