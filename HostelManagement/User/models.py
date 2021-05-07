@@ -38,6 +38,7 @@ class student(models.Model):
     sd_parent=models.CharField(max_length=150)
     sd_parent_phone=models.CharField(max_length=20)
     sd_password=models.CharField(max_length=250)
+    sd_pic =models.ImageField(upload_to='student_profile_pic',default='student.jpg')
 
 class visitor(models.Model):
     visitor_name=models.CharField(max_length=100)
