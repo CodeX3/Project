@@ -52,4 +52,10 @@ def table(request):
     id = request.session.get('userid')
     user = student.objects.get(sd_id=id)
     return render(request,'student_templates/table.html' ,{'user':user})
+@studentonly
+def students_view(request):
+    id = request.session.get('userid')
+    user = student.objects.get(sd_id=id)
+    obj = student.objects.all()
+    return render(request, 'student_templates/students_list.html',{'user':user,'obj':obj})
 
