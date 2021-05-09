@@ -32,10 +32,10 @@ urlpatterns = [
     path('students/edit/<int:pk>',views.edit_student,name='edit_student_details'),
     path('visitors',views.view_visitors,name='view_visitors'),
     path('complaints',views.view_complaints,name='admin_complaints'),
-    path('admin/review_complain',views.review_complaint),
+    # path('admin/review_complain',views.review_complaint),
     path('complaints',views.reg_complaint),
     path('today',views.today_attendance,name="today_attendance"),
-    path('admin/mark_attendance',views.mark_attendance),
+    # path('admin/mark_attendance',views.mark_attendance),
     path('view/',views.general_attendance,name="common_attendance"),
     path('view/<yyyy:date>',views.date_attendance,name="attendance_date"),
     path('fees',views.add_fees,name="add_fees"),
@@ -52,6 +52,7 @@ urlpatterns = [
     path('parent',views.parent_view,name='parent'),
     path('profile',views.admin_profile,name='admin_profile'),
     path('profile/<int:pk>',views.show_profile,name='show_profile'),
+
 
 
 

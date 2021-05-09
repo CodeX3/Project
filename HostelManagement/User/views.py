@@ -555,3 +555,23 @@ def show_profile(request,pk):
         except Exception as e:
             return render(request, 'admin_templates/show_profile.html', {'user': user, 'media_url': settings.MEDIA_URL,'err':True,'obj':obj })
     return render(request,'admin_templates/show_profile.html',{'user':user,'media_url': settings.MEDIA_URL,'obj':obj})
+@adminonly
+def alter_warden(request):
+    try:
+        obj = warden.objects.get(id=request.GET['id'])
+        if obj.status:
+            obj.status = False
+        else:
+            obj.status = True
+        obj.save()
+        return HttpResponse(status=200)
+    except Exception as e:
+        return HttpResponse(status=400)
+@adminonly
+def delete_warden(request):
+    try :
+        obj = warden.objects.get(id=request.GET['id'])
+        obj.delete()
+        return HttpResponse(status=200)
+    except Exception:
+        return HttpResponse(status=400)
