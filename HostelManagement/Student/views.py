@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.conf import settings
 from django.shortcuts import render, redirect
 from User.models import *
@@ -59,3 +61,18 @@ def students_view(request):
     obj = student.objects.all()
     return render(request, 'student_templates/students_list.html',{'user':user,'obj':obj})
 
+@studentonly
+def student_today_attendance(request):
+    id = request.session.get('userid')
+    user = student.objects.get(sd_id=id)
+    today = date.today().strftime("%Y-%m-%d")
+    obj = attendance.objects.filter(date=today).values("sd_id")
+    res = [sub['sd_id'] for sub in obj]
+    st_obj = student.objects.all()
+    print(res)
+    if id in res:
+        present =True
+    else:
+        present=False
+
+    return render(request,'student_templates/today_attendance.html',{'user':user,'today':today,'attendace_obj': res,'obj':st_obj,'present':present})
