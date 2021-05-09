@@ -141,10 +141,16 @@
 
                 <div class=" col-sm-6 emphasis">
                   {% if edit %}
-                  <button type="button" class="btn btn-success btn-sm" {% if i.is_main %} disabled {% endif %}>
-                    <i class="fa fa-user">Deactivate User</i>
+                  <button type="button" class="btn btn-success btn-sm" onclick="disableUser({{ i.id }})" {% if i.is_main %} disabled {% endif %}>
+                    <i class="fa fa-user">
+                        {% if i.status %}
+                            Deactivate User
+                        {% else %}
+                            Activate User
+                        {% endif %}
+                    </i>
                   </button>
-                  <button type="button" class="btn btn-danger btn-sm" {% if i.is_main %} disabled {% endif %}>
+                  <button type="button" class="btn btn-danger btn-sm" onclick="deleteUser({{ i.id }})" {% if i.is_main %} disabled {% endif %}>
                     <i class="fa fa-user"> </i> Delete User
                   </button>
                   {% else %}
@@ -164,5 +170,45 @@
     </div>
   </div>
 </div>
+<script>
+function  disableUser(id){
+    $.ajax({
+            url: '/admin/alter_warden',
+            type: 'get',
+            data: {
+                'id': id
+            },
+            success: (response) => {
+                alert("Updated");
+                location.reload();
 
+            },
+            error: (responce) => {
+                alert("something wrong happened");
+            }
+
+        })
+}
+</script>
+
+    <script>
+function  deleteUser(id){
+    $.ajax({
+            url: '/admin/delete_warden',
+            type: 'get',
+            data: {
+                'id': id
+            },
+            success: (response) => {
+                alert("Deleted");
+                location.reload();
+
+            },
+            error: (responce) => {
+                alert("something wrong happened");
+            }
+
+        })
+}
+</script>
 {% endblock %}
