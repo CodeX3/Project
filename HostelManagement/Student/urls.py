@@ -15,5 +15,7 @@ urlpatterns = [
    path('parent',views.student_parent_show,name='student_parent_show'),
    path('table',views.table,name='student_table'),
    path('students_list', views.students_view, name='allstudents'),
+   path('today',views.student_today_attendance,name='student_today'),
+
 ]
 urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
