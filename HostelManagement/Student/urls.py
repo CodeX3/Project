@@ -18,7 +18,8 @@ urlpatterns = [
    path('today',views.student_today_attendance,name='student_today'),
    path('pending_fee',views.student_pending_fee,name='student_pending_fee'),
    path('orders',views.test),
-   path('callback',views.callback,name='callback')
+   path('callback',views.callback,name='callback'),
+   path('all_fee',views.all_fee,name='student_all_fee')
 
 
 ]

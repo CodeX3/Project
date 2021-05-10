@@ -157,4 +157,10 @@ def callback(request):
             print("failed")
     except Exception:
         print("exception")
-    return redirect('student_pending_fee')
+    return redirect('student_all_fee')
+@studentonly
+def all_fee(request):
+    id = request.session.get('userid')
+    user = student.objects.get(sd_id=id)
+    obj = fees.objects.filter(sd_id=id)
+    return render(request,'student_templates/all_fee.html',{'user':user,'obj':obj})
