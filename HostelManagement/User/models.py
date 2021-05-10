@@ -78,6 +78,8 @@ class fees(models.Model):
     accommodation=models.IntegerField(null=True)
     common=models.IntegerField(null=True)
     total=models.IntegerField()
+    orderid=models.CharField(max_length=200,null=True)
+    amount_paise=models.IntegerField(null=True)
     student_info =models.ForeignKey(student,on_delete=models.CASCADE,null=True)
 
 class warden(models.Model):
@@ -100,3 +102,9 @@ class marks(models.Model):
     mark1=models.IntegerField(default=0)
     mark2=models.IntegerField(default=0)
     total=models.IntegerField()
+
+class Razorpay(models.Model):
+    razorpay_payment_id=models.CharField(max_length=250)
+    razorpay_order_id=models.CharField(max_length=250)
+    razorpay_signature=models.CharField(max_length=250)
+    fee_info=models.ForeignKey(fees,on_delete=models.CASCADE)

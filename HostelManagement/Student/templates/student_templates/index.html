@@ -80,10 +80,11 @@
                                         </li>
                                         <li><a>Fees<span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu">
+                                                <li><a href="{% url 'student_pending_fee' %}">Pending</a>
+                                                </li>
                                                 <li><a href="{% url 'all_fees_list' %}">All Details</a>
                                                 </li>
-                                                <li><a href="{% url 'fee_pending' %}">Pending</a>
-                                                </li>
+
                                             </ul>
                                         </li>
                                     </ul>
@@ -92,7 +93,7 @@
                                             class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li>
-                                            <a href={% url 'today_attendance' %}>Today</a>
+                                            <a href={% url 'student_today' %}>Today</a>
                                         </li>
                                         <li>
                                             <a href={% url 'common_attendance' %}>View all</a>
