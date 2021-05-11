@@ -171,3 +171,25 @@ def complaints(request):
     user = student.objects.get(sd_id=id)
     obj = complaint.objects.filter(auther_ID=id)
     return render(request,'student_templates/complaint.html',{'user':user,'obj':obj})
+
+@studentonly
+def add_complaints(request):
+    id = request.session.get('userid')
+    user = student.objects.get(sd_id=id)
+
+    if request.method=="POST":
+        print(request.POST)
+        try:
+            reg = complaint()
+            reg.auther=user.sd_name
+            reg.auther_phone=user.sd_phone
+            reg.auther_ID=user.sd_id
+            reg.status='open'
+            reg.date=request.POST['date']
+            reg.subject=request.POST['subject']
+            reg.body=request.POST['body']
+            reg.save()
+            return redirect('student_complaints')
+        except Exception as e:
+            print(e)
+    return render(request,'student_templates/add_complaint.html',{'user':user})

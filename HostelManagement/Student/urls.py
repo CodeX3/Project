@@ -21,7 +21,7 @@ urlpatterns = [
    path('callback',views.callback,name='callback'),
    path('all_fee',views.all_fee,name='student_all_fee'),
    path('complaints',views.complaints,name='student_complaints'),
-
+   path('add_complaints',views.add_complaints,name='student_add_complaints')
 
 
 ]
