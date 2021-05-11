@@ -164,3 +164,10 @@ def all_fee(request):
     user = student.objects.get(sd_id=id)
     obj = fees.objects.filter(sd_id=id)
     return render(request,'student_templates/all_fee.html',{'user':user,'obj':obj})
+
+@studentonly
+def complaints(request):
+    id = request.session.get('userid')
+    user = student.objects.get(sd_id=id)
+    obj = complaint.objects.filter(auther_ID=id)
+    return render(request,'student_templates/complaint.html',{'user':user,'obj':obj})

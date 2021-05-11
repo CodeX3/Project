@@ -19,7 +19,9 @@ urlpatterns = [
    path('pending_fee',views.student_pending_fee,name='student_pending_fee'),
    path('orders',views.test),
    path('callback',views.callback,name='callback'),
-   path('all_fee',views.all_fee,name='student_all_fee')
+   path('all_fee',views.all_fee,name='student_all_fee'),
+   path('complaints',views.complaints,name='student_complaints'),
+
 
 
 ]
