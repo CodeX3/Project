@@ -1,0 +1,124 @@
+{% extends 'student_templates/index.html' %}
+
+{% block content %}
+<script>
+    {% if err %}
+        alert("something went wrong..Try again!!!");
+    {% endif %}
+</script>
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+
+        <h3><span class="image"><img style="width: 41px" src="{{ media_url }}/leave.png" alt="Profile Image" /></span>
+          Apply Leave</h3>
+      </div>
+
+      <div class="title_right">
+        <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+          <div class="input-group">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+      <div class="col-md-12 col-sm-12  ">
+        <div class="x_panel">
+          <div class="x_title">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'student_home' %}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{% url 'student_today' %}">Attendance</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Leave Form</li>
+            </ol>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+
+            <div class="page-content">
+              <!-- Apply Leave Form -->
+              <div class="card pmd-card single-col-form">
+                <form id="apply-leave" method="post">
+                  {% csrf_token %}
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label ">
+                          <label for="leave-type">Leave Type</label>
+                          <select name="leave-type" id="leave-type" class="form-control"
+                            title="Please select a Leave Type" required>
+                            <option></option>
+                            <option>Sick Leave</option>
+                            <option>Casual Leave</option>
+                            <option>Covid</option>
+                            <option>Personal</option>
+                            <option>Emergency</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                          <label class="control-label" for="datepickerstart">Start Date</label>
+                          <input type="date" class="form-control" id="datepickerstart" name="datepickerstart">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                          <label class="control-label" for="datepickerend">End Date</label>
+                          <input type="date" class="form-control" id="datepickerend" name="datepickerend">
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                          <label>Reason</label>
+                          <textarea class="form-control" id="reason" name="reason"></textarea>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="custom-control custom-checkbox pmd-checkbox">
+                          <input class="custom-control-input" type="checkbox" name="half_day" id="inverse_defaultCheck1" />
+                          <label class="custom-control-label" for="inverse_defaultCheck1">
+                            Is it a Half Day?
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-primary pmd-ripple-effect pmd-btn-raised" onclick="return checkValidDate()"
+                      value="Apply Leave">Apply Leave</button>
+                      <button type="reset" href="leave.html" class="btn btn-outline-secondary pmd-ripple-effect">Cancel</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+function checkValidDate(){
+    f = document.getElementById('datepickerstart').value;
+    l = document.getElementById('datepickerend').value;
+    console.log(f,l);
+    if(f<=l){
+        return true;
+    }
+    else{
+        alert('pick a valid start and end date');
+        document.getElementById('datepickerend').value="";
+        document.getElementById('datepickerstart').value="";
+        return false;
+    }
+
+
+}
+</script>
+{% endblock %}
