@@ -1,7 +1,10 @@
 import json
+import datetime
 from datetime import date
 import hmac
 import hashlib
+from time import strptime
+
 from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -11,6 +14,8 @@ from Student.decorators import *
 from Student.decorators import *
 import razorpay
 from django.views.decorators.csrf import csrf_exempt
+
+
 client = razorpay.Client(auth=("rzp_test_wVJXbmu0rqhHN5", "u8MQ0rSaBtfyJloFK5YNEpIc"))
 client.set_app_details({"title" : "Django", "version" : "3.2"})
 
@@ -193,3 +198,36 @@ def add_complaints(request):
         except Exception as e:
             print(e)
     return render(request,'student_templates/add_complaint.html',{'user':user})
+
+@studentonly
+def apply_leave(request):
+    id = request.session.get('userid')
+    user = student.objects.get(sd_id=id)
+    if request.method =="POST":
+        print(request.POST)
+        f = request.POST['datepickerstart']
+        l = request.POST['datepickerend']
+        if (f<=l):
+            print("valid")
+            try:
+                lve = leave()
+                lve.sd_id = user.sd_id
+                lve.student_info=user
+                lve.sd_name=user.sd_name
+                lve.leave_type=request.POST['leave-type']
+                lve.start_date=request.POST['datepickerstart']
+                lve.end_date=request.POST['datepickerend']
+                lve.reason=request.POST['reason']
+                if 'half_day' in request.POST:
+                    lve.half_day=True
+                else:
+                    lve.half_day=False
+                start=datetime.datetime.strptime(request.POST['datepickerstart'], '%Y-%m-%d')
+                end = datetime.datetime.strptime(request.POST['datepickerend'], '%Y-%m-%d')
+                no_day =(end-start).days +1
+                lve.no_of_day = no_day
+                lve.save()
+            except Exception as e:
+                print(e)
+                return render(request,'student_templates/leaveform.html',{'user':user,'media_url': settings.MEDIA_URL,'err':True})
+    return render(request,'student_templates/leaveform.html',{'user':user,'media_url': settings.MEDIA_URL})

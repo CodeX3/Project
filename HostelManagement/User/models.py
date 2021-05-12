@@ -108,3 +108,14 @@ class Razorpay(models.Model):
     razorpay_order_id=models.CharField(max_length=250)
     razorpay_signature=models.CharField(max_length=250)
     fee_info=models.ForeignKey(fees,on_delete=models.CASCADE)
+
+class leave(models.Model):
+    sd_id=models.IntegerField()
+    student_info=models.ForeignKey(student,on_delete=models.CASCADE)
+    sd_name=models.CharField(max_length=50)
+    leave_type=models.CharField(max_length=50)
+    start_date=models.DateField()
+    end_date=models.DateField()
+    reason=models.CharField(max_length=250)
+    half_day=models.BooleanField(default=False)
+    no_of_day=models.IntegerField(default=1)
