@@ -231,3 +231,9 @@ def apply_leave(request):
                 print(e)
                 return render(request,'student_templates/leaveform.html',{'user':user,'media_url': settings.MEDIA_URL,'err':True})
     return render(request,'student_templates/leaveform.html',{'user':user,'media_url': settings.MEDIA_URL})
+
+def list_leave(request):
+    id = request.session.get('userid')
+    user = student.objects.get(sd_id=id)
+    lve = leave.objects.filter(sd_id=id)
+    return render(request,'student_templates/list_leave.html',{'user':user,'obj':lve})

@@ -1,0 +1,63 @@
+{% extends 'student_templates/table.html' %}
+
+{% block content %}
+
+    <div class="col-md-12 col-sm-12 ">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>All leave list</h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card-box table-responsive">
+                        {# <p class="text-muted font-13 m-b-30">#}
+                            {# Student list requested to join to the hostel#}
+                            {# </p>#}
+                        <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Leave Type</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>No.of Days</th>
+                                    <th>Reason</th>
+                                    <th>Hald Day</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in obj %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{i.leave_type}}</td>
+                                    <td>{{i.start_date}}</td>
+                                    <td>{{i.end_date}}</td>
+                                    <td>{{i.no_of_day}}</td>
+                                    <td>{{i.reason}}</td>
+                                    <td>{% if i.half_day %}
+                                        Yes
+                                        {% else %}
+                                        No
+                                        {% endif %}
+                                    </td>
+                                </tr>
+
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
