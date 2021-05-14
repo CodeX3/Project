@@ -272,7 +272,8 @@ def general_attendance(request):
     # if value is None:
     #     return redirect('admin_login')
     user = warden.objects.get(id=value)
-    return render(request, 'admin_templates/category_view.html', {'user': user})
+    lev = leave.objects.all()
+    return render(request, 'admin_templates/category_view.html', {'user': user,'obj':lev})
 
 @adminonly
 def date_attendance(request, date=None):
