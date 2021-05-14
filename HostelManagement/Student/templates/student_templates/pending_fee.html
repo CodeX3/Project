@@ -1,6 +1,6 @@
 {% extends 'student_templates/table.html' %}
 
-
+{% load static %}
 {% block content %}
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <div class="col-md-12 col-sm-12 ">
@@ -46,17 +46,17 @@
                                     <script>
                                         var options{{ i.id }} = {
                                             "key": "rzp_test_wVJXbmu0rqhHN5", // Enter the Key ID generated from the Dashboard
-                                            "amount": "{{ i.amount_paise }}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-                                            "currency": "INR",
-                                            "name": "Hostel",
-                                            "description": "Student Fee payment",
-                                            "image": "https://i.ibb.co/cF5F0HM/Clipart-Key-2460119.png",
-                                            "order_id": "{{ i.orderid }}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-                                            "callback_url": "callback",
-                                            "prefill": {
+                                                "amount": "{{ i.amount_paise }}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                                                    "currency": "INR",
+                                                        "name": "Hostel",
+                                                            "description": "Student Fee payment",
+                                                                "image": "https://i.ibb.co/cF5F0HM/Clipart-Key-2460119.png",
+                                                                    "order_id": "{{ i.orderid }}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                                                                        "callback_url": "callback",
+                                                                            "prefill": {
                                                 "name": "{{ user.sd_name }}",
-                                                "email": "{{ user.sd_email }}",
-                                                "contact": "{{ user.sd_phone }}"
+                                                    "email": "{{ user.sd_email }}",
+                                                        "contact": "{{ user.sd_phone }}"
                                             },
                                             "notes": {
                                                 "address": "{{ user.sd_address }}"
@@ -69,8 +69,8 @@
                                     <script>
                                         document.getElementById('{{ i.id }}').onclick = function (e) {
                                             var rzp1 = new Razorpay(options{{ i.id }});
-                                            rzp1.open();
-                                            e.preventDefault();
+                                        rzp1.open();
+                                        e.preventDefault();
                                         }
                                     </script>
                                 </tr>

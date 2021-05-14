@@ -2,9 +2,9 @@
 
 {% block content %}
 <script>
-    {% if err %}
-        alert("something went wrong..Try again!!!");
-    {% endif %}
+  {% if err %}
+  alert("something went wrong..Try again!!!");
+  {% endif %}
 </script>
 <div class="right_col" role="main">
   <div class="">
@@ -79,7 +79,8 @@
                       </div>
                       <div class="col-12">
                         <div class="custom-control custom-checkbox pmd-checkbox">
-                          <input class="custom-control-input" type="checkbox" name="half_day" id="inverse_defaultCheck1" />
+                          <input class="custom-control-input" type="checkbox" name="half_day"
+                            id="inverse_defaultCheck1" />
                           <label class="custom-control-label" for="inverse_defaultCheck1">
                             Is it a Half Day?
                           </label>
@@ -88,9 +89,10 @@
                     </div>
                   </div>
                   <div class="card-footer">
-                    <button type="submit" class="btn btn-primary pmd-ripple-effect pmd-btn-raised" onclick="return checkValidDate()"
-                      value="Apply Leave">Apply Leave</button>
-                      <button type="reset" href="leave.html" class="btn btn-outline-secondary pmd-ripple-effect">Cancel</button>
+                    <button type="submit" class="btn btn-primary pmd-ripple-effect pmd-btn-raised"
+                      onclick="return checkValidDate()" value="Apply Leave">Apply Leave</button>
+                    <button type="reset" href="leave.html"
+                      class="btn btn-outline-secondary pmd-ripple-effect">Cancel</button>
                   </div>
                 </form>
               </div>
@@ -104,21 +106,21 @@
   </div>
 </div>
 <script>
-function checkValidDate(){
+  function checkValidDate() {
     f = document.getElementById('datepickerstart').value;
     l = document.getElementById('datepickerend').value;
-    console.log(f,l);
-    if(f<=l){
-        return true;
+    console.log(f, l);
+    if (f <= l) {
+      return true;
     }
-    else{
-        alert('pick a valid start and end date');
-        document.getElementById('datepickerend').value="";
-        document.getElementById('datepickerstart').value="";
-        return false;
+    else {
+      alert('pick a valid start and end date');
+      document.getElementById('datepickerend').value = "";
+      document.getElementById('datepickerstart').value = "";
+      return false;
     }
 
 
-}
+  }
 </script>
 {% endblock %}
