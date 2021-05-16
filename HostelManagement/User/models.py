@@ -46,6 +46,8 @@ class visitor(models.Model):
     visitor_student_id=models.CharField(max_length=1000)
     visitor_student_name=models.CharField(max_length=50)
     visitor_date=models.DateField(null=True)
+    visitor_count = models.IntegerField(default=1)
+    reg_day = models.DateField(null=True)
 
 class complaint(models.Model):
     auther=models.CharField(max_length=50)
