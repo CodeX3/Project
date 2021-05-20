@@ -135,17 +135,21 @@
                 <li><a><i class="fa fa-suitcase "></i> Guest<span class="fa fa-chevron-down "></span></a>
                   <ul class="nav child_menu ">
                     <li>
-                      <a href="guestreg.html ">Registration</a>
+                      <a href="{% url 'guest registration' %} ">Registration</a>
                     </li>
-                    <li>
-                      <a href="index.html">Fees</a>
+                      <li>
+                          <a href="{% url 'guest present' %}">Guest Present</a>
+                      </li>
+
+                      <li>
+                      <a href="{% url 'all guest' %}">All Guests</a>
                     </li>
                   </ul>
                 </li>
                 <li><a><i class=" fa fa-camera-retro "></i>Photo Gallery<span class="fa fa-chevron-down "></span></a>
                   <ul class="nav child_menu ">
                     <li>
-                      <a href="{}">Gallery</a>
+                      <a href="{% url 'gallery' %}">Gallery</a>
                     </li>
                   </ul>
                 </li>
