@@ -46,7 +46,7 @@
                                         class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
                                     <input class="form-control" type="number" class='number' name="sd_admno"
-                                           data-validate-length-range="0,8" value="{{ obj.sd_admno }}" required='required'>
+                                        data-validate-length-range="0,8" value="{{ obj.sd_admno }}" required='required'>
                                 </div>
                             </div>
 
@@ -55,7 +55,7 @@
                                         class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
                                     <input class="form-control" type="text" value="{{obj.mark1}}" class='number'
-                                           name="mark1" id="mark1" value="0" onchange="sum_()"   required='required' />
+                                        name="mark1" id="mark1" value="0" onchange="sum_()" required='required' />
                                 </div>
                             </div>
 
@@ -64,7 +64,7 @@
                                         class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
                                     <input class="form-control" type="text" value="{{obj.mark2}}" class='number'
-                                           name="mark2" id="mark2" value="0" onchange="sum_()"  required='required' />
+                                        name="mark2" id="mark2" value="0" onchange="sum_()" required='required' />
                                 </div>
                             </div>
 
@@ -72,8 +72,8 @@
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">total<span
                                         class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" type="number"  class='form-control'
-                                           name="total" id="total"  required='required' readonly/>
+                                    <input class="form-control" type="number" class='form-control' name="total"
+                                        id="total" required='required' readonly />
                                 </div>
                             </div>
 
@@ -108,10 +108,10 @@
 
 
 <script>
-    function sum_(){
-        var total=0;
-        total=Number(document.getElementById('mark1').value)+Number(document.getElementById('mark2').value);
-        document.getElementById('total').value=total
+    function sum_() {
+        var total = 0;
+        total = Number(document.getElementById('mark1').value) + Number(document.getElementById('mark2').value);
+        document.getElementById('total').value = total
         console.log(total)
         return true;
     }

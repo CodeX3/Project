@@ -7,7 +7,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Student Validation</h3>
+                    <h3>Guest Registeration</h3>
                 </div>
 
                 <!-- <div class="title_right">
@@ -42,15 +42,7 @@
                                             class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
                                         <input class="form-control" data-validate-length-range="6" data-validate-words="2"
-                                               name="sd_name" value="{{ obj.sd_name }}" required="required" />
-                                    </div>
-                                </div>
-                                <div class="field item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Course<span
-                                            class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6">
-                                        <input class="form-control" class='optional' name="sd_course"
-                                               value="{{ obj.sd_course }}" data-validate-length-range="5,15" type="text" />
+                                               name="name" value="{{ obj.name }}" required="required" />
                                     </div>
                                 </div>
 
@@ -58,28 +50,8 @@
                                     <label class="col-form-label col-md-3 col-sm-3  label-align">Admission Number <span
                                             class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input class="form-control" type="number" class='number' name="sd_admno"
-                                               data-validate-length-range="0,8" value="{{ obj.sd_admno }}" required='required'>
-                                    </div>
-                                </div>
-
-                                <div class="field item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Year<span
-                                            class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6">
-                                        <input class="form-control" data-validate-length-range="4" name="sd_year"
-                                               value="{{ obj.sd_year}}" required="required" />
-                                    </div>
-                                </div>
-
-
-
-                                <div class="field item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3  label-align">email<span
-                                            class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6">
-                                        <input class="form-control" name="sd_email" class='email' required="required"
-                                               value="{{ obj.sd_email }}" type="email" />
+                                        <input class="form-control" type="number" class='number' name="admno"
+                                               data-validate-length-range="0,8" value="{{ obj.admno }}" required='required'>
                                     </div>
                                 </div>
 
@@ -87,107 +59,90 @@
                                     <label class="col-form-label col-md-3 col-sm-3  label-align">Student Phone Number<span
                                             class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input class="form-control" type="tel" value="{{obj.sd_phone}}" class='tel'
-                                               name="sd_phone" required='required' data-validate-length-range="8,20" />
+                                        <input class="form-control" type="tel" value="{{obj.phone}}" class='tel'
+                                               name="phone" required='required' data-validate-length-range="8,20" />
                                     </div>
                                 </div>
 
                                 <div class="field item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Parent name<span
+                                    <label class="col-form-label col-md-3 col-sm-3  label-align">email<span
                                             class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input class="form-control" value="{{ obj.sd_parent }}" data-validate-length-range="6" data-validate-words="2"
-                                               id="parent_name" name="sd_parent" required="required" />
+                                        <input class="form-control" name="email" class='email' required="required"
+                                               value="{{ obj.email }}" type="email" />
+                                    </div>
+                                </div>
+
+
+                                <div class="field item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Course<span
+                                            class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input class="form-control" class='optional' name="course"
+                                               value="{{ obj.course }}" data-validate-length-range="5,15" type="text" />
+                                    </div>
+                                </div>
+
+
+
+                                <div class="field item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Year<span
+                                            class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input class="form-control" data-validate-length-range="4" name="year"
+                                               value="{{ obj.year}}" required="required" />
+                                    </div>
+                                </div>
+
+
+                                <div class="field item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3  label-align">From Date<span
+                                            class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input class="form-control" value="{{ obj.sdate }}"
+                                               id="sdate" name="sdate" required="required" type="date" />
                                     </div>
                                 </div>
 
                                 <div class="field item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Parent Phone Number<span
+                                    <label class="col-form-label col-md-3 col-sm-3  label-align">To Date<span
+                                            class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input class="form-control" value="{{ obj.sdate }}"
+                                               id="ldate" name="ldate" required="required" type="date" />
+                                    </div>
+                                </div>
+
+
+                                <div class="field item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3  label-align">No of days<span
                                             class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
                                         <input class="form-control" id="parent_phone" type="tel" class='tel'
-                                               name="sd_parent_phone" value="{{ obj.sd_parent_phone }}" required='required' data-validate-length-range="8,20" />
+                                               name="days" value="{{ obj.days }}" required='required'  />
                                     </div>
                                 </div>
-
-
-                                <div class="field item form-group">
-
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align ">Guardian</label>
-                                    <div class="col-md-6 col-sm-6">
-                                        <input type="button" class="btn btn-success" onclick="fill_guardian()"
-                                               value="Parent"></input>
-                                        <button class="btn btn-success" onclick="clear_()">Others</button>
-                                    </div>
-
-                                </div>
-
-
-
-                                <div class="field item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Guardian name<span
-                                            class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6">
-                                        <input class="form-control" id="guardian_name" data-validate-length-range="6"
-                                               data-validate-words="2" value="{{ obj.sd_guardian }}" name="sd_guardian" required="required" />
-                                    </div>
-                                </div>
-
-                                <div class="field item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Guardian Phone Number<span
-                                            class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6">
-                                        <input class="form-control" id="guardian_phone" type="tel" class='tel'
-                                               name="sd_guardian_phone" value="{{ obj.sd_guardian_phone }}" required='required'
-                                               data-validate-length-range="8,20" />
-                                    </div>
-                                </div>
-
-
 
 
                                 <div class="field item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3  label-align">Room Number <span
                                             class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input class="form-control" value="{{ obj.sd_room_no }}" type="number" class='number' name="sd_room_no"
+                                        <input class="form-control" value="{{ obj.room }}" type="number" class='number' name="room"
                                                data-validate-minmax="10,500" required='required'>
                                     </div>
                                 </div>
 
+{##}
+{##}
+{#                                <div class="field item form-group">#}
+{#                                    <div class="col-md-6 col-sm-6">#}
+{#                                        <input class=" form-control" value="{{ obj.sd_dob }}" class='date' type="text" name="sd_dob"#}
+{#                                               value="{{ obj.sd_dob }}"   >#}
+{#                                    </div>#}
+{#                                </div>#}
 
 
-                                {#                            <div class="field item form-group">#}
-                                {#                                <div class="col-md-6 col-sm-6">#}
-                                {#                                    <input class=" form-control" value="{{ obj.sd_dob }}" class='date' type="text" name="sd_dob"#}
-                                {#                                     value="{{ obj.sd_dob }}"   >#}
-                                {#                                </div>#}
-                                {#                            </div>#}
-
-
-                                <div class="field item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Password<span
-                                            class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6">
-                                        <input class="form-control" type="password" value="{{ obj.sd_password }}"
-                                               id="password1" name="sd_password" required />
-
-                                        {#                                    <span style="position: absolute;right:15px;top:7px;" onclick="hideshow()">#}
-                                        {#                                        <i id="slash" class="fa fa-eye-slash"></i>#}
-                                        {#                                        <i id="eye" class="fa fa-eye"></i>#}
-                                        {#                                    </span>#}
-                                    </div>
-                                </div>
-
-
-                                <div class="field item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Address<span
-                                            class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6">
-                                    <textarea style="width: 500px; height: 89px;" required="required"
-                                              name='sd_address'>{{obj.sd_address}}</textarea>
-                                    </div>
-                                </div>
                                 <div class="ln_solid">
                                     <div class="form-group">
                                         <div class="col-md-6 offset-md-3">

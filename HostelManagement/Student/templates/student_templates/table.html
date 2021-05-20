@@ -10,7 +10,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Admin Dashboard</title>
-
+  <a data-toggle="tooltip " data-placement="top " title="Profile " href="{% url 'admin_profile' %}">
+    <span class="glyphicon glyphicon-user " aria-hidden="true "></span>
+  </a>
+  <a data-toggle="tooltip " data-placement="top " title="To-do List ">
+    <span class="glyphicon glyphicon-list-alt" aria-hidden="true "></span>
+  </a>
+  <a data-toggle="tooltip " data-placement="top " title="refresh" href="#" onclick="location.reload();">
+    <span class="glyphicon glyphicon-refresh " aria-hidden="true "></span>
+  </a>
   <!-- Bootstrap -->
   <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
   <link href="{% static 'admin_static/vendors/bootstrap/dist/css/bootstrap.min.css'%}" rel="stylesheet">
