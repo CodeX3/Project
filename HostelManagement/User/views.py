@@ -1,7 +1,8 @@
+import os
 from datetime import date
 from django.conf import settings
 from django.core.exceptions import *
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from .decorators import *
 from .forms import *
@@ -11,6 +12,7 @@ from django.http import StreamingHttpResponse
 import cv2
 import threading
 cam = None
+import xlrd,xlsxwriter
 # ---------------------------Login--------------------------------#
 def do_login(request):
     value = request.session.get('userid')
@@ -576,3 +578,71 @@ def delete_warden(request):
         return HttpResponse(status=200)
     except Exception:
         return HttpResponse(status=400)
+
+def addDataToSheet(worksheet):
+    # first row
+    worksheet.write(1, 0, "2001")
+    worksheet.write(1, 1, "James")
+    worksheet.write(1, 2, "Computer")
+    worksheet.write(1, 3, "A")
+    # Second row
+    worksheet.write(2, 0, "2002")
+    worksheet.write(2, 1, "Jhones")
+    worksheet.write(2, 2, "Electronics")
+    worksheet.write(2, 3, "A+")
+    # Third row
+    worksheet.write(3, 0, "2003")
+    worksheet.write(3, 1, "Micheal")
+    worksheet.write(3, 2, "Civil")
+    worksheet.write(3, 3, "C")
+
+def generate_excel():
+    rootPath = os.getcwd()+"\\"+"report\\"
+    print(rootPath)
+    import datetime
+    # file = (rootPath+"test.xlsx")
+    file = (rootPath+datetime.datetime.now().strftime('%Y%m%d%H%M%S')+".xlsx")
+    #file path
+    print(file)
+    workbook = xlsxwriter.Workbook(file)
+
+    # The workbook object is then used to add new
+    # worksheet via the add_worksheet() method.
+    worksheet = workbook.add_worksheet()
+    cell_formate_present = workbook.add_format()
+    cell_formate_present.set_bg_color('#00FF00')
+    cell_formate_absent = workbook.add_format()
+    cell_formate_absent.set_font_color('red')
+    row = 1
+    col = 0
+    worksheet.write(0,0,"Date")
+    worksheet.write(0,1,"Attendance")
+
+    obj = attendance.objects.filter(sd_id=1,month=5).values("date")
+    start = datetime.date(year=2021,month=5,day=1)
+    res = [sub['date'].strftime("%Y-%m-%d") for sub in obj]
+    end = date.today()
+    count = (end-start).days
+    loopVar = start
+    while count >= 0:
+        worksheet.write(row,col,loopVar.strftime("%Y-%m-%d"))
+        if loopVar.strftime("%Y-%m-%d") in res:
+            worksheet.write(row,col+1,"Present",cell_formate_present)
+        else:
+            worksheet.write(row, col + 1, "Absent",cell_formate_absent)
+        loopVar += datetime.timedelta(days=1)
+        row +=1
+        count -=1
+    workbook.close()
+
+    return file
+def download_file(request):
+    path = generate_excel()
+    file_path = os.path.join(settings.MEDIA_ROOT, path)
+    print(file_path)
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
+            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+            return response
+    raise Http404
