@@ -1,3 +1,4 @@
+import calendar
 import os
 from datetime import date
 from django.conf import settings
@@ -596,7 +597,7 @@ def addDataToSheet(worksheet):
     worksheet.write(3, 2, "Civil")
     worksheet.write(3, 3, "C")
 
-def generate_excel():
+def generate_excel(id,y,m):
     rootPath = os.getcwd()+"\\"+"report\\"
     print(rootPath)
     import datetime
@@ -618,10 +619,16 @@ def generate_excel():
     worksheet.write(0,0,"Date")
     worksheet.write(0,1,"Attendance")
 
-    obj = attendance.objects.filter(sd_id=1,month=5).values("date")
-    start = datetime.date(year=2021,month=5,day=1)
+    obj = attendance.objects.filter(sd_id=id,month=m,year=y).values("date")
+    start = datetime.date(year=y,month=m,day=1)
+    today = datetime.date.today()
+    endDay = calendar.monthrange(y,m)[1]
+    end = datetime.date(year=y,month=m,day=endDay)
+    if today >= end:
+        print("true or same")
+    else:
+        end=today
     res = [sub['date'].strftime("%Y-%m-%d") for sub in obj]
-    end = date.today()
     count = (end-start).days
     loopVar = start
     while count >= 0:
@@ -636,8 +643,8 @@ def generate_excel():
     workbook.close()
 
     return file
-def download_file(request):
-    path = generate_excel()
+def download_file(request,id,y,m):
+    path = generate_excel(id,y,m)
     file_path = os.path.join(settings.MEDIA_ROOT, path)
     print(file_path)
     if os.path.exists(file_path):
@@ -646,3 +653,21 @@ def download_file(request):
             response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
             return response
     raise Http404
+@adminonly
+def report(request):
+    value = request.session.get('admin')
+    user = warden.objects.get(id=value)
+    if request.method=="POST":
+        if 'id' not in request.POST:
+            print("id set to 1")
+            id =1
+        else:
+            id = request.POST['id']
+        data = request.POST['month']
+        y,m = data.split("-",2)
+        print(id)
+        print(y)
+        print(m)
+        response =download_file(request,int(id),int(y),int(m))
+        return  response
+    return render(request,'admin_templates/report.html',{'user':user})
