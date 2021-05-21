@@ -54,6 +54,7 @@ urlpatterns = [
     path('profile/<int:pk>',views.show_profile,name='show_profile'),
     # path('gen',views.generate_excel),
     path('download/',views.download_file),
+    path('report',views.report,name='report'),
 
 
 
