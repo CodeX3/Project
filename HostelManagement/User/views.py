@@ -643,6 +643,83 @@ def generate_excel(id,y,m):
     workbook.close()
 
     return file
+
+def generate_excel_all(y,m):
+    rootPath = os.getcwd()+"\\"+"report\\"
+    print(rootPath)
+    import datetime
+    # file = (rootPath+"test.xlsx")
+    file = (rootPath+datetime.datetime.now().strftime('%Y%m%d%H%M%S')+".xlsx")
+    #file path
+    print(file)
+    workbook = xlsxwriter.Workbook(file)
+
+    # The workbook object is then used to add new
+    # worksheet via the add_worksheet() method.
+    worksheet = workbook.add_worksheet()
+    cell_formate_present = workbook.add_format()
+    cell_formate_present.set_bg_color('#00FF00')
+    cell_formate_absent = workbook.add_format()
+    cell_formate_absent.set_font_color('red')
+
+    start = datetime.date(year=y, month=m, day=1)
+    today = datetime.date.today()
+    endDay = calendar.monthrange(y, m)[1]
+    end = datetime.date(year=y, month=m, day=endDay)
+    if today >= end:
+        print("true or same")
+    else:
+        end = today
+
+    count = (end - start).days
+
+
+    row = 1
+    col = 0
+    worksheet.write(0,0,"Name")
+    i=1
+    loopVar = start
+    print(count,loopVar)
+    while count >=0:
+        worksheet.write(0,i,loopVar.strftime("%Y-%m-%d"))
+        loopVar += datetime.timedelta(days=1)
+        i+=1
+        count -=1
+
+    student_id = student.objects.all().values('sd_id')
+    for i in student_id:
+        obj = attendance.objects.filter(sd_id=i['sd_id'],month=m,year=y).values("date")
+        res = [sub['date'].strftime("%Y-%m-%d") for sub in obj]
+        loopVar = start
+        name = student.objects.get(sd_id=i['sd_id'])
+
+        worksheet.write(row, col, name.sd_name)
+        col +=1
+        count = (end - start).days
+        while count >= 0:
+            if loopVar.strftime("%Y-%m-%d") in res:
+                worksheet.write(row,col,"Present",cell_formate_present)
+            else:
+                worksheet.write(row, col, "Absent",cell_formate_absent)
+            loopVar += datetime.timedelta(days=1)
+            col +=1
+            count -=1
+        row +=1
+        col =0
+    workbook.close()
+    return file
+def download_file_all(request,y,m):
+    path = generate_excel_all(y,m)
+    file_path = os.path.join(settings.MEDIA_ROOT, path)
+    print(file_path)
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
+            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+            return response
+    raise Http404
+
+
 def download_file(request,id,y,m):
     path = generate_excel(id,y,m)
     file_path = os.path.join(settings.MEDIA_ROOT, path)
@@ -657,17 +734,17 @@ def download_file(request,id,y,m):
 def report(request):
     value = request.session.get('admin')
     user = warden.objects.get(id=value)
+    flag = False
     if request.method=="POST":
-        if 'id' not in request.POST:
-            print("id set to 1")
-            id =1
-        else:
-            id = request.POST['id']
+        print (request.POST)
+        if request.POST['id'] =="":
+            flag = True
+        id = request.POST['id']
         data = request.POST['month']
         y,m = data.split("-",2)
-        print(id)
-        print(y)
-        print(m)
-        response =download_file(request,int(id),int(y),int(m))
+        if flag:
+            response = download_file_all(request,int(y),int(m))
+        else:
+            response =download_file(request,int(id),int(y),int(m))
         return  response
     return render(request,'admin_templates/report.html',{'user':user})
