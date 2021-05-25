@@ -171,6 +171,14 @@ def all_fee(request):
     return render(request,'student_templates/all_fee.html',{'user':user,'obj':obj})
 
 @studentonly
+def transaction_history(request):
+    id = request.session.get('userid')
+    user = student.objects.get(sd_id=id)
+    obj = fees.objects.filter(status=1,sd_id=id)
+    return render(request,'student_templates/Transactions.html',{'user':user,'obj':obj})
+
+    
+@studentonly
 def complaints(request):
     id = request.session.get('userid')
     user = student.objects.get(sd_id=id)
