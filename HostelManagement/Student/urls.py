@@ -28,6 +28,6 @@ urlpatterns = [
    path('service',views.request_service,name='student_service'),
    path('service-requested',views.list_service_requested,name='student_list_service'),
    path('calender',views.show_calender),
-
+   path('transactions',views.transaction_history,name="transactions"),
 ]
 urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
