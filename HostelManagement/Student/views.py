@@ -4,7 +4,7 @@ from datetime import date
 import hmac
 import hashlib
 from time import strptime
-
+from guest.models import *
 from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -237,3 +237,10 @@ def list_leave(request):
     user = student.objects.get(sd_id=id)
     lve = leave.objects.filter(sd_id=id)
     return render(request,'student_templates/list_leave.html',{'user':user,'obj':lve})
+
+@studentonly
+def guest(request):
+    id = request.session.get('userid')
+    user = student.objects.get(sd_id=id)
+    obj = register_guest.objects.filter(status=1)
+    return render(request,'student_templates/guest.html',{'user':user,'obj':obj})
