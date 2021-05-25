@@ -12,7 +12,7 @@
   <title>Hostel</title>
   <!-- Bootstrap -->
   <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-   <link rel="icon" href="{% static 'admin_static/index/images/favicon.ico' %}" type="image/ico" />
+  <link rel="icon" href="{% static 'admin_static/index/images/favicon.ico' %}" type="image/ico" />
 
   <link href="{% static 'admin_static/vendors/bootstrap/dist/css/bootstrap.min.css'%}" rel="stylesheet">
   <!-- Font Awesome -->
@@ -98,7 +98,7 @@
                     <li>
                       <a href="{% url 'student_leave' %}">Leave Form</a>
                     </li>
-                      <li>
+                    <li>
                       <a href="{% url 'student_list_leave' %}">List Leave</a>
                     </li>
                   </ul>
@@ -127,15 +127,18 @@
                 <li><a><i class="fa fa-search "></i> Request <span class="fa fa-chevron-down "></span></a>
                   <ul class="nav child_menu ">
                     <li>
-                      <a> Services </a>
+                      <a href="{% url 'student_service' %}"> Services </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'student_list_service' %}">List</a>
                     </li>
                   </ul>
                 </li>
                 <li><a><i class=" fa fa-edit "></i>Complaints<span class="fa fa-chevron-down "></span></a>
                   <ul class="nav child_menu ">
-                      <li>
-                           <a href="{% url 'student_add_complaints' %}" >Register</a>
-                      </li>
+                    <li>
+                      <a href="{% url 'student_add_complaints' %}">Register</a>
+                    </li>
                     <li>
                       <a href="{% url 'student_complaints' %} ">Feedback</a>
                     </li>
