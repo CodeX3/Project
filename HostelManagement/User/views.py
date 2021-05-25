@@ -12,8 +12,11 @@ from django.views.decorators import gzip
 from django.http import StreamingHttpResponse
 import cv2
 import threading
+
 cam = None
-import xlrd,xlsxwriter
+import xlrd, xlsxwriter
+
+
 # ---------------------------Login--------------------------------#
 def do_login(request):
     value = request.session.get('userid')
@@ -122,6 +125,7 @@ def load_admin_index(request):
     user = warden.objects.get(id=value)
     return render(request, 'admin_templates/index.html', {'user': user})
 
+
 @adminonly
 def verify_students(request):
     value = request.session.get('admin')
@@ -131,6 +135,7 @@ def verify_students(request):
     obj = register_new_user.objects.all()
     context = {'obj': obj, 'user': user}
     return render(request, 'admin_templates/student_reg_verify.html', context)
+
 
 @adminonly
 def verify_students_confirm(request, pk):
@@ -153,6 +158,7 @@ def verify_students_confirm(request, pk):
 
     return render(request, 'admin_templates/validate_student.html', context)
 
+
 @adminonly
 def table(request):
     value = request.session.get('admin')
@@ -160,6 +166,7 @@ def table(request):
     #     return redirect('admin_login')
     user = warden.objects.get(id=value)
     return render(request, 'admin_templates/table.html', {'user': user})
+
 
 @adminonly
 def view_students(request):
@@ -170,6 +177,7 @@ def view_students(request):
     obj = student.objects.all()
     context = {'obj': obj, 'user': user}
     return render(request, 'admin_templates/student_view.html', context)
+
 
 @adminonly
 def edit_student(request, pk):
@@ -189,6 +197,7 @@ def edit_student(request, pk):
             print("not valid")
     return render(request, 'admin_templates/edit_student.html', context)
 
+
 @adminonly
 def view_visitors(request):
     value = request.session.get('admin')
@@ -198,6 +207,7 @@ def view_visitors(request):
     obj = visitor.objects.all()
 
     return render(request, 'admin_templates/visitor.html', {'obj': obj, 'user': user})
+
 
 @adminonly
 def view_complaints(request):
@@ -209,6 +219,7 @@ def view_complaints(request):
 
     return render(request, 'admin_templates/complaint.html', {'obj': obj, 'user': user})
 
+
 @adminonly
 def review_complaint(request):
     value = request.session.get('admin')
@@ -218,6 +229,7 @@ def review_complaint(request):
     obj.status = "closed"
     obj.save()
     return HttpResponse(status=200)
+
 
 @adminonly
 def reg_complaint(request):
@@ -233,6 +245,7 @@ def reg_complaint(request):
             form = complaints()
     return render(request, 'complaint_insert.html', {'user': user})
 
+
 @adminonly
 def today_attendance(request):
     value = request.session.get('admin')
@@ -245,6 +258,7 @@ def today_attendance(request):
     st_obj = student.objects.all()
     return render(request, 'admin_templates/today_attendance.html',
                   {'obj': st_obj, 'today': today, 'attendace_obj': res, 'user': user})
+
 
 @adminonly
 def mark_attendance(request):
@@ -269,6 +283,7 @@ def mark_attendance(request):
 
     return HttpResponse(status=200)
 
+
 @adminonly
 def general_attendance(request):
     value = request.session.get('admin')
@@ -276,7 +291,8 @@ def general_attendance(request):
     #     return redirect('admin_login')
     user = warden.objects.get(id=value)
     lev = leave.objects.all()
-    return render(request, 'admin_templates/category_view.html', {'user': user,'obj':lev})
+    return render(request, 'admin_templates/category_view.html', {'user': user, 'obj': lev})
+
 
 @adminonly
 def date_attendance(request, date=None):
@@ -297,6 +313,7 @@ def date_attendance(request, date=None):
         st_obj = student.objects.all()
         return render(request, 'admin_templates/all_attendance.html',
                       {'obj': st_obj, 'today': date, 'attendace_obj': res, 'user': user})
+
 
 @adminonly
 def add_fees(request):
@@ -369,6 +386,7 @@ def add_fees(request):
 
     return render(request, 'admin_templates/fees.html', {'user': user})
 
+
 @adminonly
 def all_fees(request):
     value = request.session.get('admin')
@@ -377,6 +395,7 @@ def all_fees(request):
     obj = fees.objects.all()
     user = warden.objects.get(id=value)
     return render(request, 'admin_templates/all_fees.html', {'obj': obj, 'user': user})
+
 
 @adminonly
 def pending_fee(request):
@@ -387,6 +406,7 @@ def pending_fee(request):
     obj = fees.objects.filter(status=0).all()
     return render(request, 'admin_templates/pending_fee.html', {'obj': obj, 'user': user})
 
+
 @adminonly
 def service_list(request):
     value = request.session.get('admin')
@@ -394,6 +414,7 @@ def service_list(request):
     #     return redirect('admin_login')
     user = warden.objects.get(id=value)
     return render(request, 'admin_templates/service.html', {'user': user})
+
 
 @adminonly
 def show_warden(request):
@@ -432,6 +453,7 @@ def show_warden(request):
                   {'obj': all_warden, 'media_url': settings.MEDIA_URL, 'edit': check_super_admin, 'reg': True,
                    'user': user})
 
+
 @adminonly
 def scholarship(request):
     if request.method == 'POST':
@@ -452,6 +474,7 @@ def scholarship(request):
         obj.save()
         print("saved")
     return render(request, 'admin_templates/scholarship.html')
+
 
 @adminonly
 def scholarshipview(request):
@@ -498,6 +521,7 @@ def livefe(request):
         print("cam error")
         pass
 
+
 @adminonly
 def parent_view(request):
     value = request.session.get('admin')
@@ -505,13 +529,14 @@ def parent_view(request):
     #     return redirect('admin_login')
     user = warden.objects.get(id=value)
     parent = student.objects.all()
-    return render(request,'admin_templates/parent.html',{'user':user,'obj':parent})
+    return render(request, 'admin_templates/parent.html', {'user': user, 'obj': parent})
+
 
 @adminonly
 def admin_profile(request):
     value = request.session.get('admin')
     user = warden.objects.get(id=value)
-    if request.method=="POST":
+    if request.method == "POST":
         print(request.POST)
         print(request.FILES)
         try:
@@ -521,25 +546,28 @@ def admin_profile(request):
             user.phone = request.POST['phone']
             user.incharge = request.POST['incharge']
             user.password = request.POST['password']
-            if len(request.FILES) !=0:
+            if len(request.FILES) != 0:
                 user.pic = request.FILES['pic']
             user.save()
-            return render(request, 'admin_templates/profile.html', {'user': user, 'media_url': settings.MEDIA_URL,'success':True})
+            return render(request, 'admin_templates/profile.html',
+                          {'user': user, 'media_url': settings.MEDIA_URL, 'success': True})
         except Exception as e:
-            return render(request, 'admin_templates/profile.html', {'user': user, 'media_url': settings.MEDIA_URL,'err':True })
-    return render(request,'admin_templates/profile.html',{'user':user,'media_url': settings.MEDIA_URL})
+            return render(request, 'admin_templates/profile.html',
+                          {'user': user, 'media_url': settings.MEDIA_URL, 'err': True})
+    return render(request, 'admin_templates/profile.html', {'user': user, 'media_url': settings.MEDIA_URL})
+
 
 @adminonly
-def show_profile(request,pk):
+def show_profile(request, pk):
     value = request.session.get('admin')
-    if pk ==value:
+    if pk == value:
         return redirect('admin_profile')
     user = warden.objects.get(id=value)
     try:
-        obj =warden.objects.get(id=pk)
+        obj = warden.objects.get(id=pk)
     except ObjectDoesNotExist:
         return redirect('warden')
-    if request.method=="POST":
+    if request.method == "POST":
         try:
             obj.name = request.POST['name']
             obj.address = request.POST['address']
@@ -547,7 +575,7 @@ def show_profile(request,pk):
             obj.phone = request.POST['phone']
             obj.incharge = request.POST['incharge']
             obj.password = request.POST['password']
-            if len(request.FILES) !=0:
+            if len(request.FILES) != 0:
                 obj.pic = request.FILES['pic']
             if 'status' in request.POST:
                 obj.status = True
@@ -555,10 +583,15 @@ def show_profile(request,pk):
                 obj.status = False
             print(obj)
             obj.save()
-            return render(request, 'admin_templates/show_profile.html', {'user': user, 'media_url': settings.MEDIA_URL,'success':True,'obj':obj})
+            return render(request, 'admin_templates/show_profile.html',
+                          {'user': user, 'media_url': settings.MEDIA_URL, 'success': True, 'obj': obj})
         except Exception as e:
-            return render(request, 'admin_templates/show_profile.html', {'user': user, 'media_url': settings.MEDIA_URL,'err':True,'obj':obj })
-    return render(request,'admin_templates/show_profile.html',{'user':user,'media_url': settings.MEDIA_URL,'obj':obj})
+            return render(request, 'admin_templates/show_profile.html',
+                          {'user': user, 'media_url': settings.MEDIA_URL, 'err': True, 'obj': obj})
+    return render(request, 'admin_templates/show_profile.html',
+                  {'user': user, 'media_url': settings.MEDIA_URL, 'obj': obj})
+
+
 @adminonly
 def alter_warden(request):
     try:
@@ -571,14 +604,17 @@ def alter_warden(request):
         return HttpResponse(status=200)
     except Exception as e:
         return HttpResponse(status=400)
+
+
 @adminonly
 def delete_warden(request):
-    try :
+    try:
         obj = warden.objects.get(id=request.GET['id'])
         obj.delete()
         return HttpResponse(status=200)
     except Exception:
         return HttpResponse(status=400)
+
 
 def addDataToSheet(worksheet):
     # first row
@@ -597,13 +633,14 @@ def addDataToSheet(worksheet):
     worksheet.write(3, 2, "Civil")
     worksheet.write(3, 3, "C")
 
-def generate_excel(id,y,m):
-    rootPath = os.getcwd()+"\\"+"report\\"
+
+def generate_excel(id, y, m):
+    rootPath = os.getcwd() + "\\" + "report\\"
     print(rootPath)
     import datetime
     # file = (rootPath+"test.xlsx")
-    file = (rootPath+datetime.datetime.now().strftime('%Y%m%d%H%M%S')+".xlsx")
-    #file path
+    file = (rootPath + datetime.datetime.now().strftime('%Y%m%d%H%M%S') + ".xlsx")
+    # file path
     print(file)
     workbook = xlsxwriter.Workbook(file)
 
@@ -616,41 +653,42 @@ def generate_excel(id,y,m):
     cell_formate_absent.set_font_color('red')
     row = 1
     col = 0
-    worksheet.write(0,0,"Date")
-    worksheet.write(0,1,"Attendance")
+    worksheet.write(0, 0, "Date")
+    worksheet.write(0, 1, "Attendance")
 
-    obj = attendance.objects.filter(sd_id=id,month=m,year=y).values("date")
-    start = datetime.date(year=y,month=m,day=1)
+    obj = attendance.objects.filter(sd_id=id, month=m, year=y).values("date")
+    start = datetime.date(year=y, month=m, day=1)
     today = datetime.date.today()
-    endDay = calendar.monthrange(y,m)[1]
-    end = datetime.date(year=y,month=m,day=endDay)
+    endDay = calendar.monthrange(y, m)[1]
+    end = datetime.date(year=y, month=m, day=endDay)
     if today >= end:
         print("true or same")
     else:
-        end=today
+        end = today
     res = [sub['date'].strftime("%Y-%m-%d") for sub in obj]
-    count = (end-start).days
+    count = (end - start).days
     loopVar = start
     while count >= 0:
-        worksheet.write(row,col,loopVar.strftime("%Y-%m-%d"))
+        worksheet.write(row, col, loopVar.strftime("%Y-%m-%d"))
         if loopVar.strftime("%Y-%m-%d") in res:
-            worksheet.write(row,col+1,"Present",cell_formate_present)
+            worksheet.write(row, col + 1, "Present", cell_formate_present)
         else:
-            worksheet.write(row, col + 1, "Absent",cell_formate_absent)
+            worksheet.write(row, col + 1, "Absent", cell_formate_absent)
         loopVar += datetime.timedelta(days=1)
-        row +=1
-        count -=1
+        row += 1
+        count -= 1
     workbook.close()
 
     return file
 
-def generate_excel_all(y,m):
-    rootPath = os.getcwd()+"\\"+"report\\"
+
+def generate_excel_all(y, m):
+    rootPath = os.getcwd() + "\\" + "report\\"
     print(rootPath)
     import datetime
     # file = (rootPath+"test.xlsx")
-    file = (rootPath+datetime.datetime.now().strftime('%Y%m%d%H%M%S')+".xlsx")
-    #file path
+    file = (rootPath + datetime.datetime.now().strftime('%Y%m%d%H%M%S') + ".xlsx")
+    # file path
     print(file)
     workbook = xlsxwriter.Workbook(file)
 
@@ -673,43 +711,44 @@ def generate_excel_all(y,m):
 
     count = (end - start).days
 
-
     row = 1
     col = 0
-    worksheet.write(0,0,"Name")
-    i=1
+    worksheet.write(0, 0, "Name")
+    i = 1
     loopVar = start
-    print(count,loopVar)
-    while count >=0:
-        worksheet.write(0,i,loopVar.strftime("%Y-%m-%d"))
+    print(count, loopVar)
+    while count >= 0:
+        worksheet.write(0, i, loopVar.strftime("%Y-%m-%d"))
         loopVar += datetime.timedelta(days=1)
-        i+=1
-        count -=1
+        i += 1
+        count -= 1
 
     student_id = student.objects.all().values('sd_id')
     for i in student_id:
-        obj = attendance.objects.filter(sd_id=i['sd_id'],month=m,year=y).values("date")
+        obj = attendance.objects.filter(sd_id=i['sd_id'], month=m, year=y).values("date")
         res = [sub['date'].strftime("%Y-%m-%d") for sub in obj]
         loopVar = start
         name = student.objects.get(sd_id=i['sd_id'])
 
         worksheet.write(row, col, name.sd_name)
-        col +=1
+        col += 1
         count = (end - start).days
         while count >= 0:
             if loopVar.strftime("%Y-%m-%d") in res:
-                worksheet.write(row,col,"Present",cell_formate_present)
+                worksheet.write(row, col, "Present", cell_formate_present)
             else:
-                worksheet.write(row, col, "Absent",cell_formate_absent)
+                worksheet.write(row, col, "Absent", cell_formate_absent)
             loopVar += datetime.timedelta(days=1)
-            col +=1
-            count -=1
-        row +=1
-        col =0
+            col += 1
+            count -= 1
+        row += 1
+        col = 0
     workbook.close()
     return file
-def download_file_all(request,y,m):
-    path = generate_excel_all(y,m)
+
+
+def download_file_all(request, y, m):
+    path = generate_excel_all(y, m)
     file_path = os.path.join(settings.MEDIA_ROOT, path)
     print(file_path)
     if os.path.exists(file_path):
@@ -720,8 +759,8 @@ def download_file_all(request,y,m):
     raise Http404
 
 
-def download_file(request,id,y,m):
-    path = generate_excel(id,y,m)
+def download_file(request, id, y, m):
+    path = generate_excel(id, y, m)
     file_path = os.path.join(settings.MEDIA_ROOT, path)
     print(file_path)
     if os.path.exists(file_path):
@@ -730,21 +769,23 @@ def download_file(request,id,y,m):
             response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
             return response
     raise Http404
+
+
 @adminonly
 def report(request):
     value = request.session.get('admin')
     user = warden.objects.get(id=value)
     flag = False
-    if request.method=="POST":
-        print (request.POST)
-        if request.POST['id'] =="":
+    if request.method == "POST":
+        print(request.POST)
+        if request.POST['id'] == "":
             flag = True
         id = request.POST['id']
         data = request.POST['month']
-        y,m = data.split("-",2)
+        y, m = data.split("-", 2)
         if flag:
-            response = download_file_all(request,int(y),int(m))
+            response = download_file_all(request, int(y), int(m))
         else:
-            response =download_file(request,int(id),int(y),int(m))
-        return  response
-    return render(request,'admin_templates/report.html',{'user':user})
+            response = download_file(request, int(id), int(y), int(m))
+        return response
+    return render(request, 'admin_templates/report.html', {'user': user})
