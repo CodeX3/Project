@@ -29,12 +29,12 @@ def allguest(request):
     value = request.session.get('admin')
     user = warden.objects.get(id=value)
     obj = register_guest.objects.all()
-    value = request.session.get('admin')
-    # if value is None:
-    #     return redirect('admin_login')
-    #user = warden.objects.get(id=value)
-    obj = register_guest.objects.all()
-    context = {'obj': obj}
+    res = register_guest.objects.all()
+    for i in res:
+        if i.ldate <= today:
+            print("modified")
+            i.status = False
+            i.save()
     return render(request, 'allguest.html', {'obj': obj,'user':user})
 
 @adminonly
