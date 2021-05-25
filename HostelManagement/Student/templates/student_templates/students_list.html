@@ -1,11 +1,13 @@
-{% extends 'admin_templates/table.html' %}
+{% extends 'student_templates/table.html' %}
+
+{% load static %}
 
 {% block content %}
 
 <div class="col-md-12 col-sm-12 ">
     <div class="x_panel">
         <div class="x_title">
-            <h2>Today Attendance</h2>
+            <h2>All Students List</h2>
             <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
             </ul>
@@ -15,20 +17,21 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card-box table-responsive">
-                        <p class="text-muted font-13 m-b-30">
-                            <b>Today:{{ today }}</b>
-                        </p>
+                        {# <p class="text-muted font-13 m-b-30">#}
+                            {# List of students accommodated#}
+                            {# </p>#}
                         <table id="datatable" class="table table-striped table-bordered" style="width:100%">
 
                             <thead>
                                 <tr>
                                     <th>No</th>
                                     <th>Name</th>
+                                    <th>ID</th>
                                     <th>Course</th>
+                                    <th>Email</th>
                                     <th>phone</th>
                                     <th>Year</th>
-                                    <th>Status</th>
-                                    <th>Mark Attendace</th>
+                                    <th>Admission num</th>
 
                                 </tr>
                             </thead>
@@ -36,22 +39,14 @@
                                 {% for i in obj %}
                                 <tr>
                                     <td>{{ forloop.counter }}</td>
-                                    <td>{{i.sd_name}}</td>
+                                    <td>{{i.sd_name}}</a></td>
+                                    <td>{{ i.sd_id }}</td>
                                     <td>{{i.sd_course}}</td>
+                                    <td>{{i.sd_email}}</td>
                                     <td>{{i.sd_phone}}</td>
                                     <td>{{i.sd_year}}</td>
-
-                                    {% if i.sd_id in attendace_obj %}
-                                    <td id={{ i.sd_id }}>Present</td>
-                                    {% else %}
-                                    <td id={{ i.sd_id }}>Absent</td>
-                                    {% endif %}
-
-                                    <td> <button style="background-color: #008CBA;" class="btn btn-success"
-                                            onclick="alert('Are you sure to mark as present'); update({{ i.sd_id }})">Mark</button>
-                                    </td>
-                                </tr>
-                                {% endfor %}
+                                    <td>{{i.sd_admno}}</td>
+                                    {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -61,23 +56,5 @@
     </div>
 </div>
 
-<script>
-    function update(id) {
-        $.ajax({
-            url: '/admin/mark_attendance',
-            type: 'get',
-            data: {
-                'id': id
-            },
-            success: (response) => {
-                alert("Marked")
-                document.getElementById(id).innerText = "Present";
-            },
-            error: (responce) => {
-                alert("something wrong happened");
-            }
 
-        })
-    }
-</script>
 {% endblock %}

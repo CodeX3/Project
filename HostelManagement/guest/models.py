@@ -15,3 +15,5 @@ class register_guest(models.Model):
     status=models.BooleanField(default=True)
 
 
+
+

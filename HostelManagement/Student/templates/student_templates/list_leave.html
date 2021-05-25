@@ -1,46 +1,6 @@
-{% extends 'admin_templates/table.html' %}
+{% extends 'student_templates/table.html' %}
+
 {% block content %}
-
-{# first block #}
-<div class="col-md-12 col-sm-12 ">
-    <div class="x_panel">
-        <div class="x_title">
-            <h2>Attendance By Date</h2>
-            <ul class="nav navbar-right panel_toolbox">
-                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-            </ul>
-            <div class="clearfix"></div>
-        </div>
-        <div class="x_content">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="card-box table-responsive">
-                        <p class="text-muted font-13 m-b-30">
-                            <b>Select the date:</b>
-                            <input type="date" id="date">
-                            <button style="background-color: #008CBA;color: black;" class="btn btn-success"
-                                onclick="return redirect_page_date();">Fetch</button>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-
-    function redirect_page_date() {
-        console.log("ethi")
-        var current = document.getElementById('date').value;
-        if (current == "") {
-            return false;
-        }
-        var url = "{% url 'attendance_date' '2021-04-21' %}";
-        location.href = url.replace('2021-04-21', current);
-    }
-
-</script>
 
 <div class="col-md-12 col-sm-12 ">
     <div class="x_panel">
@@ -63,8 +23,6 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Name</th>
-                                    <th>Course</th>
                                     <th>Leave Type</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
@@ -78,8 +36,6 @@
                                 {% for i in obj %}
                                 <tr>
                                     <td>{{ forloop.counter }}</td>
-                                <td>{{ i.sd_name }}</td>
-                                <td>{{ i.student_info.sd_course }}</td>
                                     <td>{{i.leave_type}}</td>
                                     <td>{{i.start_date}}</td>
                                     <td>{{i.end_date}}</td>
@@ -102,4 +58,6 @@
         </div>
     </div>
 </div>
+
+
 {% endblock %}

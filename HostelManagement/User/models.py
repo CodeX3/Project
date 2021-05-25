@@ -46,6 +46,8 @@ class visitor(models.Model):
     visitor_student_id=models.CharField(max_length=1000)
     visitor_student_name=models.CharField(max_length=50)
     visitor_date=models.DateField(null=True)
+    visitor_count = models.IntegerField(default=1)
+    reg_day = models.DateField(null=True)
 
 class complaint(models.Model):
     auther=models.CharField(max_length=50)
@@ -78,6 +80,8 @@ class fees(models.Model):
     accommodation=models.IntegerField(null=True)
     common=models.IntegerField(null=True)
     total=models.IntegerField()
+    orderid=models.CharField(max_length=200,null=True)
+    amount_paise=models.IntegerField(null=True)
     student_info =models.ForeignKey(student,on_delete=models.CASCADE,null=True)
 
 class warden(models.Model):
@@ -100,3 +104,20 @@ class marks(models.Model):
     mark1=models.IntegerField(default=0)
     mark2=models.IntegerField(default=0)
     total=models.IntegerField()
+
+class Razorpay(models.Model):
+    razorpay_payment_id=models.CharField(max_length=250)
+    razorpay_order_id=models.CharField(max_length=250)
+    razorpay_signature=models.CharField(max_length=250)
+    fee_info=models.ForeignKey(fees,on_delete=models.CASCADE)
+
+class leave(models.Model):
+    sd_id=models.IntegerField()
+    student_info=models.ForeignKey(student,on_delete=models.CASCADE)
+    sd_name=models.CharField(max_length=50)
+    leave_type=models.CharField(max_length=50)
+    start_date=models.DateField()
+    end_date=models.DateField()
+    reason=models.CharField(max_length=250)
+    half_day=models.BooleanField(default=False)
+    no_of_day=models.IntegerField(default=1)

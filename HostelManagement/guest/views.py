@@ -1,14 +1,15 @@
 from django.shortcuts import render
 from datetime import date
 
-
+from User.models import *
 # Create your views here.
 from .form import GuestRegister
 from .models import register_guest
 today=date.today()
 
 def guestreg(request):
-
+    value = request.session.get('admin')
+    user = warden.objects.get(id=value)
     if request.method == "POST":
         print(request.POST)
         form = GuestRegister(request.POST)
@@ -21,9 +22,11 @@ def guestreg(request):
             print('failed')
             print(form.errors)
             form = GuestRegister()
-    return render(request,'guestreg.html',)
+    return render(request,'guestreg.html',{"user":user})
 
 def allguest(request):
+    value = request.session.get('admin')
+    user = warden.objects.get(id=value)
     obj = register_guest.objects.all()
     value = request.session.get('admin')
     # if value is None:
@@ -31,9 +34,11 @@ def allguest(request):
     #user = warden.objects.get(id=value)
     obj = register_guest.objects.all()
     context = {'obj': obj}
-    return render(request, 'allguest.html', {'obj': obj})
+    return render(request, 'allguest.html', {'obj': obj,'user':user})
 
 def guest_present(request):
+    value = request.session.get('admin')
+    user = warden.objects.get(id=value)
     today = date.today()
     res = register_guest.objects.all()
     for i in res:
@@ -50,4 +55,4 @@ def guest_present(request):
     #user = warden.objects.get(id=value)
     obj=register_guest.objects.filter(status=1)
     context = {'obj': obj}
-    return render(request, 'allguest.html', {'obj': obj})
+    return render(request, 'allguest.html', {'obj': obj,'user':user})

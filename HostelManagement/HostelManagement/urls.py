@@ -31,6 +31,10 @@ urlpatterns = [
     path('login', views.do_login, name='student_login'),
     path('register', views.do_register, name='register'),
     path('admin',views.admin_login,name='admin_login'),
+    path('admin/alter_warden', views.alter_warden),
+    path('admin/mark_attendance',views.mark_attendance),
+    path('admin/review_complain',views.review_complaint),
+    path('admin/delete_warden',views.delete_warden),
 
 ]
 

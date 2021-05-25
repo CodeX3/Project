@@ -73,17 +73,18 @@
                                             class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li>
-                                            <a href="{% url 'view_student_all' %}">Student</a>
+                                            <a href="{% url 'allstudents' %}">Student</a>
                                         </li>
                                         <li>
                                             <a href="{% url 'view_visitors' %}">Visitors</a>
                                         </li>
                                         <li><a>Fees<span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu">
-                                                <li><a href="{% url 'all_fees_list' %}">All Details</a>
+                                                <li><a href="{% url 'student_pending_fee' %}">Pending</a>
                                                 </li>
-                                                <li><a href="{% url 'fee_pending' %}">Pending</a>
+                                                <li><a href="{% url 'student_all_fee' %}">All Details</a>
                                                 </li>
+
                                             </ul>
                                         </li>
                                     </ul>
@@ -92,20 +93,23 @@
                                             class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li>
-                                            <a href={% url 'today_attendance' %}>Today</a>
+                                            <a href={% url 'student_today' %}>Today</a>
                                         </li>
                                         <li>
                                             <a href={% url 'common_attendance' %}>View all</a>
                                         </li>
                                         <li>
-                                            <a>Leave Form</a>
+                                            <a href="{% url 'student_leave' %}">Leave Form</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'student_list_leave' %}">List Leave</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-user "></i> Parent <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li>
-                                            <a href="form.html">Parents</a>
+                                            <a href="{% url 'student_parent_show' %}">Parents</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -137,7 +141,10 @@
                                             class="fa fa-chevron-down "></span></a>
                                     <ul class="nav child_menu ">
                                         <li>
-                                            <a href="{% url 'admin_complaints' %} ">Feedback</a>
+                                            <a href="{% url 'student_add_complaints' %}">Register</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'student_complaints' %} ">Feedback</a>
                                         </li>
                                     </ul>
                                 </li>
