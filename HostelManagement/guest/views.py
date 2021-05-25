@@ -6,7 +6,8 @@ from User.models import *
 from .form import GuestRegister
 from .models import register_guest
 today=date.today()
-
+from User.decorators import adminonly
+@adminonly
 def guestreg(request):
     value = request.session.get('admin')
     user = warden.objects.get(id=value)
@@ -23,7 +24,7 @@ def guestreg(request):
             print(form.errors)
             form = GuestRegister()
     return render(request,'guestreg.html',{"user":user})
-
+@adminonly
 def allguest(request):
     value = request.session.get('admin')
     user = warden.objects.get(id=value)
@@ -36,6 +37,7 @@ def allguest(request):
     context = {'obj': obj}
     return render(request, 'allguest.html', {'obj': obj,'user':user})
 
+@adminonly
 def guest_present(request):
     value = request.session.get('admin')
     user = warden.objects.get(id=value)
