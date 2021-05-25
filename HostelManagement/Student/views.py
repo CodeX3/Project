@@ -244,3 +244,43 @@ def guest(request):
     user = student.objects.get(sd_id=id)
     obj = register_guest.objects.filter(status=1)
     return render(request,'student_templates/guest.html',{'user':user,'obj':obj})
+
+@studentonly
+def request_service(request):
+    today = date.today().strftime('%Y-%m-%d')
+    print(today)
+    id = request.session.get('userid')
+    user = student.objects.get(sd_id=id)
+    if request.method.upper() == "POST":
+        print(request.POST)
+        try:
+            reg = service()
+            reg.auther=user.sd_name
+            reg.auther_phone=user.sd_phone
+            reg.auther_ID=user.sd_id
+            reg.status='open'
+            reg.date=today
+            reg.subject=request.POST['subject']
+            reg.body=request.POST['body']
+            if 'important' in request.POST:
+                reg.important = True
+            else:
+                reg.important = False
+            reg.save()
+        except Exception as e:
+            print(e)
+    return render(request,'student_templates/service_request.html',{'user':user,'today':today})
+
+@studentonly
+def list_service_requested(request):
+    id = request.session.get('userid')
+    user = student.objects.get(sd_id=id)
+    obj = service.objects.filter(auther_ID=id)
+    return render(request,'student_templates/list_service.html',{'user':user,'obj':obj})
+
+@studentonly
+def show_calender(request):
+    id = request.session.get('userid')
+    user = student.objects.get(sd_id=id)
+
+    return  render(request,'student_templates/calender.html',{'user':user})

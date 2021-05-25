@@ -121,3 +121,13 @@ class leave(models.Model):
     reason=models.CharField(max_length=250)
     half_day=models.BooleanField(default=False)
     no_of_day=models.IntegerField(default=1)
+
+class service(models.Model):
+    auther = models.CharField(max_length=50)
+    auther_phone = models.CharField(max_length=20)
+    auther_ID = models.CharField(max_length=1000)
+    subject = models.CharField(max_length=50)
+    status = models.CharField(max_length=20)
+    date = models.DateField()
+    body = models.CharField(max_length=500,null=True)
+    important =models.BooleanField(default=False)

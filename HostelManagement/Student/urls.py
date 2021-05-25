@@ -25,7 +25,9 @@ urlpatterns = [
    path('leave',views.apply_leave,name='student_leave'),
    path('list-leave',views.list_leave,name='student_list_leave'),
    path('guests',views.guest,name='student_guest'),
-
+   path('service',views.request_service,name='student_service'),
+   path('service-requested',views.list_service_requested,name='student_list_service'),
+   path('calender',views.show_calender),
 
 ]
 urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
