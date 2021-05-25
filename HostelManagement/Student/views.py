@@ -237,3 +237,10 @@ def list_leave(request):
     user = student.objects.get(sd_id=id)
     lve = leave.objects.filter(sd_id=id)
     return render(request,'student_templates/list_leave.html',{'user':user,'obj':lve})
+
+@studentonly
+def guest(request):
+    id = request.session.get('userid')
+    user = student.objects.get(sd_id=id)
+
+    return render(request,'student_templates/guest.html',{'user':user})
