@@ -50,11 +50,5 @@ def guest_present(request):
             i.save()
         else:
             print(today,i.ldate)
-    obj = register_guest.objects.all()
-    value = request.session.get('admin')
-    # if value is None:
-    #     return redirect('admin_login')
-    #user = warden.objects.get(id=value)
     obj=register_guest.objects.filter(status=1)
-    context = {'obj': obj}
     return render(request, 'allguest.html', {'obj': obj,'user':user})
