@@ -27,7 +27,7 @@ urlpatterns = [
     path('image/',include('image.urls')),
     path('homepage/',include('Student.urls')),
     path('guest/',include('guest.urls')),
-    path('',views.load_index),
+    path('',views.load_index,name="FrontPage"),
     path('login', views.do_login, name='student_login'),
     path('register', views.do_register, name='register'),
     path('admin',views.admin_login,name='admin_login'),
