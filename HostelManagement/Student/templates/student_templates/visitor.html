@@ -1,5 +1,7 @@
-{% extends 'admin_templates/table.html' %}
+{% extends 'student_templates/table.html' %}
+
 {% block content %}
+<button class="btn btn-outline-success" style="margin-left: 11px;" onClick=" redirectToAdd()">Add Visitor</button>
 
 <div class="col-md-12 col-sm-12 ">
     <div class="x_panel">
@@ -24,11 +26,7 @@
                                     <th>No.</th>
                                     <th>Name</th>
                                     <th>Date</th>
-                                    <th>Contact</th>
-                                    <th>Student</th>
-                                    <th>Student ID</th>
                                     <th>Count</th>
-                                    <th>Created On</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -37,11 +35,7 @@
                                     <td>{{ forloop.counter }}</td>
                                     <td>{{i.visitor_name}}</td>
                                     <td>{{i.visitor_date}}</td>
-                                    <td>{{ i.visitor_contact }}</td>
-                                    <td>{{i.visitor_student_name}}</td>
-                                    <td>{{i.visitor_student_id}}</td>
-                                    <td>{{ i.visitor_count }}</td>
-                                    <td>{{ i.reg_day }}</td>
+                                    <td>{{i.visitor_count}}</td>
                                     {% endfor %}
                             </tbody>
                         </table>
@@ -51,4 +45,11 @@
         </div>
     </div>
 </div>
+    <script>
+    function redirectToAdd(){
+        location.href='{% url 'student_visitor_add' %}'
+    }
+
+    </script>
 {% endblock %}
+

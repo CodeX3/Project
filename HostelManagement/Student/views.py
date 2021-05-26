@@ -290,5 +290,31 @@ def list_service_requested(request):
 def show_calender(request):
     id = request.session.get('userid')
     user = student.objects.get(sd_id=id)
-
     return  render(request,'student_templates/calender.html',{'user':user})
+
+@studentonly
+def visitor_view(request):
+    id = request.session.get('userid')
+    user = student.objects.get(sd_id=id)
+    obj = visitor.objects.filter(visitor_student_id=id)
+    return render(request,'student_templates/visitor.html',{'user':user,'obj':obj})
+
+@studentonly
+def visitor_add(request):
+    id = request.session.get('userid')
+    user = student.objects.get(sd_id=id)
+    if request.method.upper() =="POST":
+        obj = visitor()
+        obj.visitor_name= request.POST['visitor_name']
+        obj.visitor_contact = request.POST['visitor_contact']
+        obj.visitor_student_id = user.sd_id
+        obj.visitor_student_name= user.sd_name
+        obj.visitor_date = request.POST['visitor_date']
+        obj.reg_day= date.today().strftime("%Y-%m-%d")
+        obj.visitor_count = request.POST['visitor_count']
+        try :
+            obj.save()
+            redirect('student_visitor')
+        except Exception as e:
+            redirect('student_visitor_add')
+    return render(request,'student_templates/add_visitor.html',{'user':user})

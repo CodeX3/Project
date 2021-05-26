@@ -29,5 +29,8 @@ urlpatterns = [
    path('service-requested',views.list_service_requested,name='student_list_service'),
    path('calender',views.show_calender),
    path('transactions',views.transaction_history,name="transactions"),
+   path('visitor',views.visitor_view,name='student_visitor'),
+   path('add-visitor',views.visitor_add,name='student_visitor_add'),
+
 ]
 urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
