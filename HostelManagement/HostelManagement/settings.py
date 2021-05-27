@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'image',
     'Student',
     'guest',
-
+    'parent',
 ]
 
 MIDDLEWARE = [
