@@ -1,0 +1,96 @@
+{% extends 'student_templates/index.html' %}
+
+{% block content %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<div class="right_col" role="main">
+	<div class="">
+		<div class="page-title">
+
+
+			<div class="title_right">
+				<div class="col-md-5 col-sm-5  form-group pull-right top_search">
+
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<div class="row">
+			<div class="col-md-12 col-sm-12 ">
+				<div class="x_panel">
+					<div class="x_title">
+						<h2>Report Generator</h2>
+						<i class="fa fa-external-link" onclick="Open()"><span style="color: blue; ">Open</span></i>
+						<ul class="nav navbar-right panel_toolbox">
+							<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<div class="x_content">
+
+						<div id="reportGen" class="modal fade" role="dialog">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title">Get Report in Excel</h4>
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+
+									</div>
+									<div class="modal-body">
+										<form method="POST" >
+											{% csrf_token %}
+											<div class="field item form-group">
+												<label class="col-form-label label-align"> <a href="{% url 'view_student_all' %}">Std ID:</a> <span
+														class="required">*</span></label>
+												<input class="form-control" style="margin-left: 20px;" value="{{ user.sd_id }}" type="text"
+													name="id" data-toggle="tooltip"
+													data-placement="right"
+													disabled="disabled">
+											</div>
+											<div class="field item form-group">
+												<label class="col-form-label label-align"> Month<span
+														class="required">*</span></label>
+												<input class="form-control" style="margin-left: 20px;" type="month"
+													name="month" required="" data-toggle="tooltip"
+													data-placement="right" title="Select Month"
+													>
+											</div>
+											<div class="field item form-group">
+												<button type="submit" style="margin-left: 138px"
+													class="btn btn-outline-success">Submit</button>
+												<button type="reset" class="btn btn-outline-danger">Reset</button>
+											</div>
+										</form>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal"
+											onclick="goBack()">Close</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<button id="modalTrig" class="btn  btn-outline-dark" data-toggle="modal" data-target="#reportGen"
+						hidden></button>
+					<script type="text/javascript">
+						$(window).on('load', function () {
+							$('#reportGen').modal('show');
+						});
+					</script>
+					<script>
+						$('#reportGen').on('hidden.bs.modal', function () {
+							window.history.back();
+						});
+						function goBack() {
+							window.history.back();
+						}
+						function Open(){
+							$('#reportGen').modal('show');
+						}
+					</script>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
