@@ -1,4 +1,4 @@
-{% extends 'admin_templates/index.html' %}
+{% extends 'student_templates/index.html' %}
 
 {% block content %}
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -41,10 +41,10 @@
 											<div class="field item form-group">
 												<label class="col-form-label label-align"> <a href="{% url 'view_student_all' %}">Std ID:</a> <span
 														class="required">*</span></label>
-												<input class="form-control" style="margin-left: 20px;" type="text"
+												<input class="form-control" style="margin-left: 20px;" value="{{ user.sd_id }}" type="text"
 													name="id" data-toggle="tooltip"
-													data-placement="right" title="Just leave the field blank to get attendance of all students"
-													>
+													data-placement="right"
+													disabled="disabled">
 											</div>
 											<div class="field item form-group">
 												<label class="col-form-label label-align"> Month<span
