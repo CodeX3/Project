@@ -115,6 +115,7 @@ def do_register(request):
 # ---------------------------Admin-------------------------------#
 @adminonly
 def load_admin_index(request):
+    noti = notification.objects.filter(status=1)
     try:
         VideoCamera.__del__(cam)
     except Exception as e:
@@ -123,7 +124,10 @@ def load_admin_index(request):
     # if value is None:
     #     return redirect('admin_login')
     user = warden.objects.get(id=value)
-    return render(request, 'admin_templates/index.html', {'user': user})
+    print(noti)
+    val = noti.count()
+    print(val)
+    return render(request, 'admin_templates/index.html', {'user': user,'i':noti,'notification_count':val})
 
 
 @adminonly
