@@ -218,12 +218,13 @@
                   <span class="badge bg-green">{{notification_count}}</span>
                 </a>
                 <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
-                   <li class="nav-item">
+                  {% for i in notifications %}
+                  <li class="nav-item">
                     <a class="dropdown-item">
                       <span class="image"><img src="../../static/admin_static/index/images/img.jpg"
                           alt="Profile Image" /></span>
                       <span>
-                        <span>{{i.name}}</span>
+                        <span> {{i.name}} </span>
                         <span class="time">{{i.time}}</span>
                       </span>
                       <span class="message">
@@ -231,7 +232,7 @@
                       </span>
                     </a>
                   </li>
-
+                  {% endfor %}
                   <li class="nav-item">
                     <div class="text-center">
                       <a class="dropdown-item">

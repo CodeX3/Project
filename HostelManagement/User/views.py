@@ -127,7 +127,7 @@ def load_admin_index(request):
     print(noti)
     val = noti.count()
     print(val)
-    return render(request, 'admin_templates/index.html', {'user': user,'i':noti,'notification_count':val})
+    return render(request, 'admin_templates/index.html', {'user': user,'notifications':noti,'notification_count':val})
 
 
 @adminonly
