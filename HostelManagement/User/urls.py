@@ -55,6 +55,9 @@ urlpatterns = [
     # path('gen',views.generate_excel_all),
     path('download/',views.download_file),
     path('report',views.report,name='report'),
+    path('test_mail',views.sent_mail_to_user),
+    path('close_service',views.close_service,name='close_service'),
+
 
 
 

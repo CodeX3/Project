@@ -62,7 +62,7 @@
               <br />
 
               <div>
-                <h1><i class="fa fa-paw"></i>Hostel Management</h1>
+                <h1 style="cursor: alias" onclick="redirect_to_front_page()"><i class="fa fa-paw"></i>Hostel Management</h1>
                 <p>©2021 All Rights Reserved.</p>
               </div>
             </div>
@@ -72,5 +72,9 @@
     </div>
   </div>
 </body>
-
+<script>
+  function redirect_to_front_page(){
+    window.location.href="{% url 'FrontPage' %}";
+  }
+</script>
 </html>

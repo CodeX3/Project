@@ -48,7 +48,7 @@
                                     {% endif %}
 
                                     <td> <button style="background-color: #008CBA;" class="btn btn-success"
-                                            onclick="alert('Are you sure to mark as present'); update({{ i.sd_id }})">Mark</button>
+                                            onclick="update({{ i.sd_id }})">Mark</button>
                                     </td>
                                 </tr>
                                 {% endfor %}
@@ -63,7 +63,9 @@
 
 <script>
     function update(id) {
-        $.ajax({
+        if (confirm('Are you sure to mark as present'))
+        {
+          $.ajax({
             url: '/admin/mark_attendance',
             type: 'get',
             data: {
@@ -78,6 +80,11 @@
             }
 
         })
+        }
+        else
+        {
+
+        }
     }
 </script>
 {% endblock %}

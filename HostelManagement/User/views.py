@@ -12,7 +12,7 @@ from django.views.decorators import gzip
 from django.http import StreamingHttpResponse
 import cv2
 import threading
-
+from django.core.mail import send_mail
 cam = None
 import xlrd, xlsxwriter
 
@@ -417,7 +417,9 @@ def service_list(request):
     # if value is None:
     #     return redirect('admin_login')
     user = warden.objects.get(id=value)
-    return render(request, 'admin_templates/service.html', {'user': user})
+    open_service = service.objects.filter(status='open')
+    closed_service = service.objects.filter(status='closed')
+    return render(request, 'admin_templates/service.html', {'user': user,'open':open_service,'closed':closed_service})
 
 
 @adminonly
@@ -793,3 +795,20 @@ def report(request):
             response = download_file(request, int(id), int(y), int(m))
         return response
     return render(request, 'admin_templates/report.html', {'user': user})
+
+def sent_mail_to_user(request):
+    send_mail('','','',[''],fail_silently=False)
+    return HttpResponse(status=200)
+
+@adminonly
+def close_service(request):
+    val = request.GET['id']
+    try:
+        obj = service.objects.get(id=val)
+        obj.status='closed'
+        obj.closed=date.today().strftime("%Y-%m-%d")
+        obj.save()
+        return HttpResponse(status=200)
+    except Exception as e:
+        print(e)
+        return HttpResponse(status=500)

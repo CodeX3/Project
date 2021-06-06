@@ -22,6 +22,7 @@
                     <th>Subject</th>
                     <th>Status</th>
                     <th>Date</th>
+                    <th>Closed</th>
                     <th>Body</th>
                     <th>Imp</th>
                   </tr>
@@ -33,6 +34,12 @@
                     <td>{{i.subject}}</td>
                     <td id="{{ i.id }}">{{i.status}}</td>
                     <td>{{i.date}}</td>
+                    <td>{% if i.closed %}
+                          {{i.closed}}
+                        {% else %}
+                        Not Closed
+                        {% endif %}
+                    </td>
                     <td>{{ i.body }}</td>
                     <td>
                         {% if i.important %}
