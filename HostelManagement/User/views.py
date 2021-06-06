@@ -113,9 +113,14 @@ def do_register(request):
 
 
 # ---------------------------Admin-------------------------------#
+
+def get_notifications():
+    noti = notification.objects.filter(status=1)
+    val = noti.count()
+    return noti,val
 @adminonly
 def load_admin_index(request):
-    noti = notification.objects.filter(status=1)
+
     try:
         VideoCamera.__del__(cam)
     except Exception as e:
@@ -124,9 +129,7 @@ def load_admin_index(request):
     # if value is None:
     #     return redirect('admin_login')
     user = warden.objects.get(id=value)
-    print(noti)
-    val = noti.count()
-    print(val)
+    noti , val = get_notifications()
     return render(request, 'admin_templates/index.html', {'user': user,'notifications':noti,'notification_count':val})
 
 
@@ -137,7 +140,8 @@ def verify_students(request):
     #     return redirect('admin_login')
     user = warden.objects.get(id=value)
     obj = register_new_user.objects.all()
-    context = {'obj': obj, 'user': user}
+    noti, val = get_notifications()
+    context = {'obj': obj, 'user': user,'notifications':noti,'notification_count':val}
     return render(request, 'admin_templates/student_reg_verify.html', context)
 
 
@@ -148,7 +152,8 @@ def verify_students_confirm(request, pk):
     #     return redirect('admin_login')
     user = warden.objects.get(id=value)
     obj = register_new_user.objects.get(id=pk)
-    context = {'obj': obj, 'user': user}
+    noti, val = get_notifications()
+    context = {'obj': obj, 'user': user,'notifications':noti,'notification_count':val}
 
     if request.method == "POST":
         form = Student_add(request.POST)
@@ -169,7 +174,8 @@ def table(request):
     # if value is None:
     #     return redirect('admin_login')
     user = warden.objects.get(id=value)
-    return render(request, 'admin_templates/table.html', {'user': user})
+    noti, val = get_notifications()
+    return render(request, 'admin_templates/table.html', {'user': user,'notifications':noti,'notification_count':val})
 
 
 @adminonly
@@ -179,7 +185,8 @@ def view_students(request):
     #     return redirect('admin_login')
     user = warden.objects.get(id=value)
     obj = student.objects.all()
-    context = {'obj': obj, 'user': user}
+    noti, val = get_notifications()
+    context = {'obj': obj, 'user': user,'notifications':noti,'notification_count':val}
     return render(request, 'admin_templates/student_view.html', context)
 
 
@@ -190,7 +197,8 @@ def edit_student(request, pk):
     #     return redirect('admin_login')
     user = warden.objects.get(id=value)
     obj = student.objects.get(sd_id=pk)
-    context = {'obj': obj, 'user': user}
+    noti, val = get_notifications()
+    context = {'obj': obj, 'user': user,'notifications':noti,'notification_count':val}
 
     if request.method == "POST":
         form = Student_edit(request.POST, instance=obj)
@@ -209,8 +217,8 @@ def view_visitors(request):
     #     return redirect('admin_login')
     user = warden.objects.get(id=value)
     obj = visitor.objects.all()
-
-    return render(request, 'admin_templates/visitor.html', {'obj': obj, 'user': user})
+    noti, val = get_notifications()
+    return render(request, 'admin_templates/visitor.html', {'obj': obj, 'user': user,'notifications':noti,'notification_count':val})
 
 
 @adminonly
@@ -220,8 +228,8 @@ def view_complaints(request):
     #     return redirect('admin_login')
     user = warden.objects.get(id=value)
     obj = complaint.objects.all()
-
-    return render(request, 'admin_templates/complaint.html', {'obj': obj, 'user': user})
+    noti, val = get_notifications()
+    return render(request, 'admin_templates/complaint.html', {'obj': obj, 'user': user,'notifications':noti,'notification_count':val})
 
 
 @adminonly
@@ -241,13 +249,14 @@ def reg_complaint(request):
     # if value is None:
     #     return redirect('admin_login')
     user = warden.objects.get(id=value)
+    noti, val = get_notifications()
     if request.method == "POST":
         form = complaints(request.POST)
         if form.is_valid():
             form.save()
         else:
             form = complaints()
-    return render(request, 'complaint_insert.html', {'user': user})
+    return render(request, 'complaint_insert.html', {'user': user,'notifications':noti,'notification_count':val})
 
 
 @adminonly
@@ -260,8 +269,9 @@ def today_attendance(request):
     obj = attendance.objects.filter(date=today).values("sd_id")
     res = [sub['sd_id'] for sub in obj]
     st_obj = student.objects.all()
+    noti, val = get_notifications()
     return render(request, 'admin_templates/today_attendance.html',
-                  {'obj': st_obj, 'today': today, 'attendace_obj': res, 'user': user})
+                  {'obj': st_obj, 'today': today, 'attendace_obj': res, 'user': user,'notifications':noti,'notification_count':val})
 
 
 @adminonly
@@ -295,7 +305,8 @@ def general_attendance(request):
     #     return redirect('admin_login')
     user = warden.objects.get(id=value)
     lev = leave.objects.all()
-    return render(request, 'admin_templates/category_view.html', {'user': user, 'obj': lev})
+    noti, val = get_notifications()
+    return render(request, 'admin_templates/category_view.html', {'user': user, 'obj': lev,'notifications':noti,'notification_count':val})
 
 
 @adminonly
@@ -304,19 +315,20 @@ def date_attendance(request, date=None):
     # if value is None:
     #     return redirect('admin_login')
     user = warden.objects.get(id=value)
+    noti, val = get_notifications()
     if date is None:
         today = date.today().strftime("%Y-%m-%d")
         obj = attendance.objects.filter(date=today).values("sd_id")
         res = [sub['sd_id'] for sub in obj]
         st_obj = student.objects.all()
         return render(request, 'admin_templates/all_attendance',
-                      {'obj': st_obj, 'today': today, 'attendace_obj': res, 'user': user})
+                      {'obj': st_obj, 'today': today, 'attendace_obj': res, 'user': user,'notifications':noti,'notification_count':val})
     else:
         obj = attendance.objects.filter(date=date).values("sd_id")
         res = [sub['sd_id'] for sub in obj]
         st_obj = student.objects.all()
         return render(request, 'admin_templates/all_attendance.html',
-                      {'obj': st_obj, 'today': date, 'attendace_obj': res, 'user': user})
+                      {'obj': st_obj, 'today': date, 'attendace_obj': res, 'user': user,'notifications':noti,'notification_count':val})
 
 
 @adminonly
@@ -325,6 +337,7 @@ def add_fees(request):
     # if value is None:
     #     return redirect('admin_login')
     user = warden.objects.get(id=value)
+    noti, val = get_notifications()
     if request.method == "POST" and 'individual' in request.POST:
         month = date.today().strftime("%m")
         year = date.today().strftime("%Y")
@@ -388,7 +401,7 @@ def add_fees(request):
             obj.save()
         return redirect('all_fees_list')
 
-    return render(request, 'admin_templates/fees.html', {'user': user})
+    return render(request, 'admin_templates/fees.html', {'user': user,'notifications':noti,'notification_count':val})
 
 
 @adminonly
@@ -398,7 +411,8 @@ def all_fees(request):
     #     return redirect('admin_login')
     obj = fees.objects.all()
     user = warden.objects.get(id=value)
-    return render(request, 'admin_templates/all_fees.html', {'obj': obj, 'user': user})
+    noti, val = get_notifications()
+    return render(request, 'admin_templates/all_fees.html', {'obj': obj, 'user': user,'notifications':noti,'notification_count':val})
 
 
 @adminonly
@@ -408,7 +422,8 @@ def pending_fee(request):
     #     return redirect('admin_login')
     user = warden.objects.get(id=value)
     obj = fees.objects.filter(status=0).all()
-    return render(request, 'admin_templates/pending_fee.html', {'obj': obj, 'user': user})
+    noti, val = get_notifications()
+    return render(request, 'admin_templates/pending_fee.html', {'obj': obj, 'user': user,'notifications':noti,'notification_count':val})
 
 
 @adminonly
@@ -419,7 +434,8 @@ def service_list(request):
     user = warden.objects.get(id=value)
     open_service = service.objects.filter(status='open')
     closed_service = service.objects.filter(status='closed')
-    return render(request, 'admin_templates/service.html', {'user': user,'open':open_service,'closed':closed_service})
+    noti, val = get_notifications()
+    return render(request, 'admin_templates/service.html', {'user': user,'open':open_service,'closed':closed_service,'notifications':noti,'notification_count':val})
 
 
 @adminonly
@@ -432,6 +448,7 @@ def show_warden(request):
     all_warden = warden.objects.all()
     check_super_admin = warden.objects.get(id=admin_id)
     check_super_admin = check_super_admin.is_main
+    noti, val = get_notifications()
     if request.method == "POST":
         try:
             obj = warden()
@@ -449,15 +466,15 @@ def show_warden(request):
             obj.save()
             return render(request, 'admin_templates/warden.html',
                           {'obj': all_warden, 'media_url': settings.MEDIA_URL, 'edit': check_super_admin, 'reg': True,
-                           'user': user})
+                           'user': user,'notifications':noti,'notification_count':val})
         except Exception as e:
             print(e)
             return render(request, 'admin_templates/warden.html',
                           {'obj': all_warden, 'media_url': settings.MEDIA_URL, 'edit': check_super_admin, 'reg': False,
-                           'user': user})
+                           'user': user,'notifications':noti,'notification_count':val})
     return render(request, 'admin_templates/warden.html',
                   {'obj': all_warden, 'media_url': settings.MEDIA_URL, 'edit': check_super_admin, 'reg': True,
-                   'user': user})
+                   'user': user,'notifications':noti,'notification_count':val})
 
 
 @adminonly
@@ -530,18 +547,20 @@ def livefe(request):
 
 @adminonly
 def parent_view(request):
+    noti, val = get_notifications()
     value = request.session.get('admin')
     # if value is None:
     #     return redirect('admin_login')
     user = warden.objects.get(id=value)
     parent = student.objects.all()
-    return render(request, 'admin_templates/parent.html', {'user': user, 'obj': parent})
+    return render(request, 'admin_templates/parent.html', {'user': user, 'obj': parent,'notifications':noti,'notification_count':val})
 
 
 @adminonly
 def admin_profile(request):
     value = request.session.get('admin')
     user = warden.objects.get(id=value)
+    noti, val = get_notifications()
     if request.method == "POST":
         print(request.POST)
         print(request.FILES)
@@ -556,16 +575,17 @@ def admin_profile(request):
                 user.pic = request.FILES['pic']
             user.save()
             return render(request, 'admin_templates/profile.html',
-                          {'user': user, 'media_url': settings.MEDIA_URL, 'success': True})
+                          {'user': user, 'media_url': settings.MEDIA_URL, 'success': True,'notifications':noti,'notification_count':val})
         except Exception as e:
             return render(request, 'admin_templates/profile.html',
-                          {'user': user, 'media_url': settings.MEDIA_URL, 'err': True})
-    return render(request, 'admin_templates/profile.html', {'user': user, 'media_url': settings.MEDIA_URL})
+                          {'user': user, 'media_url': settings.MEDIA_URL, 'err': True,'notifications':noti,'notification_count':val})
+    return render(request, 'admin_templates/profile.html', {'user': user, 'media_url': settings.MEDIA_URL,'notifications':noti,'notification_count':val})
 
 
 @adminonly
 def show_profile(request, pk):
     value = request.session.get('admin')
+    noti, val = get_notifications()
     if pk == value:
         return redirect('admin_profile')
     user = warden.objects.get(id=value)
@@ -590,12 +610,12 @@ def show_profile(request, pk):
             print(obj)
             obj.save()
             return render(request, 'admin_templates/show_profile.html',
-                          {'user': user, 'media_url': settings.MEDIA_URL, 'success': True, 'obj': obj})
+                          {'user': user, 'media_url': settings.MEDIA_URL, 'success': True, 'obj': obj,'notifications':noti,'notification_count':val})
         except Exception as e:
             return render(request, 'admin_templates/show_profile.html',
-                          {'user': user, 'media_url': settings.MEDIA_URL, 'err': True, 'obj': obj})
+                          {'user': user, 'media_url': settings.MEDIA_URL, 'err': True, 'obj': obj,'notifications':noti,'notification_count':val})
     return render(request, 'admin_templates/show_profile.html',
-                  {'user': user, 'media_url': settings.MEDIA_URL, 'obj': obj})
+                  {'user': user, 'media_url': settings.MEDIA_URL, 'obj': obj,'notifications':noti,'notification_count':val})
 
 
 @adminonly
@@ -779,6 +799,7 @@ def download_file(request, id, y, m):
 
 @adminonly
 def report(request):
+    noti, val = get_notifications()
     value = request.session.get('admin')
     user = warden.objects.get(id=value)
     flag = False
@@ -794,7 +815,7 @@ def report(request):
         else:
             response = download_file(request, int(id), int(y), int(m))
         return response
-    return render(request, 'admin_templates/report.html', {'user': user})
+    return render(request, 'admin_templates/report.html', {'user': user,'notifications':noti,'notification_count':val})
 
 def sent_mail_to_user(request):
     send_mail('','','',[''],fail_silently=False)
