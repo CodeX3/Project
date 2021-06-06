@@ -142,6 +142,7 @@ class service(models.Model):
     date = models.DateField()
     body = models.CharField(max_length=500, null=True)
     important = models.BooleanField(default=False)
+    closed = models.DateField(null=True)
 
 
 class notification(models.Model):

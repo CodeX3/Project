@@ -26,17 +26,19 @@
                                     <th>Date</th>
                                     <th>Type</th>
                                     <th>Discription</th>
+                                    <th>Mark as done</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for i in obj %}
+                                {% for i in open %}
                                 <tr>
                                     <td>{{ forloop.counter }}</td>
-                                    <td><a class="btn-link"
-                                            href="{% url 'edit_student_details' i.sd_id %}">{{i.visitor_name}}</a></td>
-                                    <td>{{i.visitor_date}}</td>
-                                    <td>{{i.visitor_student_name}}</td>
-                                    <td>{{i.visitor_student_id}}</td>
+                                    <td>{{i.auther}}</td>
+                                    <td>{{i.date}}</td>
+                                    <td>{{i.subject}}</td>
+                                    <td>{{i.body}}</td>
+                                    <td><button style="background-color: #008CBA;" class="btn btn-success"
+                                            onclick="update({{ i.id }})">Mark</button></td>
                                     {% endfor %}
                                 </tr>
                             </tbody>
@@ -47,7 +49,31 @@
         </div>
     </div>
 </div>
+<script>
+    function update(id) {
+        if (confirm("Mark as completed ?"))
+        {
+            $.ajax({
+            url: "{% url 'close_service' %}",
+            type: 'get',
+            data: {
+                'id': id
+            },
+            success: (response) => {
+                alert("Marked")
+                location.reload();
+            },
+            error: (responce) => {
+                alert("something wrong happened");
+            }
 
+        })
+        }
+        else{
+
+        }
+    }
+</script>
 <div class="col-md-12 col-sm-12 ">
     <div class="x_panel">
         <div class="x_title">
@@ -73,17 +99,18 @@
                                     <th>Date</th>
                                     <th>Type</th>
                                     <th>Discription</th>
+                                    <th>Closed</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for i in obj %}
+                                {% for i in closed %}
                                 <tr>
                                     <td>{{ forloop.counter }}</td>
-                                    <td><a class="btn-link"
-                                            href="{% url 'edit_student_details' i.sd_id %}">{{i.visitor_name}}</a></td>
-                                    <td>{{i.visitor_date}}</td>
-                                    <td>{{i.visitor_student_name}}</td>
-                                    <td>{{i.visitor_student_id}}</td>
+                                    <td>{{i.auther}}</td>
+                                    <td>{{i.date}}</td>
+                                    <td>{{i.subject}}</td>
+                                    <td>{{i.body}}</td>
+                                    <td>{{i.closed}}</td>
                                     {% endfor %}
                                 </tr>
                             </tbody>
