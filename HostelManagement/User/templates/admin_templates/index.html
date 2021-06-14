@@ -94,6 +94,14 @@
                     <li>
                       <a href="{% url 'view_visitors' %}">Visitors</a>
                     </li>
+                   <li><a>Scholarship<span class="fa fa-chevron-down"></span></a>
+                      <ul class="nav child_menu">
+                        <li class="sub_menu"><a href="{% url 'scholarship' %}">Scholarship</a>
+                        </li>
+                        <li><a href="{% url 'scholarshipview' %}">Details</a>
+                        </li>
+                        </ul>
+                   </li>
                     <li><a>Fees<span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
                         <li class="sub_menu"><a href="{% url 'add_fees' %}">Add Fees</a>
