@@ -345,6 +345,28 @@ def visitor_add(request):
             redirect('student_visitor_add')
     return render(request, 'student_templates/add_visitor.html', {'user': user})
 
+@studentonly
+def scholarship(request):
+    id = request.session.get('userid')
+    user = student.objects.get(sd_id=id)
+    if request.method == 'POST':
+        print(request.POST)
+        num = request.POST['sd_admno']
+        try:
+            st = student.objects.get(sd_admno=num)
+
+        except ObjectDoesNotExist:
+            return render(request, 'student_templates/scholarship.html', {'err': True,'user':user})
+        obj = marks()
+        obj.sd_id = int(st.sd_id)
+        obj.sd_name = st.sd_name
+        obj.sd_admno = st.sd_admno
+        obj.mark1 = int(request.POST['mark1'])
+        obj.mark2 = int(request.POST['mark2'])
+        obj.total = int(request.POST['total'])
+        obj.save()
+        print("saved")
+    return render(request, 'student_templates/scholarship.html',{'user':user})
 
 def generate_excel(id, y, m, name):
     rootPath = os.getcwd() + "\\" + "report\\"
