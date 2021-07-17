@@ -32,6 +32,6 @@ urlpatterns = [
    path('visitor',views.visitor_view,name='student_visitor'),
    path('add-visitor',views.visitor_add,name='student_visitor_add'),
    path('monthly-attendance',views.report,name='student_report'),
-
+   path('scholarship',views.scholarship,name="scholarship"),
 ]
 urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

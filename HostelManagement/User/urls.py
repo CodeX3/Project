@@ -45,7 +45,6 @@ urlpatterns = [
     path('warden',views.show_warden,name='warden'),
     # path('admin',views.admin_login,name='admin_login'),
     path('logout',views.admin_logout,name='logout_admin'),
-    path('scholarship',views.scholarship,name="scholarship"),
     path('scholarshipview',views.scholarshipview,name="scholarshipview"),
     path('live',views.livefe),
     path('security_live',views.livefe,name='security'),
