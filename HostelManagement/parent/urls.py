@@ -16,5 +16,6 @@ urlpatterns = [
     path('visitor',views.visitor_view,name='parent_visitor'),
     path('fee',views.payment_view,name='parent_fee'),
     path('logout',views.logout,name="parent_logout"),
+    path('list-parents',views.list_parents,name='parent_list')
 ]
 urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

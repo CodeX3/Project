@@ -65,3 +65,7 @@ def payment_view(request):
 def logout(request):
     request.session.flush()
     return redirect('parent_login')
+@parentOnly
+def list_parents(request):
+    obj=  student.objects.all()
+    return render(request,'parent_templates/parent.html',{'obj':obj})
