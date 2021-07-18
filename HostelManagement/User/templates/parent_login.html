@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <link rel="icon" href="{% static 'admin_static/index/images/favicon.ico' %}" type="image/ico" />
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="{%  static 'register/style.css' %}">
+</head>
+
+<body>
+  {% if err %}
+  <script>alert('login failed!!');</script>
+  {% endif %}
+  <!-- partial:index.partial.html -->
+  <!-- multistep form -->
+  <form id="msform" method="POST">
+    {% csrf_token %}
+    <!-- progressbar -->
+    {# <ul id="progressbar">#}
+      {# <li class="active">Account Setup</li>#}
+      {# <li>Personal Details</li>#}
+      {# <li>Course Details</li>#}
+      {# #}
+      {# </ul>#}
+    <!-- fieldsets -->
+    <fieldset>
+      <h2 class="fs-title">Login</h2>
+      <span id="sp1" style="color: red;font-size: 15px;"></span>
+      <input type="email" id="email" name="email" onkeypress="clearspan('sp1')" placeholder="Email" required="required" />
+      <span id="sp2" style="color: red;font-size: 15px;"></span>
+      <input type="password" id="fpass" name="password" onkeypress="clearspan('sp2')" placeholder="Password" required="required"/>
+      <span id="sp3" style="color: red;font-size: 15px;"></span>
+      <input type="password" id="cpass" onkeypress="clearspan('sp3')" placeholder="Confirm Password" required="required" />
+      <input type="submit" style="background-color: #878172 ;color: #bce8f1" onclick="return check()" name="submit" value="Submit">
+    </fieldset>
+  </form>
+  <!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
+  <script src="{% static 'register/script.js' %}"></script>
+
+</body>
+<script>
+  function check(){
+    pass1 = document.getElementById('fpass').value ;
+    pass2 = document.getElementById('cpass').value;
+    if (pass1!=pass2){
+      document.getElementById('sp2').innerHTML="Passwords are not match";
+      document.getElementById('fpass').value ="";
+      document.getElementById('cpass').value="";
+      return false;
+    }
+  }
+
+</script>
+
+
+
+</html>

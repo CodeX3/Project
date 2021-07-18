@@ -56,6 +56,8 @@ def admin_login(request):
 
             return render(request, 'admin_login.html', {'active': True})
 
+def parent_login(request):
+    return render(request, 'parent_login.html', {'err': True})
 
 def admin_logout(request):
     request.session.flush()
