@@ -44,8 +44,8 @@ def student_gallery(request):
     return render(request,"student_gallery.html",{"img":img,"form":form,'user':user})
 
 def parent_gallery(request):
-    value = request.session.get('admin')
-    user = warden.objects.get(id=value)
+    id = request.session.get('stdID')
+    user = student.objects.get(sd_id=id)
     if request.method == "POST":
         print("post method")
         form=ImageForm(data=request.POST,files=request.FILES)
