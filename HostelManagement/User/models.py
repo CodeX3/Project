@@ -153,3 +153,9 @@ class notification(models.Model):
     time = models.CharField(max_length=10)
     temp = models.CharField(max_length=50,null=True)
     status = models.BooleanField(default=True)
+
+class mess_menu(models.Model):
+    day = models.CharField(max_length=20)
+    mng = models.CharField(max_length=30)
+    noon = models.CharField(max_length=30)
+    night = models.CharField(max_length=30)

@@ -36,6 +36,7 @@ urlpatterns = [
     path('admin/review_complain',views.review_complaint),
     path('admin/delete_warden',views.delete_warden),
     path('parent/',include('parent.urls')),
+    path('admin/alter_menu',views.update_menu),
 ]
 
 if settings.DEBUG:
