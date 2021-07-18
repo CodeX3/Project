@@ -1,4 +1,4 @@
-{% extends 'student_templates/table.html' %}
+{% extends 'parent_templates/table.html' %}
 
 {% block content %}
 <button class="btn btn-outline-success" style="margin-left: 11px;" onClick=" redirectToAdd()">Add Visitor</button>
@@ -47,7 +47,7 @@
 </div>
     <script>
     function redirectToAdd(){
-        location.href='{% url 'student_visitor_add' %}'
+        location.href='{% url 'parent_add_visitor' %}'
     }
 
     </script>

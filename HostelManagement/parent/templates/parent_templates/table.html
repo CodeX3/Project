@@ -70,30 +70,22 @@
                 <li><a><i class="fa fa-graduation-cap"></i> Students <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li>
-                      <a href="{% url 'allstudents' %}">Student</a>
+                      <a href="{% url 'parent_student_profile' %}">Student</a>
                     </li>
                     <li>
-                      <a href="{% url 'student_visitor' %}">Visitors</a>
+                      <a href="{% url 'parent_visitor' %}">Visitors</a>
                     </li>
-                    <li><a>Fees<span class="fa fa-chevron-down"></span></a>
-                      <ul class="nav child_menu">
-                        <li><a href="{% url 'student_pending_fee' %}">Pending</a>
-                        </li>
-                        <li><a href="{% url 'student_all_fee' %}">All Details</a>
-                        </li>
-                        <li><a href="{% url 'transactions' %}">Transaction History</a>
-                        </li>
-                      </ul>
+                    <li><a href ="{% url 'parent_fee' %}">Fees</a>
                     </li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-check-circle-o "></i> Attendance <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li>
-                      <a href={% url 'student_today' %}>Today</a>
+                      <a href="{% url 'student_today' %}">Today</a>
                     </li>
                     <li>
-                      <a href={% url 'common_attendance' %}>View all</a>
+                      <a href="{% url 'common_attendance' %}">View all</a>
                     </li>
                   </ul>
                 </li>
@@ -146,7 +138,7 @@
             <a data-toggle="tooltip " data-placement="top " title="refresh" href="#" onclick="location.reload();">
               <span class="glyphicon glyphicon-refresh " aria-hidden="true "></span>
             </a>
-            <a data-toggle="tooltip " data-placement="top " title="Logout " href="{% url 'logout' %} ">
+            <a data-toggle="tooltip " data-placement="top " title="Logout " href="{% url 'parent_logout' %} ">
               <span class="glyphicon glyphicon-off " aria-hidden="true "></span>
             </a>
           </div>
@@ -165,52 +157,52 @@
               <li class="nav-item dropdown open" style="padding-left: 15px;">
                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown"
                   data-toggle="dropdown" aria-expanded="false">
-                  <img src="/media/{{ user.pic }}" alt="">{{ user.name }}
+                  <img src="/media/parent.jpg" alt="">
                 </a>
                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="javascript:;"> Profile</a>
-                  <a class="dropdown-item" href="javascript:;">
-                    <span class="badge bg-red pull-right">50%</span>
-                    <span>Settings</span>
-                  </a>
-                  <a class="dropdown-item" href="javascript:;">Help</a>
-                  <a class="dropdown-item" href="{% url 'logout_admin' %}"><i class="fa fa-sign-out pull-right"></i> Log
+<!--                  <a class="dropdown-item" href="javascript:;"> Profile</a>-->
+<!--                  <a class="dropdown-item" href="javascript:;">-->
+<!--                    <span class="badge bg-red pull-right">50%</span>-->
+<!--                    <span>Settings</span>-->
+<!--                  </a>-->
+<!--                  <a class="dropdown-item" href="javascript:;">Help</a>-->
+                  <a class="dropdown-item" href="{% url 'parent_logout' %}"><i class="fa fa-sign-out pull-right"></i> Log
                     Out</a>
                 </div>
               </li>
 
-              <li role="presentation" class="nav-item dropdown open">
-                <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown"
-                  aria-expanded="false">
-                  <i class="fa fa-envelope-o"></i>
-                  <span class="badge bg-green">{{notification_count}}</span>
-                </a>
-                <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
-                  {% for i in notifications %}
-                  <li class="nav-item">
-                    <a class="dropdown-item">
-                      <span class="image"><img src="../../static/admin_static/index/images/img.jpg"
-                          alt="Profile Image" /></span>
-                      <span>
-                        <span> {{i.name}} </span>
-                        <span class="time">{{i.time}}</span>
-                      </span>
-                      <span class="message">
-                        {{i.msg}}
-                      </span>
-                    </a>
-                  </li>
-                  {% endfor %}
-                  <li class="nav-item">
-                    <div class="text-center">
-                      <a class="dropdown-item">
-                        <strong>See All Alerts</strong>
-                        <i class="fa fa-angle-right"></i>
-                      </a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
+<!--              <li role="presentation" class="nav-item dropdown open">-->
+<!--                <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown"-->
+<!--                  aria-expanded="false">-->
+<!--                  <i class="fa fa-envelope-o"></i>-->
+<!--                  <span class="badge bg-green">{{notification_count}}</span>-->
+<!--                </a>-->
+<!--                <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">-->
+<!--                  {% for i in notifications %}-->
+<!--                  <li class="nav-item">-->
+<!--                    <a class="dropdown-item">-->
+<!--                      <span class="image"><img src="../../static/admin_static/index/images/img.jpg"-->
+<!--                          alt="Profile Image" /></span>-->
+<!--                      <span>-->
+<!--                        <span> {{i.name}} </span>-->
+<!--                        <span class="time">{{i.time}}</span>-->
+<!--                      </span>-->
+<!--                      <span class="message">-->
+<!--                        {{i.msg}}-->
+<!--                      </span>-->
+<!--                    </a>-->
+<!--                  </li>-->
+<!--                  {% endfor %}-->
+<!--                  <li class="nav-item">-->
+<!--                    <div class="text-center">-->
+<!--                      <a class="dropdown-item">-->
+<!--                        <strong>See All Alerts</strong>-->
+<!--                        <i class="fa fa-angle-right"></i>-->
+<!--                      </a>-->
+<!--                    </div>-->
+<!--                  </li>-->
+<!--                </ul>-->
+<!--              </li>-->
             </ul>
           </nav>
         </div>

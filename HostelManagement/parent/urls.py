@@ -13,5 +13,8 @@ urlpatterns = [
     path('profile',views.load_student_profile,name="parent_student_profile"),
     path('add-visitor',views.add_visitor,name='parent_add_visitor'),
     path('contact',views.contact,name='contact'),
+    path('visitor',views.visitor_view,name='parent_visitor'),
+    path('fee',views.payment_view,name='parent_fee'),
+    path('logout',views.logout,name="parent_logout"),
 ]
 urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
