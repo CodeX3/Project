@@ -1,0 +1,72 @@
+{% extends 'student_templates/table.html' %}
+{% block content %}
+
+<div class="col-md-12 col-sm-12 ">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Food Menu List</h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card-box table-responsive">
+                        {# <p class="text-muted font-13 m-b-30">#}
+                            {# Student list requested to join to the hostel#}
+                            {# </p>#}
+                        <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Day</th>
+                                    <th>Morning</th>
+                                    <th>Noon</th>
+                                    <th>Night</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in obj %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{i.day}}</td>
+                                    <td> {{i.mng}}</td>
+                                    <td> {{i.noon}}</td>
+                                    <td> {{i.night}}</td>
+                                    {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function send_data(day){
+        mng = document.getElementById(day+"mng").value;
+        noon = document.getElementById(day+"noon").value;
+        night = document.getElementById(day+"night").value;
+
+        $.ajax({
+            url: '/admin/alter_menu',
+            type: 'get',
+            data: {
+                'day':day,
+                'mng':mng,
+                'night': night,
+                'noon':noon
+            },
+            success: (response) => {
+            },
+            error: (responce) => {
+                alert("something wrong happened");
+            }
+        })
+    }
+</script>
+{% endblock %}
