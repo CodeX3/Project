@@ -16,6 +16,8 @@ urlpatterns = [
     path('visitor',views.visitor_view,name='parent_visitor'),
     path('fee',views.payment_view,name='parent_fee'),
     path('logout',views.logout,name="parent_logout"),
-    path('list-parents',views.list_parents,name='parent_list')
+    path('list-parents',views.list_parents,name='parent_list'),
+    path('complaints',views.complaints,name="parent_complaints"),
+    path('add_complaints',views.add_complaint,name="parent_add_complaints"),
 ]
 urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
