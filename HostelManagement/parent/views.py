@@ -7,6 +7,8 @@ import selectors
 from User.models import student
 from parent.decorators import *
 # Create your views here.
+
+
 @parentOnly
 def load_index(request):
    # id =request.session.get('userid')
@@ -15,7 +17,8 @@ def load_index(request):
      return render(request,'parent_templates/index.html')
 @parentOnly
 def contact(request):
-    return render(request,'parent_templates/contact.html')
+    all_warden = warden.objects.all()
+    return render(request,'parent_templates/contact.html',{'obj': all_warden})
 
 @parentOnly
 def load_student_profile(request):
