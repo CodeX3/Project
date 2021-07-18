@@ -68,10 +68,10 @@
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
               <ul class="nav side-menu">
-                <li><a><i class="fa fa-graduation-cap"></i> Students <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-graduation-cap"></i> Student <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li>
-                      <a href="{% url 'allstudents' %}">Student</a>
+                      <a href="{% url 'parent_student_profile' %}">Student</a>
                     </li>
                     <li>
                       <a href="{% url 'student_visitor' %}">Visitors</a>
@@ -138,7 +138,7 @@
 
           <!-- /menu footer buttons -->
           <div class="sidebar-footer hidden-small ">
-            <a data-toggle="tooltip " data-placement="top " title="Profile " href="{% url 'student_profile' %}">
+            <a data-toggle="tooltip " data-placement="top " title="Profile " href="{% url 'parent_student_profile' %}">
               <span class="glyphicon glyphicon-user " aria-hidden="true "></span>
             </a>
             <a data-toggle="tooltip " data-placement="top " title="Go-to-Homepage " href="{% url 'FrontPage' %}">

@@ -4,6 +4,7 @@ import sys
 import socket
 import io
 import selectors
+from User.models import student
 from parent.decorators import *
 # Create your views here.
 @parentOnly
@@ -18,4 +19,6 @@ def contact(request):
 
 @parentOnly
 def load_student_profile(request):
-    return render(request,'parent_templates/profile.html')
+    id  = request.session.get("stdID")
+    user = student.objects.get(sd_id=id)
+    return render(request,'parent_templates/profile.html',{'user':user})
