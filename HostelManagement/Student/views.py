@@ -452,3 +452,10 @@ def report(request):
         response = download_file(request, int(id), int(y), int(m), user.sd_name)
         return response
     return render(request, 'student_templates/report.html', {'user': user})
+
+@studentonly
+def Menu(request):
+    id = request.session.get('userid')
+    user = student.objects.get(sd_id=id)
+    obj = mess_menu.objects.all()
+    return render(request, 'student_templates/mess.html', {'user': user, 'obj': obj})
