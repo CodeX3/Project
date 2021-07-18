@@ -1,4 +1,4 @@
-{% extends 'student_templates/table.html' %}
+{% extends 'parent_templates/table.html' %}
 {% block content %}
 
 <div class="col-md-12 col-sm-12 ">
@@ -46,27 +46,5 @@
     </div>
 </div>
 
-<script>
-    function send_data(day){
-        mng = document.getElementById(day+"mng").value;
-        noon = document.getElementById(day+"noon").value;
-        night = document.getElementById(day+"night").value;
 
-        $.ajax({
-            url: '/admin/alter_menu',
-            type: 'get',
-            data: {
-                'day':day,
-                'mng':mng,
-                'night': night,
-                'noon':noon
-            },
-            success: (response) => {
-            },
-            error: (responce) => {
-                alert("something wrong happened");
-            }
-        })
-    }
-</script>
 {% endblock %}

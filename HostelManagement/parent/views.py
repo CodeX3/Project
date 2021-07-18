@@ -99,3 +99,8 @@ def complaints(request):
     user = student.objects.get(sd_id=id)
     obj = complaint.objects.filter(auther_ID=id)
     return render(request,'parent_templates/complaint.html',{'obj':obj})
+
+@parentOnly
+def mess(request):
+    obj = mess_menu.objects.all()
+    return render(request,'parent_templates/mess.html',{'obj':obj})

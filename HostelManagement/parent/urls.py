@@ -19,5 +19,6 @@ urlpatterns = [
     path('list-parents',views.list_parents,name='parent_list'),
     path('complaints',views.complaints,name="parent_complaints"),
     path('add_complaints',views.add_complaint,name="parent_add_complaints"),
+    path('mess',views.mess,name='parent_mess')
 ]
 urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
