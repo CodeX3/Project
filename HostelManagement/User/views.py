@@ -57,7 +57,20 @@ def admin_login(request):
             return render(request, 'admin_login.html', {'active': True})
 
 def parent_login(request):
-    return render(request, 'parent_login.html', {'err': True})
+    value = request.session.get('stdID')
+    if value is not None:
+        return redirect('parent_home')
+    if request.method =='GET':
+        return render(request, 'parent_login.html',)
+    if request.method =="POST":
+        stdPhone = request.POST['email']
+        parentPhone = request.POST['password']
+        try:
+            obj = student.objects.get(sd_phone=stdPhone, sd_parent_phone=parentPhone)
+        except ObjectDoesNotExist:
+            return render(request,'parent_login.html',{'err':True})
+        request.session['stdID'] = obj.sd_id
+        return redirect('parent_home')
 
 def admin_logout(request):
     request.session.flush()
