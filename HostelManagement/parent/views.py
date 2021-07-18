@@ -4,8 +4,10 @@ import sys
 import socket
 import io
 import selectors
-
+from parent.decorators import *
 # Create your views here.
+
+@parentOnly
 def load_index(request):
    # id =request.session.get('userid')
    # user = student.objects.get(sd_id=id)
