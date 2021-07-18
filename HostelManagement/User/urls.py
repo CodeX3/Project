@@ -57,6 +57,7 @@ urlpatterns = [
     path('test_mail',views.sent_mail_to_user),
     path('close_service',views.close_service,name='close_service'),
     path('mess-menu',views.Menu,name='mess_menu'),
+    path('all_fees_list_parent', views.parent_all_fee, name="all_fees_list_parent"),
 
 
 

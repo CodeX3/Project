@@ -427,6 +427,14 @@ def pending_fee(request):
     noti, val = get_notifications()
     return render(request, 'admin_templates/pending_fee.html', {'obj': obj, 'user': user,'notifications':noti,'notification_count':val})
 
+@adminonly
+def parent_all_fee(request):
+    value = request.session.get('admin')
+    # if value is None:
+    #     return redirect('admin_login')
+    obj = fees.objects.all()
+    user = warden.objects.get(id=value)
+    return render(request, 'admin_templates/parent_all_fee.html', {'user': user, 'obj': obj})
 
 @adminonly
 def service_list(request):
