@@ -10,3 +10,5 @@ def load_index(request):
    # id =request.session.get('userid')
    # user = student.objects.get(sd_id=id)
     return render(request,'parent_templates/index.html')
+def contact(request):
+    return render(request,'parent_templates/contact.html')

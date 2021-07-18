@@ -8,11 +8,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Admin Dashboard</title>
   <link rel="icon" href="{% static 'admin_static/index/images/favicon.ico' %}" type="image/ico" />
 
-  <title>Hostel</title>
-
   <!-- Bootstrap -->
+  <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
   <link href="{% static 'admin_static/vendors/bootstrap/dist/css/bootstrap.min.css'%}" rel="stylesheet">
   <!-- Font Awesome -->
   <link href="{% static 'admin_static/vendors/font-awesome/css/font-awesome.min.css'%}" rel="stylesheet">
@@ -20,22 +21,22 @@
   <link href="{% static 'admin_static/vendors/nprogress/nprogress.css'%}" rel="stylesheet">
   <!-- iCheck -->
   <link href="{% static 'admin_static/vendors/iCheck/skins/flat/green.css'%}" rel="stylesheet">
+  <!-- Datatables -->
 
-  <!-- bootstrap-progressbar -->
-  <link href="{% static 'admin_static/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css'%}" rel="stylesheet">
-  <!-- JQVMap -->
-  <link href="{% static 'admin_static/vendors/jqvmap/dist/jqvmap.min.css'%}" rel="stylesheet" />
-  <!-- bootstrap-daterangepicker -->
-  <link href="{% static 'admin_static/vendors/bootstrap-daterangepicker/daterangepicker.css'%}" rel="stylesheet">
+  <link href="{% static 'admin_static/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css'%}" rel="stylesheet">
+  <link href="{% static 'admin_static/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css'%}"
+    rel="stylesheet">
+  <link href="{% static 'admin_static/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css'%}"
+    rel="stylesheet">
+  <link href="{% static 'admin_static/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css'%}"
+    rel="stylesheet">
+  <link href="{% static 'admin_static/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css'%}"
+    rel="stylesheet">
 
   <!-- Custom Theme Style -->
-  <link href="{% static 'admin_static/build/css/custom.min.css'%}" rel="stylesheet ">
-
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
-
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js">
-  </script>
+  <link href="{% static 'admin_static//build/css/custom.min.css' %}" rel="stylesheet">
+  <!-- Ajax library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body class="nav-md">
@@ -44,8 +45,8 @@
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="{% url 'student_home' %}" class="site_title"><i class="fa fa-paw"></i>
-              <span>Welcome</span></a>
+            <a href="{% url 'dashboard' %}" class="site_title"><i class="fa fa-building-o"></i> <span>Welcome
+                Admin!!</span></a>
           </div>
 
           <div class="clearfix"></div>
@@ -53,11 +54,11 @@
           <!-- menu profile quick info -->
           <div class="profile clearfix">
             <div class="profile_pic">
-              <img src=" /media/{{ user.sd_pic }} " alt="..." class="img-circle profile_img">
+              <img src="/media/{{ user.pic }}" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
-              <h2>{{ user.sd_name }}</h2>
+              <h2>{{ user.name }}</h2>
             </div>
           </div>
           <!-- /menu profile quick info -->
@@ -166,16 +167,16 @@
               <li class="nav-item dropdown open" style="padding-left: 15px;">
                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown"
                   data-toggle="dropdown" aria-expanded="false">
-                  <img src="/media/{{ user.sd_pic }}" alt="">{{ user.sd_name }}
+                  <img src="/media/{{ user.pic }}" alt="">{{ user.name }}
                 </a>
                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{% url 'student_profile' %}"> Profile</a>
+                  <a class="dropdown-item" href="javascript:;"> Profile</a>
                   <a class="dropdown-item" href="javascript:;">
                     <span class="badge bg-red pull-right">50%</span>
                     <span>Settings</span>
                   </a>
                   <a class="dropdown-item" href="javascript:;">Help</a>
-                  <a class="dropdown-item" href="{% url 'logout' %}"><i class="fa fa-sign-out pull-right"></i> Log
+                  <a class="dropdown-item" href="{% url 'logout_admin' %}"><i class="fa fa-sign-out pull-right"></i> Log
                     Out</a>
                 </div>
               </li>
@@ -184,74 +185,24 @@
                 <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown"
                   aria-expanded="false">
                   <i class="fa fa-envelope-o"></i>
-                  <span class="badge bg-green">5</span>
+                  <span class="badge bg-green">{{notification_count}}</span>
                 </a>
                 <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
+                  {% for i in notifications %}
                   <li class="nav-item">
                     <a class="dropdown-item">
                       <span class="image"><img src="../../static/admin_static/index/images/img.jpg"
                           alt="Profile Image" /></span>
                       <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
+                        <span> {{i.name}} </span>
+                        <span class="time">{{i.time}}</span>
                       </span>
                       <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                        {{i.msg}}
                       </span>
                     </a>
                   </li>
-                  <li class="nav-item">
-                    <a class="dropdown-item">
-                      <span class="image"><img src="../../static/admin_static/index/images/img.jpg"
-                          alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="dropdown-item">
-                      <span class="image"><img src="../../static/admin_static/index/images/img.jpg"
-                          alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="dropdown-item">
-                      <span class="image"><img src="../../static/admin_static/index/images/img.jpg"
-                          alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="dropdown-item">
-                      <span class="image"><img src="../../static/admin_static/index/images/img.jpg"
-                          alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
+                  {% endfor %}
                   <li class="nav-item">
                     <div class="text-center">
                       <a class="dropdown-item">
@@ -267,54 +218,66 @@
         </div>
       </div>
       <!-- /top navigation -->
-      {% block content %}
 
-      {% endblock %}
+      <!-- page content -->
+      <div class="right_col" role="main">
+        <div class="">
 
+          <div class="clearfix"></div>
+
+          <div class="row">
+            {% block content %}
+
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+      <!-- /page content -->
+
+      <!-- footer content -->
+      <footer>
+        <div class="pull-right">
+          Hostel Management
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      <!-- /footer content -->
     </div>
   </div>
 
   <!-- jQuery -->
-  <script src="{% static 'admin_static/vendors/jquery/dist/jquery.min.js'%} "></script>
+  <script src="{% static 'admin_static/vendors/jquery/dist/jquery.min.js'%}"></script>
   <!-- Bootstrap -->
-  <script src="{% static 'admin_static/vendors/bootstrap/dist/js/bootstrap.bundle.min.js'%} "></script>
+  <script src="{% static 'admin_static/vendors/bootstrap/dist/js/bootstrap.bundle.min.js'%}"></script>
   <!-- FastClick -->
-  <script src="{% static 'admin_static/vendors/fastclick/lib/fastclick.js'%} "></script>
+  <script src="{% static 'admin_static/vendors/fastclick/lib/fastclick.js'%}"></script>
   <!-- NProgress -->
-  <script src="{% static 'admin_static/vendors/nprogress/nprogress.js'%} "></script>
-  <!-- Chart.js -->
-  <script src="{% static 'admin_static/vendors/Chart.js/dist/Chart.min.js'%} "></script>
-  <!-- gauge.js -->
-  <script src="{% static 'admin_static/vendors/gauge.js/dist/gauge.min.js'%} "></script>
-  <!-- bootstrap-progressbar -->
-  <script src="{% static 'admin_static/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js'%} "></script>
+  <script src="{% static 'admin_static/vendors/nprogress/nprogress.js'%}"></script>
   <!-- iCheck -->
-  <script src="{% static 'admin_static/vendors/iCheck/icheck.min.js'%} "></script>
-  <!-- Skycons -->
-  <script src="{% static 'admin_static/vendors/skycons/skycons.js'%} "></script>
-  <!-- Flot -->
-  <script src="{% static 'admin_static/vendors/Flot/jquery.flot.js'%} "></script>
-  <script src="{% static 'admin_static/vendors/Flot/jquery.flot.pie.js'%} "></script>
-  <script src="{% static 'admin_static/vendors/Flot/jquery.flot.time.js'%} "></script>
-  <script src="{% static 'admin_static/vendors/Flot/jquery.flot.stack.js'%} "></script>
-  <script src="{% static 'admin_static/vendors/Flot/jquery.flot.resize.js'%} "></script>
-  <!-- Flot plugins -->
-  <script src="{% static 'admin_static/vendors/flot.orderbars/js/jquery.flot.orderBars.js'%} "></script>
-  <script src="{% static 'admin_static/vendors/flot-spline/js/jquery.flot.spline.min.js'%} "></script>
-  <script src="{% static 'admin_static/vendors/flot.curvedlines/curvedLines.js'%} "></script>
-  <!-- DateJS -->
-  <script src="{% static 'admin_static/vendors/DateJS/build/date.js'%} "></script>
-  <!-- JQVMap -->
-  <script src="{% static 'admin_static/vendors/jqvmap/dist/jquery.vmap.js'%} "></script>
-  <script src="{% static 'admin_static/vendors/jqvmap/dist/maps/jquery.vmap.world.js'%} "></script>
-  <script src="{% static 'admin_static/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js'%} "></script>
-  <!-- bootstrap-daterangepicker -->
-  <script src="{% static 'admin_static/vendors/moment/min/moment.min.js'%} "></script>
-  <script src="{% static 'admin_static/vendors/bootstrap-daterangepicker/daterangepicker.js'%} "></script>
+  <script src="{% static 'admin_static/vendors/iCheck/icheck.min.js'%}"></script>
+  <!-- Datatables -->
+  <script src="{% static 'admin_static/vendors/datatables.net/js/jquery.dataTables.min.js'%}"></script>
+  <script src="{% static 'admin_static/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js'%}"></script>
+  <script src="{% static 'admin_static/vendors/datatables.net-buttons/js/dataTables.buttons.min.js'%}"></script>
+  <script src="{% static 'admin_static/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js'%}"></script>
+  <script src="{% static 'admin_static/vendors/datatables.net-buttons/js/buttons.flash.min.js'%}"></script>
+  <script src="{% static 'admin_static/vendors/datatables.net-buttons/js/buttons.html5.min.js'%}"></script>
+  <script src="{% static 'admin_static/vendors/datatables.net-buttons/js/buttons.print.min.js'%}"></script>
+  <script src="{% static 'admin_static/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js'%}"></script>
+  <script src="{% static 'admin_static/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js'%}"></script>
+  <script src="{% static 'admin_static/vendors/datatables.net-responsive/js/dataTables.responsive.min.js'%}"></script>
+  <script src="{% static 'admin_static/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js'%}"></script>
+  <script src="{% static 'admin_static/vendors/datatables.net-scroller/js/dataTables.scroller.min.js'%}"></script>
+  <script src="{% static 'admin_static/vendors/jszip/dist/jszip.min.js'%}"></script>
+  <script src="{% static 'admin_static/vendors/pdfmake/build/pdfmake.min.js'%}"></script>
+  <script src="{% static 'admin_static/vendors/pdfmake/build/vfs_fonts.js'%}"></script>
 
   <!-- Custom Theme Scripts -->
-  <script src="{% static 'admin_static/build/js/custom.min.js '%} "></script>
-
+  <script src="{%static 'admin_static/build/js/custom.min.js'%}"></script>
+  <!-- Ajax Script  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
