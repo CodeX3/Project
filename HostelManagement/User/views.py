@@ -814,3 +814,25 @@ def close_service(request):
     except Exception as e:
         print(e)
         return HttpResponse(status=500)
+@adminonly
+def Menu(request):
+    noti, val = get_notifications()
+    value = request.session.get('admin')
+    user = warden.objects.get(id=value)
+    obj = mess_menu.objects.all()
+
+    return render (request,'admin_templates/Menu.html',{'notifications':noti,'notification_count':val,'user':user,'obj':obj})
+
+def update_menu(request):
+
+
+    try:
+        obj = mess_menu.objects.get(day=request.GET['day'])
+        obj.mng = request.GET['mng']
+        obj.noon = request.GET['noon']
+        obj.night = request.GET['night']
+        obj.save()
+        return HttpResponse(status=200)
+    except Exception as e:
+        return HttpResponse(status=500)
+

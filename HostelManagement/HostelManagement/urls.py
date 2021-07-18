@@ -36,7 +36,8 @@ urlpatterns = [
     path('admin/review_complain',views.review_complaint),
     path('admin/delete_warden',views.delete_warden),
     path('parent/',include('parent.urls')),
-    path('parent_login',views.parent_login,name='parent_login')
+    path('parent_login',views.parent_login,name='parent_login'),
+    path('admin/alter_menu',views.update_menu),
 ]
 
 if settings.DEBUG:
