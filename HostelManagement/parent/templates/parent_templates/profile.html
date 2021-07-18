@@ -1,4 +1,4 @@
-{% extends 'student_templates/index.html' %}
+{% extends 'parent_templates/index.html' %}
 {% load static %}
 {% block content %}
 
@@ -32,67 +32,7 @@
     </div>
 
 
-    <div id="profile" class="modal fade" role="dialog">
-      <div class="modal-dialog">
 
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Edit Profile</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-
-          </div>
-          <div class="modal-body">
-            <form method="POST" enctype="multipart/form-data">
-              {% csrf_token %}
-              <div class="field item form-group">
-                <label class="col-form-label label-align">Name<span class="required">*</span></label>
-                <input class="form-control" style="margin-left: 20px;" type="text" name="sd_name" required=""
-                  data-toggle="tooltip" data-placement="right" title="Enter name" value="{{ user.sd_name }}">
-              </div>
-              <div class="field item form-group">
-                <label class="col-form-label label-align">Picture<span class="required">*</span></label>
-                <input class="form-control" style="margin-left: 20px;" type="file" name="sd_pic" data-toggle="tooltip"
-                  data-placement="right" title="Please upload square size image">
-              </div>
-              <div class="field item form-group">
-                <label class="col-form-label label-align">Address<span class="required">*</span></label>
-                <input class="form-control" style="margin-left: 8px;" type="text" name="sd_address" required=""
-                  data-toggle="tooltip" data-placement="right" title="Enter address" value="{{ user.sd_address }}">
-              </div>
-              <div class="field item form-group">
-                <label class="col-form-label label-align">Email<span class="required">*</span></label>
-                <input class="form-control" style="margin-left: 23px;" type="email" name="sd_email" required=""
-                  data-toggle="tooltip" data-placement="right" title="Enter a valid email" value="{{ user.sd_email }}">
-              </div>
-              <div class="field item form-group">
-                <label class="col-form-label label-align">Phone<span class="required">*</span></label>
-                <input class="form-control" style="margin-left: 16px;" type="text" name="sd_phone" required=""
-                  data-toggle="tooltip" data-placement="right" title="Enter phone number" value="{{ user.sd_phone }}">
-              </div>
-              <div class="field item form-group">
-                <label class="col-form-label label-align">Uni.No.<span class="required">*</span></label>
-                <input class="form-control" style="margin-left: 11px;" type="text" name="sd_university_register" required=""
-                  data-toggle="tooltip" data-placement="right" title="Enter department" value="{{ user.sd_university_register }}">
-              </div>
-              <div class="field item form-group">
-                <label class="col-form-label label-align">Password<span class="required">*</span></label>
-                <input class="form-control" style="margin-left: -4px;" type="text" name="sd_password" required="" data-toggle="tooltip"
-                  data-placement="right" title="Change password">
-              </div>
-              <div class="field item form-group">
-                <button type="submit" style="margin-left: 138px" class="btn btn-outline-success">Submit</button>
-                <button type="reset" class="btn btn-outline-danger">Reset</button>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <div class="clearfix"></div>
 
@@ -101,7 +41,7 @@
       <div class="x_panel">
         <div class="x_title">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'student_home' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'parent_home' %}">Home</a></li>
             <li class="breadcrumb-item"><a href="">Student</a></li>
             <li class="breadcrumb-item active" aria-current="page">User Profile</li>
           </ol>
@@ -119,14 +59,12 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="d-flex flex-column align-items-center text-center">
-                      <img src="{{media_url}}/{{ user.sd_pic }}" alt="" class="rounded-circle" width="150">
+                      <img src="/media/{{ user.sd_pic }}" alt="" class="rounded-circle" width="150">
                       <div class="mt-3">
                         <h4>{{ user.sd_name }}</h4>
                         <p class="text-secondary mb-1">ID:{{ user.sd_id }}</p>
                         <p class="text-muted font-size-sm">{{ user.address }}</p>
 
-                        <button class="btn  btn-outline-dark" data-toggle="modal" data-target="#profile"><i
-                            class="fa fa-edit"></i>Edit Profile</button>
                       </div>
                     </div>
                   </div>
