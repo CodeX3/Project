@@ -8,7 +8,7 @@
   <div class="">
     <div class="page-title">
       <div class="title_left">
-        <h3>Parent Details</h3>
+        <h3>Warden Details</h3>
         {% if edit %}
         <button class="btn btn-outline-success" data-toggle="modal" data-target="#myModal">Add Warden</button>
         {% endif %}
@@ -124,13 +124,6 @@
                   <ul class="list-unstyled">
                     <li><i class="fa fa-building"></i> Address: {{ i.address }}</li>
                     <li><i class="fa fa-phone"></i> Phone #: {{ i.phone }}</li>
-                    <li><i class="fa fa-spinner"></i> Acc. Status:
-                      {% if i.status %}
-                      <i class="fa fa-check-circle-o"></i>Active
-                      {% else %}
-                      <i class="fa fa-ban"></i>Disabled
-                      {% endif %}
-                    </li>
                   </ul>
                 </div>
                 <div class="right col-md-5 col-sm-5 text-center">
@@ -139,27 +132,6 @@
               </div>
               <div class=" profile-bottom text-center">
 
-                <div class=" col-sm-6 emphasis">
-                  {% if edit %}
-                  <button type="button" class="btn btn-success btn-sm" onclick="disableUser({{ i.id }})" {% if i.is_main %} disabled {% endif %}>
-                    <i class="fa fa-user">
-                      {% if i.status %}
-                      Deactivate User
-                      {% else %}
-                      Activate User
-                      {% endif %}
-                    </i>
-                  </button>
-                  <button type="button" class="btn btn-danger btn-sm" onclick="deleteUser({{ i.id }})" {% if i.is_main %} disabled {% endif %}>
-                    <i class="fa fa-user"> </i> Delete User
-                  </button>
-                  {% else %}
-                  <button type="button" style="width: 100px;" class="btn btn-success btn-sm" data-toggle="modal"
-                          data-target="#profile" onclick="location.href='{% url 'show_profile' i.id %}'">
-                    <i class="fa fa-user">Profile</i>
-                  </button>
-                  {% endif %}
-                </div>
               </div>
             </div>
           </div>
@@ -170,45 +142,5 @@
     </div>
   </div>
 </div>
-<script>
-  function  disableUser(id){
-    $.ajax({
-      url: '/admin/alter_warden',
-      type: 'get',
-      data: {
-        'id': id
-      },
-      success: (response) => {
-        alert("Updated");
-        location.reload();
 
-      },
-      error: (responce) => {
-        alert("something wrong happened");
-      }
-
-    })
-  }
-</script>
-
-<script>
-  function  deleteUser(id){
-    $.ajax({
-      url: '/admin/delete_warden',
-      type: 'get',
-      data: {
-        'id': id
-      },
-      success: (response) => {
-        alert("Deleted");
-        location.reload();
-
-      },
-      error: (responce) => {
-        alert("something wrong happened");
-      }
-
-    })
-  }
-</script>
 {% endblock %}
