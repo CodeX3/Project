@@ -33,5 +33,6 @@ urlpatterns = [
    path('add-visitor',views.visitor_add,name='student_visitor_add'),
    path('monthly-attendance',views.report,name='student_report'),
    path('scholarship',views.scholarship,name="scholarship"),
+   path('mess-menu',views.Menu,name='mess_menu'),
 ]
 urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
