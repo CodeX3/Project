@@ -1,0 +1,214 @@
+{% extends 'parent_templates/index.html' %}
+{% load static %}
+{% block content %}
+
+<link href="{% static 'admin_static/vendors/switchery/dist/switchery.min.css' %}" rel="stylesheet">
+<script src="{% static 'admin_static/vendors/switchery/dist/switchery.min.js' %}"></script>
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3>Parent Details</h3>
+        {% if edit %}
+        <button class="btn btn-outline-success" data-toggle="modal" data-target="#myModal">Add Warden</button>
+        {% endif %}
+
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Add New Warden</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+              </div>
+              <div class="modal-body">
+                <form method="POST">
+                  {% csrf_token %}
+                  <div class="field item form-group">
+                    <label class="col-form-label label-align">Name<span class="required">*</span></label>
+                    <input class="form-control" style="margin-left: 20px;" type="text" name="name" required=""
+                           data-toggle="tooltip" data-placement="right" title="Enter name">
+                  </div>
+
+                  <div class="field item form-group">
+                    <label class="col-form-label label-align">Address<span class="required">*</span></label>
+                    <input class="form-control" style="margin-left: 8px;" type="text" name="address" required=""
+                           data-toggle="tooltip" data-placement="right" title="Enter address">
+                  </div>
+                  <div class="field item form-group">
+                    <label class="col-form-label label-align">Email<span class="required">*</span></label>
+                    <input class="form-control" style="margin-left: 23px;" type="email" name="email" required=""
+                           data-toggle="tooltip" data-placement="right" title="Enter a valid email">
+                  </div>
+                  <div class="field item form-group">
+                    <label class="col-form-label label-align">Phone<span class="required">*</span></label>
+                    <input class="form-control" style="margin-left: 16px;" type="text" name="phone" required=""
+                           data-toggle="tooltip" data-placement="right" title="Enter phone number">
+                  </div>
+                  <div class="field item form-group">
+                    <label class="col-form-label label-align">Incharge<span class="required">*</span></label>
+                    <input class="form-control" style="margin-left: 3px;" type="text" name="incharge" required=""
+                           data-toggle="tooltip" data-placement="right" title="Enter department">
+                  </div>
+                  <div class="field item form-group">
+                    <label class="col-form-label label-align" style="margin-right: 16px">Status<span
+                            class="required">*</span></label>
+                    <input class="form-control js-switch " type="checkbox" name="status">
+                  </div>
+                  <div class="field item form-group">
+                    <label class="col-form-label label-align">Password<span class="required">*</span></label>
+                    <input class="form-control" type="text" name="password" value="warden@hostel" required=""
+                           data-toggle="tooltip" data-placement="right" title="Default password: warden@hostel">
+                  </div>
+                  <div class="field item form-group">
+                    <button type="submit" style="margin-left: 138px" class="btn btn-outline-success">Submit</button>
+                    <button type="reset" class="btn btn-outline-danger">Reset</button>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="title_right">
+        <div class="col-md-5 col-sm-5  form-group pull-right top_search">
+          <div class="input-group">
+            <input type="search" id="search" class="form-control" placeholder="Search for...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" onclick="find(document.getElementById('search').value);"
+                      type="button">Go!</button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+      <div class="x_panel">
+        <div class="x_content">
+          <div class="clearfix"></div>
+
+          <div class="col-md-12 col-sm-12  text-center">
+            <ul class="pagination pagination-split">
+            </ul>
+          </div>
+
+          {% for i in obj %}
+
+          <div class="col-md-4 col-sm-4  profile_details">
+            <div class="well profile_view">
+              <div class="col-sm-12">
+                <h4 class="brief">
+                  <i>
+                    {% if i.is_main %}
+                    Main Warden
+                    {% else %}
+                    Warden
+                    {% endif %}
+                  </i>
+                </h4>
+
+                <div class="left col-md-7 col-sm-7">
+                  <h2><a href="{% url 'show_profile' i.id %}"> {{ i.name }}</a></h2>
+                  <p><strong>Incharge: </strong>{{ i.incharge }}</p>
+                  <ul class="list-unstyled">
+                    <li><i class="fa fa-building"></i> Address: {{ i.address }}</li>
+                    <li><i class="fa fa-phone"></i> Phone #: {{ i.phone }}</li>
+                    <li><i class="fa fa-spinner"></i> Acc. Status:
+                      {% if i.status %}
+                      <i class="fa fa-check-circle-o"></i>Active
+                      {% else %}
+                      <i class="fa fa-ban"></i>Disabled
+                      {% endif %}
+                    </li>
+                  </ul>
+                </div>
+                <div class="right col-md-5 col-sm-5 text-center">
+                  <img src="{{ media_url }}{{ i.pic }}" alt="" class="img-circle img-fluid">
+                </div>
+              </div>
+              <div class=" profile-bottom text-center">
+
+                <div class=" col-sm-6 emphasis">
+                  {% if edit %}
+                  <button type="button" class="btn btn-success btn-sm" onclick="disableUser({{ i.id }})" {% if i.is_main %} disabled {% endif %}>
+                    <i class="fa fa-user">
+                      {% if i.status %}
+                      Deactivate User
+                      {% else %}
+                      Activate User
+                      {% endif %}
+                    </i>
+                  </button>
+                  <button type="button" class="btn btn-danger btn-sm" onclick="deleteUser({{ i.id }})" {% if i.is_main %} disabled {% endif %}>
+                    <i class="fa fa-user"> </i> Delete User
+                  </button>
+                  {% else %}
+                  <button type="button" style="width: 100px;" class="btn btn-success btn-sm" data-toggle="modal"
+                          data-target="#profile" onclick="location.href='{% url 'show_profile' i.id %}'">
+                    <i class="fa fa-user">Profile</i>
+                  </button>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          </script>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function  disableUser(id){
+    $.ajax({
+      url: '/admin/alter_warden',
+      type: 'get',
+      data: {
+        'id': id
+      },
+      success: (response) => {
+        alert("Updated");
+        location.reload();
+
+      },
+      error: (responce) => {
+        alert("something wrong happened");
+      }
+
+    })
+  }
+</script>
+
+<script>
+  function  deleteUser(id){
+    $.ajax({
+      url: '/admin/delete_warden',
+      type: 'get',
+      data: {
+        'id': id
+      },
+      success: (response) => {
+        alert("Deleted");
+        location.reload();
+
+      },
+      error: (responce) => {
+        alert("something wrong happened");
+      }
+
+    })
+  }
+</script>
+{% endblock %}

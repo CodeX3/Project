@@ -10,6 +10,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('',views.load_index,name='parent_home'),
+    path('contact',views.contact,name='contact'),
     path('profile',views.load_student_profile,name="parent_student_profile")
 
 ]
