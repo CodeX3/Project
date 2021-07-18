@@ -11,4 +11,9 @@ from parent.decorators import *
 def load_index(request):
    # id =request.session.get('userid')
    # user = student.objects.get(sd_id=id)
+
     return render(request,'parent_templates/index.html')
+
+@parentOnly
+def load_student_profile(request):
+    return render(request,'parent_templates/profile.html')
