@@ -20,3 +20,7 @@ def load_student_profile(request):
     id  = request.session.get("stdID")
     user = student.objects.get(sd_id=id)
     return render(request,'parent_templates/profile.html',{'user':user})
+
+@parentOnly
+def add_visitor(request):
+    return render(request,'parent_templates/add_visitor.html')
