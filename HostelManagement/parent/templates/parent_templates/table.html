@@ -8,12 +8,11 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Admin Dashboard</title>
   <link rel="icon" href="{% static 'admin_static/index/images/favicon.ico' %}" type="image/ico" />
 
+  <title>Hostel</title>
+
   <!-- Bootstrap -->
-  <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
   <link href="{% static 'admin_static/vendors/bootstrap/dist/css/bootstrap.min.css'%}" rel="stylesheet">
   <!-- Font Awesome -->
   <link href="{% static 'admin_static/vendors/font-awesome/css/font-awesome.min.css'%}" rel="stylesheet">
@@ -21,50 +20,49 @@
   <link href="{% static 'admin_static/vendors/nprogress/nprogress.css'%}" rel="stylesheet">
   <!-- iCheck -->
   <link href="{% static 'admin_static/vendors/iCheck/skins/flat/green.css'%}" rel="stylesheet">
-  <!-- Datatables -->
 
-  <link href="{% static 'admin_static/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css'%}" rel="stylesheet">
-  <link href="{% static 'admin_static/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css'%}"
-    rel="stylesheet">
-  <link href="{% static 'admin_static/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css'%}"
-    rel="stylesheet">
-  <link href="{% static 'admin_static/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css'%}"
-    rel="stylesheet">
-  <link href="{% static 'admin_static/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css'%}"
-    rel="stylesheet">
+  <!-- bootstrap-progressbar -->
+  <link href="{% static 'admin_static/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css'%}" rel="stylesheet">
+  <!-- JQVMap -->
+  <link href="{% static 'admin_static/vendors/jqvmap/dist/jqvmap.min.css'%}" rel="stylesheet" />
+  <!-- bootstrap-daterangepicker -->
+  <link href="{% static 'admin_static/vendors/bootstrap-daterangepicker/daterangepicker.css'%}" rel="stylesheet">
 
   <!-- Custom Theme Style -->
-  <link href="{% static 'admin_static//build/css/custom.min.css' %}" rel="stylesheet">
-  <!-- Ajax library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link href="{% static 'admin_static/build/css/custom.min.css'%}" rel="stylesheet ">
+
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js">
+  </script>
 </head>
 
 <body class="nav-md">
-  <div class="container body">
-    <div class="main_container">
-      <div class="col-md-3 left_col">
-        <div class="left_col scroll-view">
-          <div class="navbar nav_title" style="border: 0;">
-            <a href="{% url 'dashboard' %}" class="site_title"><i class="fa fa-building-o"></i> <span>Welcome
-                Admin!!</span></a>
+<div class="container body">
+  <div class="main_container">
+    <div class="col-md-3 left_col">
+      <div class="left_col scroll-view">
+        <div class="navbar nav_title" style="border: 0;">
+          <a href="{% url 'student_home' %}" class="site_title"><i class="fa fa-paw"></i>
+            <span>Welcome</span></a>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <!-- menu profile quick info -->
+        <div class="profile clearfix">
+          <div class="profile_pic">
+            <img src=" /media/parent.jpg " alt="..." class="img-circle profile_img">
           </div>
-
-          <div class="clearfix"></div>
-
-          <!-- menu profile quick info -->
-          <div class="profile clearfix">
-            <div class="profile_pic">
-              <img src="/media/{{ user.pic }}" alt="..." class="img-circle profile_img">
-            </div>
-            <div class="profile_info">
-              <span>Welcome,</span>
-              <h2>{{ user.name }}</h2>
-            </div>
+          <div class="profile_info">
+            <span><h2><b>Welcome</b></h2></span>
+            <h2><b>Parent</b></h2>
           </div>
-          <!-- /menu profile quick info -->
+        </div>
+        <!-- /menu profile quick info -->
 
-          <br />
-
+        <br />
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
@@ -109,7 +107,7 @@
                 <li><a><i class="fa fa-phone-square "></i>Contact<span class="fa fa-chevron-down "></span></a>
                   <ul class="nav child_menu ">
                     <li>
-                      <a>Contacts</a>
+                      <a href="{% url 'contact' %}">Contacts</a>
                     </li>
                   </ul>
                 </li>

@@ -6,13 +6,13 @@ import io
 import selectors
 from parent.decorators import *
 # Create your views here.
-
 @parentOnly
 def load_index(request):
    # id =request.session.get('userid')
    # user = student.objects.get(sd_id=id)
 
-    return render(request,'parent_templates/index.html')
+     return render(request,'parent_templates/index.html')
+@parentOnly
 def contact(request):
     return render(request,'parent_templates/contact.html')
 
