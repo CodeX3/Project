@@ -69,3 +69,38 @@ def logout(request):
 def list_parents(request):
     obj=  student.objects.all()
     return render(request,'parent_templates/parent.html',{'obj':obj})
+
+@parentOnly
+def add_complaint(request):
+    id = request.session.get('stdID')
+    user = student.objects.get(sd_id=id)
+
+    if request.method == "POST":
+        print(request.POST)
+        try:
+            reg = complaint()
+            reg.auther = user.sd_parent
+            reg.auther_phone = user.sd_parent_phone
+            reg.auther_ID = user.sd_id
+            reg.status = 'open'
+            reg.date = request.POST['date']
+            reg.subject = request.POST['subject']
+            reg.body = request.POST['body']
+            reg.save()
+            return redirect('parent_complaints')
+        except Exception as e:
+            print(e)
+
+    return render(request,'parent_templates/add_complaint.html',{'user':user})
+
+@parentOnly
+def complaints(request):
+    id = request.session.get('stdID')
+    user = student.objects.get(sd_id=id)
+    obj = complaint.objects.filter(auther_ID=id)
+    return render(request,'parent_templates/complaint.html',{'obj':obj})
+
+@parentOnly
+def mess(request):
+    obj = mess_menu.objects.all()
+    return render(request,'parent_templates/mess.html',{'obj':obj})
