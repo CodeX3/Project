@@ -11,6 +11,7 @@ from parent.decorators import *
 # Create your views here.
 
 
+
 @parentOnly
 def load_index(request):
    # id =request.session.get('userid')
@@ -104,3 +105,20 @@ def complaints(request):
 def mess(request):
     obj = mess_menu.objects.all()
     return render(request,'parent_templates/mess.html',{'obj':obj})
+
+@parentOnly
+def student_today_attendance(request):
+    id = request.session.get('stdID')
+    user = student.objects.get(sd_id=id)
+    today = date.today().strftime("%Y-%m-%d")
+    obj = attendance.objects.filter(date=today).values("sd_id")
+    res = [sub['sd_id'] for sub in obj]
+    st_obj = student.objects.all()
+    if id in res:
+        present = True
+    else:
+        present = False
+
+    return render(request, 'parent_templates/today_attendance.html',
+                  {'user': user, 'today': today, 'attendace_obj': res, 'obj': st_obj, 'present': present})
+
