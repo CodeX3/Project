@@ -38,6 +38,7 @@ urlpatterns = [
     path('parent/',include('parent.urls')),
     path('parent_login',views.parent_login,name='parent_login'),
     path('admin/alter_menu',views.update_menu),
+    path('admin/update_food',views.update_food),
 ]
 
 if settings.DEBUG:

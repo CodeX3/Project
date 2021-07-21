@@ -1,0 +1,116 @@
+{% extends 'admin_templates/table.html' %}
+{% block content %}
+
+{# first block #}
+<div class="col-md-12 col-sm-12 ">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Daily Food Entering</h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card-box table-responsive">
+                        <p class="text-muted font-13 m-b-30">
+                            <b>Values::</b>
+                            <input type="date" id="date">
+                            <input type="text" id="make" placeholder="Today Food maked" >
+                            <input type="text" id="consumed" placeholder="Today food consumed">
+                            <input type="button" value="Submit" onclick="send_food_data()">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function redirect_page_date() {
+        console.log("ethi")
+        var current = document.getElementById('date').value;
+        if (current == "") {
+            return false;
+        }
+        var url = "{% url 'attendance_date' '2021-04-21' %}";
+        location.href = url.replace('2021-04-21', current);
+    }
+
+</script>
+
+<div class="col-md-12 col-sm-12 ">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Data Recored</h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card-box table-responsive">
+                        {# <p class="text-muted font-13 m-b-30">#}
+                            {# Student list requested to join to the hostel#}
+                            {# </p>#}
+                        <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Date</th>
+                                    <th>Maked</th>
+                                    <th>Consumed</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in obj %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{i.day}}</td>
+                                    <td>{{i.Bake}}</td>
+                                    <td>{{i.Consumed}}</td>
+                                </tr>
+
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function send_food_data(){
+        today = document.getElementById('date').value;
+        make = document.getElementById('make').value;
+        consumed = document.getElementById('consumed').value;
+
+        console.log(today,make,consumed)
+
+        $.ajax({
+            url: '/admin/update_food',
+            type: 'get',
+            data: {
+                'day':today,
+                'make':make,
+                'consumed': consumed
+            },
+            success: (response) => {
+                alert("success");
+            },
+            error: (responce) => {
+                alert("something wrong happened");
+            }
+
+        })
+    }
+</script>
+{% endblock %}

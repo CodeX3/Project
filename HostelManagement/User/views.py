@@ -849,3 +849,28 @@ def update_menu(request):
     except Exception as e:
         return HttpResponse(status=500)
 
+@adminonly
+def food_menu(request):
+    value = request.session.get('admin')
+    noti, val = get_notifications()
+    user = warden.objects.get(id=value)
+    obj = FoodWaste.objects.all();
+
+    return render(request,'admin_templates/food.html',{'user':user,'notifications':noti,'notification_count':val,'obj':obj})
+
+def update_food(request):
+    try:
+        obj = FoodWaste.objects.get(day=request.GET['day'])
+        obj.Bake = request.GET['make']
+        obj.Consumed = request.GET['consumed']
+        obj.save()
+        return HttpResponse(status=200)
+    except ObjectDoesNotExist:
+        obj = FoodWaste()
+        obj.day = request.GET['day']
+        obj.Bake = request.GET['make']
+        obj.Consumed = request.GET['consumed']
+        obj.save()
+        return HttpResponse(status=200)
+    except Exception as e:
+        return HttpResponse(status=500)
