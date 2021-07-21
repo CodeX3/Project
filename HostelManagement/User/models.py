@@ -159,3 +159,8 @@ class mess_menu(models.Model):
     mng = models.CharField(max_length=30)
     noon = models.CharField(max_length=30)
     night = models.CharField(max_length=30)
+
+class FoodWaste(models.Model):
+    day = models.CharField(max_length=15)
+    Bake = models.CharField(max_length=10)
+    Consumed = models.CharField(max_length=10)
